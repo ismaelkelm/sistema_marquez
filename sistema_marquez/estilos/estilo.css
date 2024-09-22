@@ -1,0 +1,300 @@
+/* Variables de Color y Tipografía */
+:root {
+    --mint-cream: #f1f7eeff;
+    --black: #050609ff;
+    --cambridge-blue: #92aa83ff;
+    --vermilion: #dd403aff;
+    --sandy-brown: #fc9f5bff;
+    --cream: #F3EED9;
+    --color-primary: #ECE9E1;
+    --color-accent: #E43C13;
+    --color-dark: #181818;
+    --color-1: #F7F9FB;
+    --color-2: #d0e0eb;
+    --color-3: #5085A5;
+    --color-4: #31708E;
+    --color-5: #687864;
+    --white: #ffffff;
+    --green: #93b874;
+    --dark-gray: #444f45;
+    --light-gray: #e5eddf;
+    --yellow: #282829;
+    --accent: "Playfair Display", serif;
+    --main: "Lato", sans-serif;
+}
+
+/* Estilo General */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: var(--main);
+}
+
+html {
+    background-color: var(--color-2);
+    color: var(--color-dark);
+}
+
+body {
+    background-image: url('../../mi_sistema/media/abretucompu.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    margin: 0;
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+}
+
+/* Barra de Navegación */
+#nav-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--color-4);
+    z-index: 1010;
+}
+
+/* Contenedor de Contenido */
+#content-container {
+    padding-top: 120px; /* Ajusta según la altura de la barra de navegación */
+    margin: auto;
+}
+
+/* Títulos */
+h2, h3 {
+    color: var(--color-3);
+    font-family: var(--accent);
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* Botones */
+#title-button {
+    font-size: 1rem;
+    color: var(--white);
+    background-color: var(--color-accent);
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    padding: 1rem 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#title-button:hover {
+    background-color: var(--color-dark);
+    color: var(--white);
+}
+
+.btn-light {
+    background-color: var(--color-1);
+    border: 1px solid var(--color-3);
+    color: var(--color-dark);
+}
+
+.btn-light:hover {
+    background-color: var(--color-3);
+    color: var(--color-1);
+}
+
+.btn {
+    margin-right: 5px;
+}
+
+.btn-register {
+    background-color: var(--color-accent);
+    color: var(--white);
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-register:hover {
+    background-color: var(--color-dark);
+}
+
+.btn-scroll-down {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-scroll-down:hover {
+    background-color: #0056b3;
+}
+
+/* Estilo para el contenedor del título */
+#title-container {
+    text-align: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+/* Pie de Página */
+footer {
+    padding: 10px;
+    text-align: center;
+    color: var(--white);
+    background-color: var(--color-4);
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Estilos para la Tabla */
+.table th {
+    background-color: var(--color-4);
+    color: var(--white);
+}
+
+.table thead th {
+    background-color: var(--color-4);
+    color: var(--white);
+    text-align: center;
+}
+
+.table tbody tr:nth-child(odd) {
+    background-color: var(--light-gray);
+}
+
+.table tbody tr:hover {
+    background-color: var(--color-3);
+}
+
+.table th, .table td {
+    padding: 0.75rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+}
+
+/* Estilo para el formulario de registro */
+.container {
+    max-width: 600px;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+/* Estilos Específicos para Roles */
+.admin-container {
+    background-color: var(--white);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.admin-panel h2 {
+    color: var(--color-accent);
+}
+
+.admin-panel .card {
+    margin-bottom: 20px;
+}
+
+.tech-container {
+    background-color: var(--light-gray);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tech-panel h2 {
+    color: var(--color-dark);
+}
+
+.client-container {
+    background-color: var(--mint-cream);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.client-panel h2 {
+    color: var(--cambridge-blue);
+}
+
+
+/* Ajuste del tamaño del carrusel */
+.carousel-image {
+    max-height: 500px; /* Ajusta esta altura según tus necesidades */
+    object-fit: cover;
+}
+
+/* Navbar personalizado */
+.custom-navbar .navbar-brand {
+    font-weight: bold;
+}
+
+.custom-navbar .navbar-text {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* Imagen de fondo y contenido principal */
+.background-image {
+    width: 100%;
+    height: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.content {
+    position: relative;
+    z-index: 2;
+    padding: 2rem;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+/* Botones y contacto */
+.buttons .button {
+    width: 200px;
+}
+
+.contact p, .website {
+    color: white;
+    font-size: 1.2rem;
+}
+
+/* Pie de página */
+.footer {
+    background-color: #343a40;
+    color: white;
+    padding: 1rem 0;
+}
