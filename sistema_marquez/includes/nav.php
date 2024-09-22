@@ -25,8 +25,7 @@ switch ($usuario_rol) {
         $inicio_url = '../empleados/empleado.php';
         break;
     default:
-        $inicio_url = '../login/login.php'; // URL predeterminada
-        break;
+        $inicio_url = '../login/login.php'; 
 }
 ?>
 
