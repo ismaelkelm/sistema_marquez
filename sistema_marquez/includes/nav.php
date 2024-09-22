@@ -45,7 +45,7 @@ switch ($usuario_rol) {
                         Opciones
                     </a>
                     <div class="dropdown-menu" aria-labelledby="adminDropdown">
-                        <a class="dropdown-item" href="../base_datos/gestionar_permisos.php">Area Permisos</a>
+                        <a class="dropdown-item" href="../base_datos/gestionar_permisos.php">ssssssssss</a>
                         <a class="dropdown-item" href="../login/register.php">Registrar Administrador</a>
                         <a class="dropdown-item" href="../pdf/PruebaH.php">Factura Compra</a>
                         <a class="dropdown-item" href="../pdf/PruebaV.php">Factura Venta</a>
