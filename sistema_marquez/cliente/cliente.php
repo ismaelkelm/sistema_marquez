@@ -117,7 +117,6 @@ include('../base_datos/icons.php');
             <!-- Tarjetas del panel -->
             <?php
             $cards = [
-                ["icon" => "fas fa-user-circle", "title" => "Mi Perfil", "link" => "../cliente/perfil.php"],
                 ["icon" => "fas fa-box", "title" => "Estado de Reparación", "link" => "../cliente/check_status.php"],
             ];
 

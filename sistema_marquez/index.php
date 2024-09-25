@@ -248,7 +248,7 @@
         <button class="menu-btn" onclick="toggleMenu()">Menú</button>
         <ul class="nav-menu">
             <li><a href="login/login.php">Iniciar Sesion</a></li>
-            <li><a href="base_datos/check_status.php">Consultar Estado de reparación</a></li>
+            <li><a href="cliente/check_status.php">Consultar Estado de reparación</a></li>
         </ul>
     </nav>
         <div class="carousel">

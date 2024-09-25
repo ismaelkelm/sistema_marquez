@@ -1,5 +1,5 @@
 <?php
-include_once '../base_datos/db.php';
+require_once '../base_datos/db.php'; // Asegúrate de que este archivo defina y exporte $conn
 
 // Obtener los datos del formulario
 $order_number = isset($_POST['order_number']) ? htmlspecialchars(trim($_POST['order_number'])) : '';
@@ -140,10 +140,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
             
             <button type="submit" class="btn btn-primary">Consultar</button>
+            
         </form>
+        <a href="javascript:history.back();" class="btn btn-secondary mb-3">Volver</a>
         
         <div class="mt-4">
-            <a href="../cliente/cliente.php" class="btn btn-secondary">Volver</a>
+        <!-- <a href="javascript:window.history.back();" class="btn btn-secondary mb-3">Volver</a> -->
         </div>
     </div>
 
