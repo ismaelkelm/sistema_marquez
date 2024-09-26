@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Gastos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        form {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        label {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        input[type="text"], input[type="date"], select, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Registro de Gastos</h2>
+<p>El ticket para estas tareas tendrá lo siguiente:</p>
+
+<form>
+    <label for="fecha">Fecha:</label>
+    <input type="date" id="fecha" name="fecha">
+
+    <label for="numero-ticket">Número de Ticket:</label>
+    <input type="text" id="numero-ticket" name="numero-ticket">
+
+    <label for="departamento">Departamento:</label>
+    <input type="text" id="departamento" name="departamento">
+
+    <label for="tipo-gasto">Tipo de Gasto:</label>
+    <select id="tipo-gasto" name="tipo-gasto">
+        <option value="insumos">Insumos</option>
+        <option value="operativos">Operativos</option>
+    </select>
+
+    <label for="descripcion">Descripción:</label>
+    <textarea id="descripcion" name="descripcion" rows="4"></textarea>
+
+    <label for="total-gasto">Total del Gasto:</label>
+    <input type="text" id="total-gasto" name="total-gasto">
+
+    <label for="responsable-gasto">Responsable del Gasto:</label>
+    <input type="text" id="responsable-gasto" name="responsable-gasto">
+
+    <label for="firma-responsable">Firma del Responsable:</label>
+    <input type="text" id="firma-responsable" name="firma-responsable">
+
+    <input type="submit" value="Registrar Gasto">
+</form>
+
+<p>Estos documentos de entrada y tickets son fundamentales para el correcto funcionamiento del taller de reparaciones, permitiendo un seguimiento detallado de cada pedido y compra, y asegurando que todos los actores involucrados tengan acceso a la información necesaria para realizar su trabajo de manera eficiente y efectiva.</p>
+
+</body>
+</html>
