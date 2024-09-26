@@ -1,5 +1,5 @@
 <?php
-require_once '../../mi_sistema/base_datos/db.php';
+require_once '../../sistema_marquez/base_datos/db.php';
 
 // Capturar el ID del rol desde el formulario
 if (!isset($_POST['rol_id'])) {

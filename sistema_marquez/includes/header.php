@@ -15,7 +15,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 150px;
+            height: 180px;
             background: linear-gradient(135deg, #2c3e58, #3498db);
             color: gainsboro;
             padding: 20px;
@@ -70,7 +70,7 @@
 </head>
 <body>
     <div id="title-container" class="container-fluid">
-        <img id="title-logo" src="../pdf/logo.png" alt="Logo de la empresa">
+        <img id="title-logo" src="../../pdf/logo.png" alt="Logo de la empresa">
         <button id="title-button" onclick="window.location.reload(); return false;">
             Marquez Comunicaciones
         </button>

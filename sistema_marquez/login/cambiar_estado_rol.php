@@ -1,6 +1,6 @@
 <?php
 // Incluir conexión a la base de datos
-require_once '../../mi_sistema/base_datos/db.php';
+require_once '../../sistema_marquez/base_datos/db.php';
 
 if (isset($_POST['id_roles'], $_POST['nuevo_estado'])) {
     $id_roles = intval($_POST['id_roles']);

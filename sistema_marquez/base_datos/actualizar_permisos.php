@@ -1,5 +1,5 @@
 <?php
-require_once '../../mi_sistema/base_datos/db.php';
+require_once '../../sistema_marquez/base_datos/db.php';
 
 if (!isset($_POST['roles_id_roles']) || !isset($_POST['Permisos_idPermisos']) || !isset($_POST['estado'])) {
     die('Datos incompletos.');

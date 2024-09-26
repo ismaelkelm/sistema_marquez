@@ -45,8 +45,10 @@ switch ($usuario_rol) {
                         Opciones
                     </a>
                     <div class="dropdown-menu" aria-labelledby="adminDropdown">
-                        <a class="dropdown-item" href="../base_datos/gestionar_permisos.php">Permisos</a>
-                        <a class="dropdown-item" href="../buscador/buscarEmpleadojson.html">Buscar</a>
+                    <a class="dropdown-item" href="../login/register_roles.php">Permisos Login roles  </a>
+
+                        <a class="dropdown-item" href="../base_datos/gestionar_permisos.php">Permisos iconos</a>
+                        <a class="dropdown-item" href="../login/register.php">Registrar Administrador</a>
                         <a class="dropdown-item" href="../pdf/PruebaH.php">Factura Compra</a>
                         <a class="dropdown-item" href="../pdf/PruebaV.php">Factura Venta</a>
                         <a class="dropdown-item" href="../facturacion/plantillas/inframe-dark.html">Plantillas</a>

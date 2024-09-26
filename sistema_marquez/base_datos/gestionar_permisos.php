@@ -1,7 +1,7 @@
 <?php
 // Incluir funciones y la conexión a la base de datos
 
-require_once '../../mi_sistema/base_datos/db.php';
+require_once '../../sistema_marquez/base_datos/db.php';
 
 // Verificar si el usuario está logueado
 session_start();

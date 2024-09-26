@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../../mi_sistema/base_datos/db.php';
+require_once '../../sistema_marquez/base_datos/db.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Captura y limpia los datos del formulario
