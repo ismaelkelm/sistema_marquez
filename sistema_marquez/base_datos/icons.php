@@ -30,7 +30,7 @@ function obtenerIconos($user_id) {
 
     $iconos_y_rutas = [
         'Administrador' => [
-            'accesorios_y_componentes' => ['icono' => 'fa-tools', 'ruta' => '../administrador/accesorios_componentes/accesorios.php'],
+            'accesorios_y_componentes' => ['icono' => 'fa-tools', 'ruta' => '../administrador/accesorios_componentes/index.php'],
             'area_tecnico' => ['icono' => 'fa-cogs', 'ruta' => '../administrador/area_tecnico/index.php'],
             'cliente_con_usuario' => ['icono' => 'fa-user', 'ruta' => '../administrador/cliente_con_usuario/index.php'],
             'clientes' => ['icono' => 'fa-user', 'ruta' => '../administrador/clientes/index.php'],
@@ -55,28 +55,28 @@ function obtenerIconos($user_id) {
             'usuario' => ['icono' => 'fa-user-cog', 'ruta' => '../administrador/usuario/index.php']
         ],
         'Administrativo' => [
-            'accesorios_y_componentes' => ['icono' => 'fa-tools', 'ruta' => '../administrativo/accesorios_componentes/accesorios.php'],
+            'accesorios_y_componentes' => ['icono' => 'fa-tools', 'ruta' => '../administrativo/accesorios_componentes/index.php'],
             'area_tecnico' => ['icono' => 'fa-cogs', 'ruta' => '../administrativo/area_tecnico/index.php'],
             'cliente_con_usuario' => ['icono' => 'fa-user', 'ruta' => '../administrativo/cliente_con_usuario/index.php'],
-            'clientes' => ['icono' => 'fa-user', 'ruta' => '../administrativo/clientes/clientes.php'],
-            'comprobante_proveedores' => ['icono' => 'fa-box', 'ruta' => '../administrativo/comprobante_proveedores/comprobantes.php'],
+            'clientes' => ['icono' => 'fa-user', 'ruta' => '../administrativo/clientes/index.php'],
+            'comprobante_proveedores' => ['icono' => 'fa-box', 'ruta' => '../administrativo/comprobante_proveedores/index.php'],
             'detalle_factura' => ['icono' => 'fa-wrench', 'ruta' => '../administrativo/detalle_factura/index.php'],
             'detalle_reparaciones' => ['icono' => 'fa-wrench', 'ruta' => '../administrativo/detalle_reparaciones/index.php'],
             'detalle_servicios' => ['icono' => 'fa-shopping-cart', 'ruta' => '../administrativo/detalle_servicios/index.php'],
             'dispositivos' => ['icono' => 'fa-laptop', 'ruta' => '../administrativo/dispositivos/index.php'],
-            'cabecera_factura' => ['icono' => 'fa-file-invoice', 'ruta' => '../administrativo/cabecera_factura/facturas.php'],
+            'cabecera_factura' => ['icono' => 'fa-file-invoice', 'ruta' => '../administrativo/cabecera_factura/index.php'],
             'historial_cambios_contrasena' => ['icono' => 'fa-history', 'ruta' => '../administrativo/historial_cambios_contrasena/index.php'],
             'notificaciones' => ['icono' => 'fa-bell', 'ruta' => '../administrativo/notificaciones/index.php'],
-            'operacion' => ['icono' => 'fa-credit-card', 'ruta' => '../administrativo/operacion/operacion.php'],
+            'operacion' => ['icono' => 'fa-credit-card', 'ruta' => '../administrativo/operacion/index.php'],
             'pedidos_de_reparacion' => ['icono' => 'fa-repair', 'ruta' => '../administrativo/pedidos_de_reparacion/index.php'],
             'permisos' => ['icono' => 'fa-shield-alt', 'ruta' => '../administrativo/permisos/index.php'],
             'permisos_en_roles' => ['icono' => 'fa-user-shield', 'ruta' => '../administrativo/permisos_en_roles/index.php'],
-            'proveedores' => ['icono' => 'fa-truck', 'ruta' => '../administrativo/proveedores/proveedores.php'],
+            'proveedores' => ['icono' => 'fa-truck', 'ruta' => '../administrativo/proveedores/index.php'],
             'roles' => ['icono' => 'fa-users-cog', 'ruta' => '../administrativo/roles/index.php'],
             'servicios' => ['icono' => 'fa-users-cog', 'ruta' => '../administrativo/roles/index.php'],
             'tecnicos' => ['icono' => 'fa-tools', 'ruta' => '../administrativo/tecnicos/index.php'],
             'tipo_comprobante' => ['icono' => 'fa-users-cog', 'ruta' => '../administrativo/tipo_comprobante/index.php'],
-            'tipo_de_pago' => ['icono' => 'fa-money-bill-wave', 'ruta' => '../administrativo/tipo_de_pago/tipo_de_pago.php'],
+            'tipo_de_pago' => ['icono' => 'fa-money-bill-wave', 'ruta' => '../administrativo/tipo_de_pago/index.php'],
             'usuario' => ['icono' => 'fa-user-cog', 'ruta' => '../administrativo/usuario/index.php']
         ],
         'Tecnico' => [

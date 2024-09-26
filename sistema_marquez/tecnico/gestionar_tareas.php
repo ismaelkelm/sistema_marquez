@@ -13,17 +13,17 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['role']) || $_SESSION['role
     exit;
 }
 
-// Obtener el id_tecnico desde la sesión (suponiendo que fue guardado correctamente en el panel del técnico)
-$id_tecnico = $_SESSION['user_id'];
+// Obtener el id_UsuarioTecnico desde la sesión (suponiendo que fue guardado correctamente en el panel del técnico)
+$id_UsuarioTecnico = $_SESSION['user_id'];
 
 // Verificar si se ha enviado el formulario para asignar la tarea
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['asignar_tarea'])) {
     $id_pedido = $_POST['id_pedido'];
 
     // Actualizar el estado del pedido y asignar el técnico en la base de datos
-    $sql_update = "UPDATE pedidos_de_reparacion SET estado = 'En Progreso', id_tecnico = ? WHERE id_pedidos_de_reparacion = ?";
+    $sql_update = "UPDATE pedidos_de_reparacion SET estado = 'En Progreso', id_UsuarioTecnico = ? WHERE id_pedidos_de_reparacion = ?";
     if ($stmt_update = $conn->prepare($sql_update)) {
-        $stmt_update->bind_param("ii", $id_tecnico, $id_pedido);
+        $stmt_update->bind_param("ii", $id_UsuarioTecnico, $id_pedido);
         if ($stmt_update->execute()) {
             echo "<p class='success-message'>Tarea asignada correctamente.</p>";
         } else {

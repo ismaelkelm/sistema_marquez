@@ -2,7 +2,6 @@
 require_once '../base_datos/db.php';
 include('../includes/header.php');
 
-
 // Verificar si el usuario ha iniciado sesión y obtener el id_tecnico desde la sesión
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
@@ -13,20 +12,24 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['role']) || $_SESSION['role
     exit;
 }
 
-// Obtener el id_tecnico desde la sesión (suponiendo que fue guardado correctamente en el panel del técnico)
-$id_tecnico = $_SESSION['user_id'];
+// Obtener el id_tecnico desde la sesión
+$id_UsuarioTecnico = $_SESSION['user_id'];
 
 ?>
 <div class="container">
     <h1>Lista de Pedidos de Reparación</h1>
-
+    <a href="../tecnico/tecnico_panel.php" class="btn btn-secondary btn-back">
+        <i class="fas fa-arrow-left"></i> Volver Atrás
+    </a>
     <?php
-    $sql = "SELECT * FROM pedidos_de_reparacion WHERE id_tecnico = ? ORDER BY id_pedidos_de_reparacion DESC";
+    // Modifica la consulta para excluir los pedidos completados
+    $sql = "SELECT * FROM pedidos_de_reparacion WHERE id_UsuarioTecnico	 = ? AND estado NOT IN ('Completado', 'Pendiente') ORDER BY id_pedidos_de_reparacion DESC";
     if ($stmt = $conn->prepare($sql)) {
-        $stmt->bind_param("i", $id_tecnico);
+        $stmt->bind_param("i", $id_UsuarioTecnico);
         $stmt->execute();
         $result = $stmt->get_result();
     }
+
     ?>
 
     <?php if ($result->num_rows > 0): ?>
@@ -52,10 +55,18 @@ $id_tecnico = $_SESSION['user_id'];
                             <td><?php echo htmlspecialchars($row['id_clientes']); ?></td>
                             <td><?php echo htmlspecialchars($row['id_dispositivos']); ?></td>
                             <td><?php echo htmlspecialchars($row['fecha_de_pedido']); ?></td>
-                            <td><?php echo htmlspecialchars($row['estado']); ?></td>
+                            <td>
+                                <select name="estado[<?php echo htmlspecialchars($row['id_pedidos_de_reparacion']); ?>]" class="form-control">
+                                    <option value="En progreso" <?php echo $row['estado'] == 'En progreso' ? 'selected' : ''; ?>>En progreso</option>
+                                    <option value="Completado" <?php echo $row['estado'] == 'Completado' ? 'selected' : ''; ?>>Completado</option>
+                                    <option value="Retrasado" <?php echo $row['estado'] == 'Retrasado' ? 'selected' : ''; ?>>Retrasado</option>
+                                    <option value="Pendiente" <?php echo $row['estado'] == 'Pendiente' ? 'selected' : ''; ?>>Quitar pedido</option>
+                                </select>
+                            </td>
                             <td><?php echo htmlspecialchars($row['numero_orden']); ?></td>
                             <td>
                                 <input type="text" name="descripcion[<?php echo htmlspecialchars($row['id_pedidos_de_reparacion']); ?>]" class="form-control mb-2" placeholder="Descripción de la reparación">
+                                <input type="submit" name="actualizar_seleccionados" value="Actualizar Estado" class="btn btn-primary mt-3">
                             </td>
                         </tr>
                     <?php endwhile; ?>
@@ -64,7 +75,6 @@ $id_tecnico = $_SESSION['user_id'];
 
             <h3>Piezas y Componentes Utilizados</h3>
             <div id="piezas-componentes">
-                <!-- Este bloque se duplicará para cada pieza utilizada -->
                 <div class="form-group">
                     <label for="pieza">Pieza/Componente:</label>
                     <select name="piezas_componentes[]" class="form-control mb-2">
@@ -84,7 +94,6 @@ $id_tecnico = $_SESSION['user_id'];
             </div>
 
             <button type="button" class="btn btn-secondary" id="agregar-pieza">Agregar otra pieza/componente</button>
-            <input type="submit" name="actualizar_seleccionados" value="Actualizar Estado" class="btn btn-primary mt-3">
         </form>
     <?php else: ?>
         <p>No tienes trabajos pendientes.</p>

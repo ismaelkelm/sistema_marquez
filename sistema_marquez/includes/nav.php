@@ -25,7 +25,7 @@ switch ($usuario_rol) {
         $inicio_url = '../empleados/empleado.php';
         break;
     default:
-        $inicio_url = '../login/login.php';
+        $inicio_url = '../login/login.php'; // URL predeterminada
         break;
 }
 ?>
@@ -45,10 +45,8 @@ switch ($usuario_rol) {
                         Opciones
                     </a>
                     <div class="dropdown-menu" aria-labelledby="adminDropdown">
-                    <a class="dropdown-item" href="../login/register_roles.php">Permisos Login roles  </a>
-
-                        <a class="dropdown-item" href="../base_datos/gestionar_permisos.php">Permisos iconos</a>
-                        <a class="dropdown-item" href="../login/register.php">Registrar Administrador</a>
+                        <a class="dropdown-item" href="../base_datos/gestionar_permisos.php">Permisos</a>
+                        <a class="dropdown-item" href="../buscador/buscarEmpleadojson.html">Buscar</a>
                         <a class="dropdown-item" href="../pdf/PruebaH.php">Factura Compra</a>
                         <a class="dropdown-item" href="../pdf/PruebaV.php">Factura Venta</a>
                         <a class="dropdown-item" href="../facturacion/plantillas/inframe-dark.html">Plantillas</a>
@@ -57,15 +55,25 @@ switch ($usuario_rol) {
             <?php endif; ?>
             <?php if ($usuario_rol === 2): ?>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Administrativo
+                    <a class="nav-link dropdown-toggle" href="#" id="tecnicoDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Reparaciones
                     </a>
                     <div class="dropdown-menu" aria-labelledby="adminDropdown">
-                        
-                        <a class="dropdown-item" href="../buscador/buscarEmpleadojson.html">ismael</a>
+                        <a class="dropdown-item" href="../buscador/buscarEmpleadojson.html">Buscar</a>
                         <a class="dropdown-item" href="../pdf/PruebaH.php">Factura Compra</a>
                         <a class="dropdown-item" href="../pdf/PruebaV.php">Factura Venta</a>
                         <a class="dropdown-item" href="../facturacion/plantillas/inframe-dark.html">Plantillas</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="tecnicoDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Operaciones
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="adminDropdown">
+                        <a class="dropdown-item" href="../facturacion/factura.php">Venta</a>
+                        <a class="dropdown-item" href="../pdf/PruebaH.php">Reparación</a>
+                        <a class="dropdown-item" href="../pdf/PruebaV.php">Venta y Reparación</a>
+                        <a class="dropdown-item" href="../facturacion/plantillas/inframe-dark.html">Compra</a>
                     </div>
                 </li>
             <?php endif; ?>
@@ -73,10 +81,10 @@ switch ($usuario_rol) {
             <?php if ($usuario_rol === 3): ?>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="tecnicoDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Tecnico
+                        Reparaciones
                     </a>
                     <div class="dropdown-menu" aria-labelledby="tecnicoDropdown">
-                    <a class="dropdown-item" href="../tecnico/listar_reparaciones.php">Listar Reparaciones</a>
+                        <a class="dropdown-item" href="../tecnico/listar_reparaciones.php">Listar Reparaciones</a>
                         <a class="dropdown-item" href="../tecnico/gestionar_tareas.php">Gestionar Tareas</a>
                         <a class="dropdown-item" href="../tecnico/notificar_completado.php">Notificar Completado</a>
                         <a class="dropdown-item" href="../tecnico/ver_notificacion.php">Ver Notificaciones</a>
@@ -98,7 +106,7 @@ switch ($usuario_rol) {
             <?php endif; ?>
 
             <?php if ($usuario_rol === 5): ?>
-                <!-- <li class="nav-item dropdown">
+                <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="empleadoDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Empleado
                     </a>
@@ -106,22 +114,6 @@ switch ($usuario_rol) {
                         <a class="dropdown-item" href="../../mi_sistema/empleados/empleado.php">Mi Perfil</a>
                         <a class="dropdown-item" href="../cliente/reparaciones.php">Mis Reparaciones</a>
                         <a class="dropdown-item" href="../cliente/notificaciones.php">Notificaciones</a>
-                    </div>
-                </li> -->
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="empleadoDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Opciones
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="empleadoDropdown">
-                    <a class="dropdown-item" href="../login/register_roles.php">Permisos Login roles  </a>
-
-                        <a class="dropdown-item" href="../base_datos/gestionar_permisos.php">Permisos iconos</a>
-                        <a class="dropdown-item" href="../login/register.php">Registrar Administrador</a>
-                        <a class="dropdown-item" href="../pdf/PruebaH.php">Factura Compra</a>
-                        <a class="dropdown-item" href="../pdf/PruebaV.php">Factura Venta</a>
-                        <a class="dropdown-item" href="../facturacion/plantillas/inframe-dark.html">Plantillas</a>
-                        
                     </div>
                 </li>
             <?php endif; ?>
@@ -143,10 +135,10 @@ switch ($usuario_rol) {
 <style>
     /* Estilo personalizado para el navbar */
     .navbar {
-        padding: 0.5rem 1rem;
+        padding: 0.5rem 1.5rem;
     }
     .navbar-nav .nav-link {
-        padding: 0.5rem 1.9rem;
+        padding: 0.5rem 1rem;
         transition: background-color 0.3s ease, color 0.3s ease;
     }
     .navbar-nav .nav-link:hover,

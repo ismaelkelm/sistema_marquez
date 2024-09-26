@@ -2,8 +2,8 @@
 session_start();
 require_once '../base_datos/db.php';
 
-// Consultar los roles habilitados desde la base de datos
-$sql_roles = "SELECT id_roles, nombre FROM roles WHERE habilitado = 1";
+// Consultar los roles desde la base de datos
+$sql_roles = "SELECT id_roles, nombre FROM roles";
 $roles = [];
 if ($stmt_roles = $conn->prepare($sql_roles)) {
     $stmt_roles->execute();
@@ -17,12 +17,6 @@ if ($stmt_roles = $conn->prepare($sql_roles)) {
 }
 
 $conn->close();
-
-// Redirigir a login.php si no hay roles habilitados
-if (empty($roles)) {
-    header("Location: ../login/login.php");
-    exit;
-}
 ?>
 
 <!DOCTYPE html>
@@ -41,7 +35,7 @@ if (empty($roles)) {
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-image: url('../presentacion/fondoazul.jpg');
+            background-image: url('../presentacion/fondoazul.jpg'); /* Cambia esta URL por la de tu imagen de fondo */
             background-size: cover;
             background-position: center;
             position: relative;
@@ -49,11 +43,11 @@ if (empty($roles)) {
         .container {
             max-width: 500px;
             width: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
+            background-color: rgba(0, 0, 0, 0.8); /* Fondo oscuro con opacidad */
             padding: 2rem;
             border-radius: 12px;
-            color: #ffffff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            color: #ffffff; /* Texto blanco para buen contraste */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra para profundidad */
             text-align: center;
         }
         .form-group {
@@ -111,19 +105,19 @@ if (empty($roles)) {
             padding: 10px;
             border-radius: 5px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-            display: <?php echo isset($message) ? 'block' : 'none'; ?>;
+            display: <?php echo isset($message) ? 'block' : 'none'; ?>; /* Mostrar solo si hay un mensaje */
         }
         .message-container.success {
-            background-color: #28a745;
+            background-color: #28a745; /* Verde para éxito */
         }
         .message-container.error {
-            background-color: #dc3545;
+            background-color: #dc3545; /* Rojo para errores */
         }
         .message-container p {
             margin: 0;
         }
         .message-container a {
-            color: #007bff;
+            color: #007bff; /* Azul para enlaces */
             font-weight: bold;
         }
         .message-container a:hover {
@@ -159,8 +153,8 @@ if (empty($roles)) {
             </div>
 
             <div class="form-group">
-                <label for="dni">DNI Usuario</label>
-                <input type="text" class="form-control" id="dni" name="dni" placeholder="DNI Usuario" required>
+                <label for="dni">Dni Usuario</label>
+                <input type="text" class="form-control" id="dni" name="dni" placeholder="dni Usuario" required>
             </div>
 
             <div class="form-group">
