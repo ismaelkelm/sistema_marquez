@@ -15,17 +15,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id_clientes = $_POST['id_clientes'];
     $fecha_factura = $_POST['fecha_factura'];
     $subtotal_factura = $_POST['subtotal_factura'];
-    $impuestos = $_POST['impuestos'];
-    $total_factura = $_POST['total_factura'];
+    $impuestos = $_POST['iva_resultado'];
+    $total_factura = $_POST['total'];
     $id_usuario = $_POST['id_usuario'];
     $id_tipo_comprobante = $_POST['id_tipo_comprobante'];
     $id_tipo_de_pago = $_POST['id_tipo_de_pago'];
-    $id_pedido_reparacion = $_POST['id_pedido_reparacion'];
+    // Verificar si el campo está presente en el POST y no es nulo o vacío
+    if (isset($_POST['id_pedido_reparacion']) && !empty($_POST['id_pedido_reparacion'])) {
+        $id_pedido_reparacion = $_POST['id_pedido_reparacion'];
+        // Aquí puedes continuar con tu lógica
+    } else {
+        $id_pedido_reparacion =0;
+    }
     // Recibir datos de los detalles de la factura
     $cantidad_venta = $_POST['cantidad_venta'];
     $precio_unitario_V = $_POST['precio_unitario_V'];
     $id_accesorios_y_componentes = $_POST['id_accesorios_y_componentes'];
-    $id_operacion = 1;
+    $id_operacion = $_POST['id_operacion'];;
 
     // Empezar la transacción
     mysqli_begin_transaction($conn);

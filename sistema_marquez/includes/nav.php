@@ -72,10 +72,10 @@ switch ($usuario_rol) {
                         Operaciones
                     </a>
                     <div class="dropdown-menu" aria-labelledby="adminDropdown">
-                        <a class="dropdown-item" href="../facturacion/factura.php">Venta</a>
-                        <a class="dropdown-item" href="../pdf/PruebaH.php">Reparación</a>
-                        <a class="dropdown-item" href="../pdf/PruebaV.php">Venta y Reparación</a>
-                        <a class="dropdown-item" href="../facturacion/plantillas/inframe-dark.html">Compra</a>
+                        <a class="dropdown-item" href="../facturacion/venta/venta.php">Venta</a>
+                        <a class="dropdown-item" href="../facturacion/factura.php">Reparación</a>
+                        <a class="dropdown-item" href="../facturacion/factura.php">Venta y Reparación</a>
+                        <a class="dropdown-item" href="../facturacion/factura.php">Compra</a>
                     </div>
                 </li>
             <?php endif; ?>

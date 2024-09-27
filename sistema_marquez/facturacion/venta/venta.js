@@ -1,4 +1,60 @@
 $(document).ready(function () {
+      // Función que se ejecuta cuando se cambia el subtotal o el tipo de comprobante
+    $('#subtotal_factura, #id_tipo_comprobante').on('input change', function() {
+        // Obtener los valores del formulario
+        var subtotal = $('#subtotal_factura').val();
+        var id_tipo_comprobante = $('#id_tipo_comprobante').val();
+
+        if (total && id_tipo_comprobante) {
+            // Enviar los datos al servidor usando AJAX
+            $.ajax({
+                url: '../calcular_iva.php',
+                type: 'POST',
+                data: {
+                    subtotal: subtotal,
+                    id_tipo_comprobante: id_tipo_comprobante
+                },
+                dataType: 'json',
+                success: function(response) {
+                    if (response.error) {
+                        $('#resultado').html(response.message);
+                        // Ocultar los campos de IVA y total
+                        $('#iva_label').hide();
+                        $('#iva_resultado').hide();
+                        $('#total_label').show();
+                        //muestro el total sin IVA
+                        $('#total').val(response.total);
+                        $('#total').show();
+                    } else {
+                        $('#resultado').html('Cálculo exitoso');
+                        $('#iva_resultado').val(response.iva);
+                        $('#total').val(response.total);
+                        
+                        // Mostrar los campos de IVA y total
+                        $('#iva_label').show();
+                        $('#iva_resultado').show();
+                        $('#total_label').show();
+                        $('#total').show();
+                    }
+                },
+                error: function() {
+                    $('#resultado').html('Hubo un error en el cálculo. Inténtalo nuevamente.');
+                    // Ocultar los campos de IVA y total
+                    $('#iva_label').hide();
+                    $('#iva_resultado').hide();
+                    $('#total_label').hide();
+                    $('#total_con_iva').hide();
+                }
+            });
+        } else {
+            // Si no hay subtotal o tipo de comprobante, ocultar los campos
+            $('#iva_label').hide();
+            $('#iva_resultado').hide();
+            $('#total_label').hide();
+            $('#total_con_iva').hide();
+        }
+    });
+
     $('#add-accesorio').on('click', function () {
         var newAccesorio = $('.detalle-accesorio:first').clone();
         newAccesorio.find('input').val(''); // Limpiar valores del nuevo campo
@@ -12,7 +68,7 @@ $(document).ready(function () {
         var $detalleAccesorio = $(this).closest('.detalle-accesorio');
 
         $.ajax({
-            url: '../accesorios_componentes/get_precio.php',
+            url: '../../accesorios_componentes/get_precio.php',
             method: 'POST',
             data: { id: id_accesorio },
             dataType: 'json',
@@ -61,7 +117,7 @@ $(document).ready(function () {
         var dni = $(this).val();
         if (dni.length >= 7) { // Realiza la consulta si el DNI tiene una longitud mínima razonable
             $.ajax({
-                url: '../cliente/buscar_cliente.php',
+                url: '../../cliente/buscar_cliente.php',
                 method: 'POST',
                 data: { dni: dni },
                 dataType: 'json',
@@ -103,7 +159,7 @@ $(document).ready(function () {
         var dni_cliente = $('#dni_cliente').val();
 
         $.ajax({
-            url: '../cliente/registrar_cliente.php',
+            url: '../../cliente/registrar_cliente.php',
             method: 'POST',
             data: {
                 nombre: nuevo_nombre,
