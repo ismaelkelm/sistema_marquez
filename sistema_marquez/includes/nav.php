@@ -52,6 +52,8 @@ switch ($usuario_rol) {
                         <a class="dropdown-item" href="../pdf/PruebaH.php">Factura Compra</a>
                         <a class="dropdown-item" href="../pdf/PruebaV.php">Factura Venta</a>
                         <a class="dropdown-item" href="../facturacion/plantillas/inframe-dark.html">Plantillas</a>
+                        <a class="dropdown-item" href="../login/send_mail.php">enviar correo</a>
+
                     </div>
                 </li>
             <?php endif; ?>
