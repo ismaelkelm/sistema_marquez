@@ -2,12 +2,12 @@
 require_once '../base_datos/db.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $nombre = mysqli_real_escape_string($conn, $_POST['nombre']);
-    $apellido = mysqli_real_escape_string($conn, $_POST['apellido']);
-    $telefono = mysqli_real_escape_string($conn, $_POST['telefono']);
-    $correo = mysqli_real_escape_string($conn, $_POST['correo']);
-    $direccion = mysqli_real_escape_string($conn, $_POST['direccion']);
-    $dni = mysqli_real_escape_string($conn, $_POST['dni']);
+    $nombre = trim(mysqli_real_escape_string($conn, $_POST['nombre']));
+    $apellido = trim(mysqli_real_escape_string($conn, $_POST['apellido']));
+    $telefono = trim(mysqli_real_escape_string($conn, $_POST['telefono']));
+    $correo = trim(mysqli_real_escape_string($conn, $_POST['correo']));
+    $direccion = trim(mysqli_real_escape_string($conn, $_POST['direccion']));
+    $dni =trim(mysqli_real_escape_string($conn, $_POST['dni']));
 
     // Insertar el cliente en la base de datos
     $query = "INSERT INTO clientes (nombre, apellido, telefono, correo_electronico, direccion, dni)

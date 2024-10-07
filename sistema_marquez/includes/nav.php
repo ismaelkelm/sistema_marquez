@@ -58,7 +58,7 @@ switch ($usuario_rol) {
             <?php if ($usuario_rol === 2): ?>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="tecnicoDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Reparaciones
+                        Historial
                     </a>
                     <div class="dropdown-menu" aria-labelledby="adminDropdown">
                         <a class="dropdown-item" href="../buscador/buscarEmpleadojson.html">Buscar</a>
@@ -76,6 +76,7 @@ switch ($usuario_rol) {
                         <a class="dropdown-item" href="../facturacion/factura.php">Reparación</a>
                         <a class="dropdown-item" href="../facturacion/factura.php">Venta y Reparación</a>
                         <a class="dropdown-item" href="../facturacion/factura.php">Compra</a>
+                        <a class="dropdown-item" href="./pedidos_de_reparacion/copia.php">copia</a>
                     </div>
                 </li>
             <?php endif; ?>
