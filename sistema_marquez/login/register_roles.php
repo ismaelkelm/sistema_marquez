@@ -1,6 +1,6 @@
 <?php
 // Incluir conexión a la base de datos
-require_once '../../sistema_marquez/base_datos/db.php';
+require_once '../base_datos/db.php';
 
 // Obtener todos los roles
 $query = "SELECT id_roles, nombre, habilitado FROM roles";

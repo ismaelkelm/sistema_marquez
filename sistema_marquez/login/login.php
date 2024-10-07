@@ -100,7 +100,7 @@
 
         <!-- Botón para volver al índice -->
         <div class="text-center">
-            <a href="../index.php" class="btn btn-secondary w-100">Volver al Inicio</a>
+            <a href="../index.html" class="btn btn-secondary w-100">Volver al Inicio</a>
         </div>
     </div>
 

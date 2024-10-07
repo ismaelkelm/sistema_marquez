@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit;
     }
 
-    $sql = "SELECT id_usuarios, usuario FROM usuarios WHERE correo = ?";
+    $sql = "SELECT id_usuario, usuario FROM usuario WHERE correo = ?";
     if ($stmt = $conn->prepare($sql)) {
         $stmt->bind_param("s", $correo);
         $stmt->execute();
@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $stmt_insert->close();
 
                 // Enviar el correo con el enlace de recuperación
-                $reset_link = "http://localhost/koki/sistema%20celular%202024/sistema-celular-2024/login/reset_change.php?token=" . $token;
+                $reset_link = "http://localhost/koki/sistema%20celular%202024/sistema_marquez/login/reset_change.php?token=" . $token;
                 $subject = "Solicitud de cambio de " . ($tipo_cambio == 'usuario' ? "Nombre de Usuario" : "Contraseña");
                 $message = "Haz clic en el siguiente enlace para " . ($tipo_cambio == 'usuario' ? "cambiar tu nombre de usuario" : "restablecer tu contraseña") . ": " . $reset_link;
                 $headers = "From: no-reply@example.com";

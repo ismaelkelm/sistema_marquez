@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reparación Electrónica - Marquez Comunicaciones</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body { 
+            background-color: #d8d6d6; 
+        }
+        .header { 
+            background-color: #458a8b; 
+            padding: 10px 0; 
+            text-align: center; 
+            color: white;
+        }
+        .product-card { 
+            margin-bottom: 20px; 
+            border: 1px solid #ccc; 
+            border-radius: 5px; 
+            overflow: hidden; 
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s; /* Transición para el efecto hover */
+        }
+        .product-card:hover { 
+            transform: scale(1.05); /* Efecto de aumento al pasar el mouse */
+        }
+        .product-card img { 
+            width: 100%; 
+            height: 200px; /* Altura fija para que todas las imágenes se ajusten */
+            object-fit: cover; /* Mantiene la relación de aspecto */
+        }
+        .footer { 
+            background-color: #f2f5f8; 
+            padding: 20px; 
+            text-align: center; 
+        }
+        .card-title { 
+            font-size: 1.2rem; 
+            font-weight: bold; 
+        }
+        .card-text { 
+            font-size: 1rem; 
+            color: #333; 
+        }
+        /* Asegura que la fila ocupe todo el ancho */
+        .row {
+            margin-left: 0;
+            margin-right: 0;
+        }
+        .back-button { 
+            position: absolute; /* Posición absoluta */
+            top: 10px; /* Margen superior */
+            left: 10px; /* Margen izquierdo */
+            background-color: #458a8b; 
+            color: white; 
+            border: none; 
+            border-radius: 5px; 
+            padding: 10px 20px; 
+            text-decoration: none; 
+        }
+        .back-button:hover { 
+            background-color: #3a7071; /* Color más oscuro al pasar el mouse */
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>Reparación Electrónica</h1>
+    </header>
+
+    <a href="javascript:history.back()" class="back-button">Volver</a>
+
+    <section class="container-fluid my-5">
+        <h2 class="text-center mb-4">Servicios Disponibles</h2>
+        <div class="row">
+            <!-- Servicio 1 -->
+            <div class="col-md-3 col-sm-6">
+                <div class="card product-card">
+                    <img src="../presentacion/reparacion_electronica.jpg" class="card-img-top" alt="Reparación de Placas">
+                    <div class="card-body">
+                        <h5 class="card-title">Reparación de Placas</h5>
+                        <p class="card-text">$70.000</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Servicio 2 -->
+            <div class="col-md-3 col-sm-6">
+                <div class="card product-card">
+                    <img src="../presentacion/abretucompu.jpg" class="card-img-top" alt="Sustitución de Componentes">
+                    <div class="card-body">
+                        <h5 class="card-title">Sustitución de Componentes</h5>
+                        <p class="card-text">$45.000</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Servicio 3 -->
+            <div class="col-md-3 col-sm-6">
+                <div class="card product-card">
+                    <img src="../vista_nav_imagenes/repelec.png" class="card-img-top" alt="Diagnóstico de Fallas">
+                    <div class="card-body">
+                        <h5 class="card-title">Diagnóstico de Fallas</h5>
+                        <p class="card-text">$30.000</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Servicio 4 -->
+            <div class="col-md-3 col-sm-6">
+                <div class="card product-card">
+                    <img src="../vista_nav_imagenes/electronica.png" class="card-img-top" alt="Reparación de Electrodomésticos">
+                    <div class="card-body">
+                        <h5 class="card-title">Reparación de Electrodomésticos</h5>
+                        <p class="card-text">$60.000</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer text-center">
+        <p>&copy; 2024 Marquez Comunicaciones. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>

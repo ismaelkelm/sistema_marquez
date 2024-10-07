@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accesorios - Marquez Comunicaciones</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body { 
+            background-color: #d8d6d6; 
+        }
+        .header { 
+            background-color: #458a8b; 
+            padding: 10px 0; 
+            text-align: center; 
+            color: white;
+        }
+        .product-card { 
+            margin-bottom: 20px; 
+            border: 1px solid #ccc; 
+            border-radius: 5px; 
+            overflow: hidden; 
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s; /* Transición para el efecto hover */
+        }
+        .product-card:hover { 
+            transform: scale(1.05); /* Efecto de aumento al pasar el mouse */
+        }
+        .product-card img { 
+            width: 100%; 
+            height: 200px; /* Altura fija para que todas las imágenes se ajusten */
+            object-fit: cover; /* Mantiene la relación de aspecto */
+        }
+        .footer { 
+            background-color: #f2f5f8; 
+            padding: 20px; 
+            text-align: center; 
+        }
+        .card-title { 
+            font-size: 1.2rem; 
+            font-weight: bold; 
+        }
+        .card-text { 
+            font-size: 1rem; 
+            color: #333; 
+        }
+        /* Asegura que la fila ocupe todo el ancho */
+        .row {
+            margin-left: 0;
+            margin-right: 0;
+        }
+        .back-button { 
+            position: absolute; /* Posición absoluta */
+            top: 10px; /* Margen superior */
+            left: 10px; /* Margen izquierdo */
+            background-color: #458a8b; 
+            color: white; 
+            border: none; 
+            border-radius: 5px; 
+            padding: 10px 20px; 
+            text-decoration: none; 
+        }
+        .back-button:hover { 
+            background-color: #3a7071; /* Color más oscuro al pasar el mouse */
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>Accesorios Disponibles</h1>
+    </header>
+
+    <a href="javascript:history.back()" class="back-button">Volver</a> <!-- Botón en la parte superior izquierda -->
+
+    <section class="container-fluid my-5">
+        <h2 class="text-center mb-4">Nuestros Productos</h2>
+        <div class="row">
+            <!-- Accesorio 1 -->
+            <div class="col-md-3 col-sm-6">
+                <div class="card product-card">
+                    <img src="../vista_nav_imagenes/auricular.png" class="card-img-top" alt="Auriculares Inalámbricos">
+                    <div class="card-body">
+                        <h5 class="card-title">Auriculares Inalámbricos</h5>
+                        <p class="card-text">$20.000</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Accesorio 2 -->
+            <div class="col-md-3 col-sm-6">
+                <div class="card product-card">
+                    <img src="../vista_nav_imagenes/cargador.png" class="card-img-top" alt="Cargador Rápido">
+                    <div class="card-body">
+                        <h5 class="card-title">Cargador Rápido</h5>
+                        <p class="card-text">$25.000</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Accesorio 3 -->
+            <div class="col-md-3 col-sm-6">
+                <div class="card product-card">
+                    <img src="../vista_nav_imagenes/funda.png" class="card-img-top" alt="Funda Protectora">
+                    <div class="card-body">
+                        <h5 class="card-title">Funda Protectora</h5>
+                        <p class="card-text">$10.000</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Accesorio 4 -->
+            <div class="col-md-3 col-sm-6">
+                <div class="card product-card">
+                    <img src="../vista_nav_imagenes/teclado.png" class="card-img-top" alt="Teclado Inalámbrico">
+                    <div class="card-body">
+                        <h5 class="card-title">Teclado Inalámbrico</h5>
+                        <p class="card-text">$50.000</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Accesorio 5 -->
+            <div class="col-md-3 col-sm-6">
+                <div class="card product-card">
+                    <img src="../vista_nav_imagenes/mouse.png" class="card-img-top" alt="Ratón Óptico">
+                    <div class="card-body">
+                        <h5 class="card-title">Ratón Óptico</h5>
+                        <p class="card-text">$18.000</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Accesorio 6 -->
+            <div class="col-md-3 col-sm-6">
+                <div class="card product-card">
+                    <img src="../vista_nav_imagenes/usb.png" class="card-img-top" alt="Cable USB-C">
+                    <div class="card-body">
+                        <h5 class="card-title">Cable USB-C</h5>
+                        <p class="card-text">$900.00</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Accesorio 7 -->
+            <div class="col-md-3 col-sm-6">
+                <div class="card product-card">
+                    <img src="../vista_nav_imagenes/soporte.png" class="card-img-top" alt="Soporte para Celular">
+                    <div class="card-body">
+                        <h5 class="card-title">Soporte para Celular</h5>
+                        <p class="card-text">$1.600</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Accesorio 8 -->
+            <div class="col-md-3 col-sm-6">
+                <div class="card product-card">
+                    <img src="../vista_nav_imagenes/adaptador.png" class="card-img-top" alt="Adaptador Bluetooth">
+                    <div class="card-body">
+                        <h5 class="card-title">Adaptador Bluetooth</h5>
+                        <p class="card-text">$1.300</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Accesorio 9 -->
+            <div class="col-md-3 col-sm-6">
+                <div class="card product-card">
+                    <img src="../vista_nav_imagenes/altavoz.png" class="card-img-top" alt="Altavoz Portátil">
+                    <div class="card-body">
+                        <h5 class="card-title">Altavoz Portátil</h5>
+                        <p class="card-text">$11.000</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Accesorio 10 -->
+            <div class="col-md-3 col-sm-6">
+                <div class="card product-card">
+                    <img src="../vista_nav_imagenes/camara.png" class="card-img-top" alt="Cámara Web">
+                    <div class="card-body">
+                        <h5 class="card-title">Cámara Web</h5>
+                        <p class="card-text">$145.000</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer text-center">
+        <p>&copy; 2024 Marquez Comunicaciones. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>

@@ -2,8 +2,8 @@
 session_start();
 require_once '../base_datos/db.php';
 
-// Consultar los roles desde la base de datos
-$sql_roles = "SELECT id_roles, nombre FROM roles";
+// Consultar los roles habilitados desde la base de datos
+$sql_roles = "SELECT id_roles, nombre FROM roles WHERE habilitado = 1";
 $roles = [];
 if ($stmt_roles = $conn->prepare($sql_roles)) {
     $stmt_roles->execute();
@@ -17,6 +17,12 @@ if ($stmt_roles = $conn->prepare($sql_roles)) {
 }
 
 $conn->close();
+
+// Redirigir a login.php si no hay roles habilitados
+if (empty($roles)) {
+    header("Location: ../login/login.php");
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -35,7 +41,7 @@ $conn->close();
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-image: url('../presentacion/fondoazul.jpg'); /* Cambia esta URL por la de tu imagen de fondo */
+            background-image: url('../presentacion/fondoazul.jpg');
             background-size: cover;
             background-position: center;
             position: relative;
@@ -43,11 +49,11 @@ $conn->close();
         .container {
             max-width: 500px;
             width: 100%;
-            background-color: rgba(0, 0, 0, 0.8); /* Fondo oscuro con opacidad */
+            background-color: rgba(0, 0, 0, 0.8);
             padding: 2rem;
             border-radius: 12px;
-            color: #ffffff; /* Texto blanco para buen contraste */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra para profundidad */
+            color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             text-align: center;
         }
         .form-group {
@@ -105,19 +111,19 @@ $conn->close();
             padding: 10px;
             border-radius: 5px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-            display: <?php echo isset($message) ? 'block' : 'none'; ?>; /* Mostrar solo si hay un mensaje */
+            display: <?php echo isset($message) ? 'block' : 'none'; ?>;
         }
         .message-container.success {
-            background-color: #28a745; /* Verde para éxito */
+            background-color: #28a745;
         }
         .message-container.error {
-            background-color: #dc3545; /* Rojo para errores */
+            background-color: #dc3545;
         }
         .message-container p {
             margin: 0;
         }
         .message-container a {
-            color: #007bff; /* Azul para enlaces */
+            color: #007bff;
             font-weight: bold;
         }
         .message-container a:hover {
@@ -153,8 +159,8 @@ $conn->close();
             </div>
 
             <div class="form-group">
-                <label for="dni">Dni Usuario</label>
-                <input type="text" class="form-control" id="dni" name="dni" placeholder="dni Usuario" required>
+                <label for="dni">DNI Usuario</label>
+                <input type="text" class="form-control" id="dni" name="dni" placeholder="DNI Usuario" required>
             </div>
 
             <div class="form-group">

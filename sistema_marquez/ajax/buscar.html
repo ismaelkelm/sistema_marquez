@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados de Búsqueda</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Asegúrate de enlazar tu archivo CSS aquí -->
+    <style>
+        /* Estilo del contenedor de resultados */
+        #result {
+            margin-top: 20px; /* Espacio superior */
+        }
+
+        /* Spinner de carga */
+        #loading-spinner {
+            display: none;
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div id="loading-spinner">Cargando...</div>
+    <div id="result"></div> <!-- Aquí se mostrarán los resultados -->
+</div>
+
+    <script>
+        // Función para mostrar el spinner de carga
+        function showLoadingSpinner() {
+            document.getElementById('loading-spinner').style.display = 'block';
+        }
+
+        // Función para ocultar el spinner de carga
+        function hideLoadingSpinner() {
+            document.getElementById('loading-spinner').style.display = 'none';
+        }
+
+        // Función para mostrar un mensaje de error
+        function showError(message) {
+            document.getElementById('result').innerHTML = `<p class="alert alert-danger">${message}</p>`;
+        }
+
+        // Función para mostrar los datos del cliente
+        function displayClientData(data) {
+            const table = `
+                <table class="table table-bordered table-hover">
+                    <tr><th>Nombre</th><td>${data.nombre}</td></tr>
+                    <tr><th>Apellido</th><td>${data.apellido}</td></tr>
+                    <tr><th>DNI</th><td>${data.dni}</td></tr>
+                    <tr><th>Correo electrónico</th><td>${data.correo_electronico}</td></tr>
+                    <tr><th>Teléfono</th><td>${data.telefono}</td></tr>
+                    <tr><th>Dirección</th><td>${data.direccion}</td></tr>
+                </table>`;
+            document.getElementById('result').innerHTML = table;
+        }
+
+        // Función para obtener los resultados basados en el parámetro de búsqueda
+        function fetchResults() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const query = urlParams.get('q'); // Obtiene el valor de 'q' en la URL
+
+            if (!query) {
+                showError('No se ha proporcionado un término de búsqueda.');
+                return;
+            }
+
+            showLoadingSpinner();
+
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', `get_client.php?name=${encodeURIComponent(query)}`, true);
+            
+            xhr.onload = function() {
+                hideLoadingSpinner();
+                if (xhr.status === 200) {
+                    const response = JSON.parse(xhr.responseText);
+                    if (response.error) {
+                        showError(response.error);
+                    } else {
+                        displayClientData(response);
+                    }
+                } else {
+                    showError('Error al obtener los resultados.');
+                }
+            };
+
+            xhr.onerror = function() {
+                hideLoadingSpinner();
+                showError('Error en la solicitud.');
+            };
+
+            xhr.send();
+        }
+
+        // Llamar a la función cuando se cargue la página
+        window.onload = fetchResults;
+    </script>
+
+</body>
+</html>
