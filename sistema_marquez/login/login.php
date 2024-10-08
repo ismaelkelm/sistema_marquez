@@ -95,12 +95,12 @@
 
         <div class="mt-3 text-center">
             <p>¿No tienes una cuenta? <a href="register.php">Regístrate aquí</a></p>
-            <p>¿Olvidaste tu nombre de usuario o contraseña? <a href="../login/forgot_change.html">Recupera aquí.</a></p>
+            <p>¿Olvidaste tu nombre de usuario o contraseña? <a href="">Recupera aquí.</a></p>
         </div>
 
         <!-- Botón para volver al índice -->
         <div class="text-center">
-            <a href="../index.php" class="btn btn-secondary w-100">Volver al Inicio</a>
+            <a href="../index.html" class="btn btn-secondary w-100">Volver al Inicio</a>
         </div>
     </div>
 
