@@ -1,6 +1,5 @@
 <?php
 // Incluir funciones y la conexión a la base de datos
-
 require_once '../../sistema_marquez/base_datos/db.php';
 
 // Verificar si el usuario está logueado
@@ -13,8 +12,7 @@ if (!isset($_SESSION['user_id'])) {
 $user_id = $_SESSION['user_id'];
 $query = "SELECT id_roles FROM usuario WHERE id_usuario = ?";
 $stmt = $conn->prepare($query);
-
-if ($stmt === false) {
+if (!$stmt) {
     die('Error en la preparación de la consulta: ' . $conn->error);
 }
 
@@ -27,8 +25,7 @@ $id_roles = $row['id_roles'];
 // Verificar si el usuario es administrador
 $query = "SELECT nombre FROM roles WHERE id_roles = ?";
 $stmt = $conn->prepare($query);
-
-if ($stmt === false) {
+if (!$stmt) {
     die('Error en la preparación de la consulta: ' . $conn->error);
 }
 
@@ -38,15 +35,14 @@ $result = $stmt->get_result();
 $row = $result->fetch_assoc();
 $role_name = $row['nombre'];
 
-if ($role_name != 'Administrador') {
+if ($role_name !== 'Administrador') {
     die('Acceso denegado.');
 }
 
 // Obtener la lista de roles
 $query = "SELECT id_roles, nombre FROM roles";
 $result = $conn->query($query);
-
-if ($result === false) {
+if (!$result) {
     die('Error en la consulta: ' . $conn->error);
 }
 
@@ -85,9 +81,10 @@ $conn->close();
         .btn-custom {
             border-radius: 0.5rem;
             transition: background-color 0.3s ease, transform 0.2s ease;
+            margin-top: 0.5rem; /* Espacio superior entre botones en general */
         }
         .btn-custom:hover {
-            background-color: #0056b3;
+            background-color: green;
             transform: scale(1.05);
         }
         .btn-custom i {
@@ -98,6 +95,15 @@ $conn->close();
         }
         .page-header {
             margin-bottom: 2rem;
+        }
+        .admin-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem; /* Espacio horizontal entre los botones para el rol Administrativo */
+            flex-wrap: wrap;
+        }
+        .admin-buttons form {
+            display: inline-block;
         }
     </style>
 </head>
@@ -115,12 +121,32 @@ $conn->close();
                     <div class="card">
                         <div class="card-body text-center">
                             <h5 class="card-title"><?php echo htmlspecialchars($rol['nombre']); ?></h5>
-                            <form method="POST" action="./permisos.php">
-                                <input type="hidden" name="rol_id" value="<?php echo htmlspecialchars($rol['id_roles']); ?>">
-                                <button type="submit" class="btn btn-custom btn-primary">
-                                    <i class="fas fa-lock"></i> Ver Permisos
-                                </button>
-                            </form>
+
+                            <!-- Si el rol es Administrativo, mostrar dos botones -->
+                            <?php if ($rol['nombre'] === 'Administrativo'): ?>
+                                <div class="admin-buttons">
+                                    <form method="POST" action="./permisos.php">
+                                        <input type="hidden" name="rol_id" value="<?php echo htmlspecialchars($rol['id_roles']); ?>">
+                                        <button type="submit" class="btn btn-custom btn-primary">
+                                            <i class="fas fa-lock"></i> Ver Permisos (General)
+                                        </button>
+                                    </form>
+                                    <form method="POST" action="./gestionar_panel.php">
+                                        <input type="hidden" name="rol_id" value="<?php echo htmlspecialchars($rol['id_roles']); ?>">
+                                        <button type="submit" class="btn btn-custom btn-secondary">
+                                            <i class="fas fa-lock"></i> Ver Permisos (Administrativo)
+                                        </button>
+                                    </form>
+                                </div>
+                            <?php else: ?>
+                                <!-- Para otros roles, un solo botón que redirige a permisos.php -->
+                                <form method="POST" action="./permisos.php">
+                                    <input type="hidden" name="rol_id" value="<?php echo htmlspecialchars($rol['id_roles']); ?>">
+                                    <button type="submit" class="btn btn-custom btn-primary">
+                                        <i class="fas fa-lock"></i> Ver Permisos
+                                    </button>
+                                </form>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
@@ -128,7 +154,8 @@ $conn->close();
         </div>
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/dist/js/bootstrap.min.js"></script>
 </body>
 </html>

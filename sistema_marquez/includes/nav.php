@@ -42,11 +42,10 @@ switch ($usuario_rol) {
             <?php if ($usuario_rol === 1): ?>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Opciones
+                        Panel de Control
                     </a>
                     <div class="dropdown-menu" aria-labelledby="adminDropdown">
                     <a class="dropdown-item" href="../login/register_roles.php">Permisos Login roles  </a>
-
                         <a class="dropdown-item" href="../base_datos/gestionar_permisos.php">Permisos iconos</a>
                         <a class="dropdown-item" href="../login/register.php">Registrar Administrador</a>
                         <a class="dropdown-item" href="../pdf/PruebaH.php">Factura Compra</a>
@@ -60,13 +59,17 @@ switch ($usuario_rol) {
             <?php if ($usuario_rol === 2): ?>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="tecnicoDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Historial
+                        Comprobantes
                     </a>
                     <div class="dropdown-menu" aria-labelledby="adminDropdown">
                         <a class="dropdown-item" href="../buscador/buscarEmpleadojson.html">Buscar</a>
+                        <a class="dropdown-item" href="../pdf/facturaAA.php">Factura AA</a>
+                        <a class="dropdown-item" href="../pdf/facturaB.php">Factura B</a>
                         <a class="dropdown-item" href="../pdf/PruebaH.php">Factura Compra</a>
                         <a class="dropdown-item" href="../pdf/PruebaV.php">Factura Venta</a>
-                        <a class="dropdown-item" href="../facturacion/plantillas/inframe-dark.html">Plantillas</a>
+                        <a class="dropdown-item" href="../pdf/facturas.html">Factura xxxx</a>
+
+                        <a class="dropdown-item" href="../facturacion/plantillas/iframe.html">Plantillas</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
