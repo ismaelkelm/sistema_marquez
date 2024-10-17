@@ -3,7 +3,7 @@
     <select name="cliente_id" id="cliente">
         <?php
         // Conexión a la base de datos
-        $conn = mysqli_connect("localhost", "usuario", "contraseña", "base_de_datos");
+        $conn = mysqli_connect("localhost", "root", "543210", "pruebas_marquez2");
         $query_clientes = "SELECT id_cliente, nombre_cliente FROM clientes";
         $result_clientes = mysqli_query($conn, $query_clientes);
 

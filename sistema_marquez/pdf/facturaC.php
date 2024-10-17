@@ -1,4 +1,3 @@
-
 <?php
 require('./fpdf.php');
 
@@ -32,7 +31,7 @@ class PDF extends FPDF
 
         // Título "A" con tamaño grande
         $this->SetFont('Arial', 'B', 22);
-        $titulo = 'B';
+        $titulo = 'C';
         $tituloWidth = $this->GetStringWidth($titulo); // Obtener el ancho del texto del título
         
         // Subtítulo "cod 001" con tamaño más pequeño
@@ -92,37 +91,37 @@ class PDF extends FPDF
         $this->Image('../presentacion/qr.png', 95, $this->GetY(), 13, 13, 'PNG'); // Center the QR code (X, Y, Width, Height)
     }
 
-    // function AddClienteSection($clientData)
-    // {
-    //     // Guardar la posición inicial y restar para subir el recuadro
-    //     $xStart = 10;
-    //     $yStart = $this->GetY() - 11; // Restar 10 para subir el recuadro más arriba. Cambia este valor según necesites
+    function AddClienteSection($clientData)
+    {
+        // Guardar la posición inicial y restar para subir el recuadro
+        $xStart = 10;
+        $yStart = $this->GetY() - 11; // Restar 10 para subir el recuadro más arriba. Cambia este valor según necesites
         
-    //     // Dibujar el recuadro de 190x30 (21 de altura en este caso)
-    //     $this->Rect($xStart, $yStart, 190, 23);
+        // Dibujar el recuadro de 190x30 (21 de altura en este caso)
+        $this->Rect($xStart, $yStart, 190, 23);
 
-    //     // Ajustar la posición del contenido del recuadro
-    //     $this->SetFont('Arial', 'B', 12); // Mantener en negrita para el título "Cliente"
-    //     $this->SetXY($xStart, $yStart + 2); // Ajustar posición para el texto "Cliente"
-    //     $this->Cell(0, 5, 'Cliente', 0, 1, 'L');
-    //     $this->Ln(1);
+        // Ajustar la posición del contenido del recuadro
+        $this->SetFont('Arial', 'B', 12); // Mantener en negrita para el título "Cliente"
+        $this->SetXY($xStart, $yStart + 2); // Ajustar posición para el texto "Cliente"
+        $this->Cell(0, 5, 'Cliente', 0, 1, 'L');
+        $this->Ln(1);
         
-    //     $this->SetFont('Arial', '', 10); // Cambiar a fuente normal para el resto del texto
-    //     $this->SetXY($xStart, $this->GetY()); // Ajustar la posición Y para el resto del contenido
-    //     $this->Cell(110, 6, utf8_decode('Nombre: ' . $clientData['nombre'] . ' ' . $clientData['apellido']), 0, 0, 'L'); // Nombre del cliente
-    //     $this->Cell(90, 6, 'CUIT: ' . $clientData['cuit'], 0, 1, 'L'); // CUIT del cliente
-    //     $this->Cell(110, 6, utf8_decode('Dirección: ' . $clientData['direccion']), 0, 0, 'L'); // Dirección del cliente
-    //     $this->Cell(90, 6, utf8_decode('Condición IVA: Consumidor Final'), 0, 1, 'L'); // Condición IVA del cliente
-    //     $this->Ln(3);
+        $this->SetFont('Arial', '', 10); // Cambiar a fuente normal para el resto del texto
+        $this->SetXY($xStart, $this->GetY()); // Ajustar la posición Y para el resto del contenido
+        $this->Cell(110, 6, utf8_decode('Nombre: ' . $clientData['nombre'] . ' ' . $clientData['apellido']), 0, 0, 'L'); // Nombre del cliente
+        $this->Cell(90, 6, 'CUIT: ' . $clientData['cuit'], 0, 1, 'L'); // CUIT del cliente
+        $this->Cell(110, 6, utf8_decode('Dirección: ' . $clientData['direccion']), 0, 0, 'L'); // Dirección del cliente
+        $this->Cell(90, 6, utf8_decode('Condición IVA: Consumidor Final'), 0, 1, 'L'); // Condición IVA del cliente
+        $this->Ln(3);
         
-    //     // Línea divisoria horizontal
-    //     $this->Line(10, $this->GetY(), 200, $this->GetY());
-    //     $this->Ln(8);
+        // Línea divisoria horizontal
+        $this->Line(10, $this->GetY(), 200, $this->GetY());
+        $this->Ln(8);
         
-    //     // Añadir cuadros de verificación
-    //     $this->DrawCheckboxes();
-    //     $this->Ln();
-    // }
+        // Añadir cuadros de verificación
+        $this->DrawCheckboxes();
+        $this->Ln();
+    }
 
     function DrawCheckboxes()
     {
@@ -199,7 +198,7 @@ class PDF extends FPDF
         $this->Ln(5);
 
         $this->Cell(110, 6, 'Empresa: Marquez Comunicaciones', 0, 0, 'L'); // Nombre de la empresa
-        $this->Cell(110, 6, $titulocomprobante['tipo_comprobante'], 0, 0, 'L'); // Nombre de la empresa
+        $this->Cell(110, 6, 'FACTURA'. $titulocomprobante['tipo_comprobante'], 0, 0, 'L'); // Nombre de la empresa
         // $this->Cell(90, 6, 'CUIT: ' . $clientData['cuit'], 0, 1, 'L'); // CUIT del cliente
         $this->Cell(90, 6, 'Fecha: ' . date('d/m/Y'), 0, 1, 'L'); // Fecha actual
         $this->Cell(110, 6, 'CUIT: 30-12345678-9', 0, 0, 'L'); // CUIT de la empresa
@@ -333,37 +332,7 @@ class PDF extends FPDF
         $this->AddTotalsSection($subTotal, $totalIVA, $totalFactura);
     }
 
-    function AddClienteSection($clientData)
-    {
-        // Guardar la posición inicial y restar para subir el recuadro
-        $xStart = 10;
-        $yStart = $this->GetY() - 11; // Restar 10 para subir el recuadro más arriba. Cambia este valor según necesites
-        
-        // Dibujar el recuadro de 190x30 (21 de altura en este caso)
-        $this->Rect($xStart, $yStart, 190, 23);
 
-        // Ajustar la posición del contenido del recuadro
-        $this->SetFont('Arial', 'B', 12); // Mantener en negrita para el título "Cliente"
-        $this->SetXY($xStart, $yStart + 2); // Ajustar posición para el texto "Cliente"
-        $this->Cell(0, 5, 'Cliente', 0, 1, 'L');
-        $this->Ln(1);
-        
-        $this->SetFont('Arial', '', 10); // Cambiar a fuente normal para el resto del texto
-        $this->SetXY($xStart, $this->GetY()); // Ajustar la posición Y para el resto del contenido
-        $this->Cell(110, 6, utf8_decode('Nombre: ' . $clientData['nombre'] . ' ' . $clientData['apellido']), 0, 0, 'L'); // Nombre del cliente
-        $this->Cell(90, 6, 'CUIT: ' . $clientData['cuit'], 0, 1, 'L'); // CUIT del cliente
-        $this->Cell(110, 6, utf8_decode('Dirección: ' . $clientData['direccion']), 0, 0, 'L'); // Dirección del cliente
-        $this->Cell(90, 6, utf8_decode('Condición IVA: Consumidor Final'), 0, 1, 'L'); // Condición IVA del cliente
-        $this->Ln(3);
-        
-        // Línea divisoria horizontal
-        $this->Line(10, $this->GetY(), 200, $this->GetY());
-        $this->Ln(8);
-        
-        // Añadir cuadros de verificación
-        $this->DrawCheckboxes();
-        $this->Ln();
-    }
 
 }
 
@@ -371,6 +340,9 @@ class PDF extends FPDF
 $pdf = new PDF();
 $pdf->AliasNbPages();
 $pdf->AddPage();
+
+
+require_once('../base_datos/db.php');
 
 // Consultas a la base de datos
 $query_tipo_pago = "SELECT id_tipo_de_pago, descripcion_de_pago FROM tipo_de_pago";
@@ -385,6 +357,43 @@ $result_accesorios_componentes = mysqli_query($conn, $query_accesorios_component
 $query_clientes = "SELECT id_clientes, nombre, apellido, cuit, direccion FROM clientes"; // Incluyendo CUIT y dirección
 $result_clientes = mysqli_query($conn, $query_clientes);
 
+$query_detalle_factura = "SELECT id_detalle_factura, cantidad_venta, precio_unitario_V, id_accesorios_y_componentes FROM detalle_factura";
+$result_detalle_factura = mysqli_query($conn, $query_detalle_factura);
+
+$query_cabecera_factura = "SELECT id_cabecera_factura, id_clientes, id_usuario FROM cabecera_factura";
+$result_cabecera_factura = mysqli_query($conn, $query_detalle_factura);
+
+
+$query_pedidos_de_reparacion = "SELECT id_pedidos_de_reparacion, observacion,id_clientes FROM pedidos_de_reparacion";
+$result_pedidos_de_reparacion = mysqli_query($conn, $query_pedidos_de_reparacion);
+
+$query_detalle_reparaciones = "SELECT id_detalle_reparaciones, descripcion, id_pedidos_de_reparacion, id_servicios, id_dispositivos FROM detalle_reparaciones";
+$result_detalle_reparaciones = mysqli_query($conn, $query_detalle_reparaciones);
+
+$query_dispositivos = "SELECT id_dispositivos, marca, modelo FROM dispositivos";
+$result_dispositivos = mysqli_query($conn, $query_dispositivos);
+
+$query_servicios = "SELECT id_servicios, descripcion, precio_servicio FROM servicios";
+$result_servicios = mysqli_query($conn, $query_servicios);
+
+$query_proveedores = "SELECT id_proveedores, nombre, contacto, telefono,direccion FROM proveedores";
+$result_proveed = mysqli_query($conn, $query_detalle_factura);
+
+
+
+// Verificar si hay datos de clientes
+if ($result_clientes && mysqli_num_rows($result_clientes) > 0) {
+    // Obtener el primer cliente como ejemplo
+    $clientData = mysqli_fetch_assoc($result_clientes);
+} else {
+    echo "No se encontraron clientes.";
+    exit;
+}
+
+
+$query_accesorios_componentes = "SELECT id_accesorios_y_componentes, nombre, precio FROM accesorios_y_componentes";
+$result_accesorios_componentes = mysqli_query($conn, $query_accesorios_componentes);
+
 if ($result_tipo_comprobante && mysqli_num_rows($result_tipo_comprobante) > 1) {
     // Obtener el primer cliente como ejemplo
     $titulocomprobante = mysqli_fetch_assoc($result_tipo_comprobante);
@@ -394,82 +403,58 @@ if ($result_tipo_comprobante && mysqli_num_rows($result_tipo_comprobante) > 1) {
 }
 
 
-// Consultar detalles de la factura y productos relacionados
-$id_cabecera_factura = 1; // Este valor puede ser dinámico, cambiable manualmente o por formulario
+$id_cabecera_factura = 3; // Puedes cambiarlo manualmente o ingresar por otro método (como un formulario)
 
+// **Paso 2**: Comprobar si $id_cabecera_factura es 0
 if ($id_cabecera_factura == 0) {
-
-    $productos = []; // No cargamos productos si no hay cabecera de factura
+    // Si id_cabecera_factura es 0, no buscar productos y pasar un array vacío
+    $productos = []; // No cargamos productos
 } else {
+    // **Consulta de productos si el id_cabecera_factura no es 0**
     $query = "
         SELECT 
             df.cantidad_venta, 
             ac.nombre AS nombre_accesorio_componente, 
-            df.precio_unitario_V,
-            c.nombre AS nombre_cliente, 
-            c.apellido AS apellido_cliente, 
-            c.cuit AS cuit_cliente, 
-            c.direccion AS direccion_cliente
+            df.precio_unitario_V 
         FROM 
             detalle_factura df
         JOIN 
-            accesorios_y_componentes ac 
-            ON df.id_accesorios_y_componentes = ac.id_accesorios_y_componentes
-        JOIN 
-            cabecera_factura cf 
-            ON df.id_cabecera_factura = cf.id_cabecera_factura
-        JOIN 
-            clientes c 
-            ON cf.id_clientes = c.id_clientes
+            accesorios_y_componentes ac
+        ON 
+            df.id_accesorios_y_componentes = ac.id_accesorios_y_componentes
         WHERE 
             df.id_cabecera_factura = $id_cabecera_factura
     ";
 
     $result = mysqli_query($conn, $query);
 
+    // Inicializamos un array vacío para productos
+    $productos = [];
     if ($result && mysqli_num_rows($result) > 0) {
-        // Almacenar productos y datos del cliente
-        $productos = [];
-        $cliente = [];
-    
+        // Recorrer los resultados y construir la matriz de productos
         while ($row = mysqli_fetch_assoc($result)) {
-            // Almacenar productos
             $productos[] = [
-                $row['cantidad_venta'], 
-                $row['nombre_accesorio_componente'], 
-                $row['precio_unitario_V']
+                $row['cantidad_venta'],             // Cantidad
+                $row['nombre_accesorio_componente'], // Descripción (nombre del accesorio/componente)
+                $row['precio_unitario_V']            // Precio unitario
             ];
-    
-            // Almacenar datos del cliente si aún no están
-            if (empty($cliente)) {
-                $cliente = [
-                    'nombre' => $row['nombre_cliente'],
-                    'apellido' => $row['apellido_cliente'],
-                    'cuit' => $row['cuit_cliente'],
-                    'direccion' => $row['direccion_cliente']
-                ];
-            }
         }
     } else {
-        echo "No se encontraron productos ni cliente para la factura.";
+        // Si no se encuentran productos, el array de productos seguirá vacío
+        echo "No se encontraron productos para el id_cabecera_factura = " . $id_cabecera_factura;
         exit;
     }
 }
 
-// Sección de generación del PDF
-$clientData = $cliente;
-ob_start();
-
-// Añadir secciones de empresa, cliente y factura
-$pdf->AddEmpresaSection($titulocomprobante); // Asegúrate de que esta función esté definida
-$pdf->AddClienteSection($clientData); // Pasar los datos del cliente
-$pdf->AddInvoiceSection($productos); // Pasar los productos
+// Generar la sección de la factura con los datos del cliente y productos
+$pdf->AddEmpresaSection($titulocomprobante);
+$pdf->AddClienteSection($clientData);
+$pdf->AddInvoiceSection($productos); // Pasar los productos o array vacío
 
 // Salida del PDF
-$pdf->Output('I', 'factura.pdf'); // Cambia 'I' a 'D' para forzar la descarga
+$pdf->Output('I', 'factura.pdf'); // Cambia 'I' a 'D' si deseas forzar la descarga
 
 // Cerrar la conexión a la base de datos
 mysqli_close($conn);
 
 ?>
-

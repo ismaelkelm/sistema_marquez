@@ -63,11 +63,14 @@ switch ($usuario_rol) {
                     </a>
                     <div class="dropdown-menu" aria-labelledby="adminDropdown">
                         <a class="dropdown-item" href="../buscador/buscarEmpleadojson.html">Buscar</a>
-                        <a class="dropdown-item" href="../pdf/facturaAA.php">Factura AA</a>
+                        <a class="dropdown-item" href="../pdf/facturaA.php">Factura A</a>
                         <a class="dropdown-item" href="../pdf/facturaB.php">Factura B</a>
-                        <a class="dropdown-item" href="../pdf/PruebaH.php">Factura Compra</a>
+                        <a class="dropdown-item" href="../pdf/facturaC.php">Factura c</a>
+                        <a class="dropdown-item" href="../facturacion/pdf2/venta.php">Factura XXX</a>
+
+                        <!-- <a class="dropdown-item" href="../pdf/PruebaH.php">Factura ejemplo</a>
                         <a class="dropdown-item" href="../pdf/PruebaV.php">Factura Venta</a>
-                        <a class="dropdown-item" href="../pdf/facturas.html">Factura xxxx</a>
+                        <a class="dropdown-item" href="../pdf/facturas.php">Factura xxxx</a> -->
 
                         <a class="dropdown-item" href="../facturacion/plantillas/iframe.html">Plantillas</a>
                     </div>
