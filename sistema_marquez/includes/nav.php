@@ -78,23 +78,17 @@ switch ($usuario_rol) {
                         <a class="dropdown-item" href="../facturacion/factura.php">Reparación</a>
                         <a class="dropdown-item" href="../facturacion/factura.php">Venta y Reparación</a>
                         <a class="dropdown-item" href="../facturacion/factura.php">Compra</a>
-                        <a class="dropdown-item" href="./pedidos_de_reparacion/copia.php">copia</a>
+                        <a class="dropdown-item" href="../tecnico/detalle_reparaciones/gestionar_tareas.php">Gestionar Tareas</a>
                     </div>
                 </li>
             <?php endif; ?>
 
             <?php if ($usuario_rol === 3): ?>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="tecnicoDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Reparaciones
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="tecnicoDropdown">
-                        <a class="dropdown-item" href="../tecnico/listar_reparaciones.php">Listar Reparaciones</a>
-                        <a class="dropdown-item" href="../tecnico/gestionar_tareas.php">Gestionar Tareas</a>
-                        <a class="dropdown-item" href="../tecnico/notificar_completado.php">Notificar Completado</a>
-                        <a class="dropdown-item" href="../tecnico/ver_notificacion.php">Ver Notificaciones</a>
-                    </div>
-                </li>
+                <button><a class="dropdown-item" href="../tecnico/detalle_reparaciones/gestionar_tareas.php">Gestionar Tareas</a>
+                </button>
+                <button><a class="dropdown-item" href="../tecnico/detalle_reparaciones/tareas_pendientes.php">Tareas Pendientes</a>
+                </button>
+
             <?php endif; ?>
 
             <?php if ($usuario_rol === 4): ?>

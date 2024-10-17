@@ -11,7 +11,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $observacion = trim($_POST['observacion']);
     $id_clientes = trim($_POST['id_clientes']);
     $id_tecnicos = trim($_POST['id_tecnicos']);  // Un solo valor para id_tecnicos
-    $id_dispositivos = $_POST['id_dispositivos'];  // Esto es un array
+    // Obtener los IDs de dispositivos seleccionados y convertirlos en un array
+    $dispositivos_seleccionados = $_POST['dispositivos_seleccionados'];  // Obtiene la cadena de IDs
+    $id_dispositivos = explode(',', $dispositivos_seleccionados); // Convierte la cadena en un array
 
     // Insertar el nuevo pedido en la tabla pedidos_de_reparacion
     $query_pedido = "INSERT INTO pedidos_de_reparacion 
@@ -20,19 +22,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (mysqli_query($conn, $query_pedido)) {
         // Si el pedido se registró correctamente, iterar sobre los dispositivos
-        for ($i = 0; $i < count($id_dispositivos); $i++) {
-            $id_dispositivo = trim($id_dispositivos[$i]);
+        foreach ($id_dispositivos as $id_dispositivo) {
+            $id_dispositivo = trim($id_dispositivo); // Asegúrate de limpiar espacios
 
             // Valores predeterminados para detalle_reparaciones
-            $fecha_finalizada = '0000-00-00';  // Valor predeterminado
+            $fecha_seguimiento = date('Y-m-d H:i:s');  // Valor predeterminado
             $descripcion = '------';  // Valor predeterminado
             $estado_dispositivo = '0';  // Valor predeterminado
             $id_servicios = 1;  // Servicio predeterminado
+            $id_accesorio = 0;  // Valor predeterminado para id_accesorio
+            $cantidad_usada = 0;  // Valor predeterminado para cantidad_usada
 
             // Insertar los detalles de reparación correspondientes a cada dispositivo
             $query_detalle = "INSERT INTO detalle_reparaciones 
-                              (fecha_finalizada, descripcion, estado_dispositivo, id_pedidos_de_reparacion, id_servicios, id_dispositivos, id_tecnico)
-                              VALUES ('$fecha_finalizada', '$descripcion', '$estado_dispositivo', '$id_pedidos_de_reparacion', '$id_servicios', '$id_dispositivo', '$id_tecnicos')";
+                              (fecha_seguimiento, descripcion, estado_dispositivo, id_pedidos_de_reparacion, id_servicios, id_dispositivos, id_tecnico, id_accesorio, cantidad_usada)
+                              VALUES ('$fecha_seguimiento', '$descripcion', '$estado_dispositivo', '$id_pedidos_de_reparacion', '$id_servicios', '$id_dispositivo', '$id_tecnicos', '$id_accesorio', '$cantidad_usada')";
 
             if (!mysqli_query($conn, $query_detalle)) {
                 echo "Error al registrar el detalle de reparación: " . mysqli_error($conn) . "<br>";
@@ -40,10 +44,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // Redirigir a asignacion_tareas.php si todos los registros fueron exitosos
-        header("Location: ../../tecnico/detalle_reparaciones/asignacion_tareas.php");
+        header("Location: ../../tecnico/detalle_reparaciones/gestionar_tareas.php");
         exit;  // Asegúrate de salir después de la redirección
     } else {
         echo "Error al registrar el pedido: " . mysqli_error($conn);
     }
 }
+
 ?>
