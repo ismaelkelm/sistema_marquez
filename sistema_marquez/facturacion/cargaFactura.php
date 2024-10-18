@@ -69,7 +69,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         mysqli_commit($conn);
 
         // Redireccionar o mostrar mensaje de éxito
-        echo "SIII";
+        echo "SIII";    
+        header("Location: ../../pdf/facturaB.php");
+        exit();
+
         exit;
     } catch (Exception $e) {
         // Si hay algún error, deshacer la transacción

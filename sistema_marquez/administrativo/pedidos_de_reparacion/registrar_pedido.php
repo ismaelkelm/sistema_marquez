@@ -29,15 +29,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id_tecnico = trim($id_tecnicos[$i]);
 
             // Valores predeterminados para detalle_reparaciones
-            $fecha_finalizada = '0000-00-00';  // Valor predeterminado
+            $fecha_seguimiento = '0000-00-00';  // Valor predeterminado
             $descripcion = '------';  // Valor predeterminado
             $estado_dispositivo = '0';  // Valor predeterminado
             $id_servicios = 1;  // Servicio predeterminado
 
             // Insertar los detalles de reparación correspondientes a cada dispositivo
             $query_detalle = "INSERT INTO detalle_reparaciones 
-                              (fecha_finalizada, descripcion, estado_dispositivo, id_pedidos_de_reparacion, id_servicios, id_dispositivos, id_tecnicos)
-                              VALUES ('$fecha_finalizada', '$descripcion', '$estado_dispositivo', '$id_pedidos_de_reparacion', '$id_servicios', '$id_dispositivo', '$id_tecnico')";
+                              (fecha_seguimiento, descripcion, estado_dispositivo, id_pedidos_de_reparacion, id_servicios, id_dispositivos, id_tecnicos)
+                              VALUES ('$fecha_seguimiento', '$descripcion', '$estado_dispositivo', '$id_pedidos_de_reparacion', '$id_servicios', '$id_dispositivo', '$id_tecnico')";
 
             if (mysqli_query($conn, $query_detalle)) {
                 echo "Detalle de reparación para el dispositivo $id_dispositivo registrado correctamente.<br>";

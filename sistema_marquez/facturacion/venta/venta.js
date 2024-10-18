@@ -187,4 +187,58 @@ $(document).ready(function () {
             }
         });
     });
+
+
+    function obtenerUltimoIdCabeceraFactura() {
+        $.ajax({
+            url: '../facturacion/venta/obtener_ultimo_id_cabecera_factura.php', // Archivo PHP que retorna el último ID
+            method: 'POST',
+            dataType: 'json',
+            success: function (response) {
+                if (response.status === 'success') {
+                    var ultimoId = response.id_cabecera_factura; // Guarda el ID obtenido
+                    console.log("Último id_cabecera_factura:", ultimoId); // Verifica en la consola
+    
+                    // Redirigir al archivo facturaB.php con el ID
+                    window.location.href = '../facturacion/facturaB.php?id=' + ultimoId; // Redirige con el ID
+                } else {
+                    alert('Error al obtener el último id_cabecera_factura.');
+                }
+            },
+            error: function () {
+                alert('Hubo un error en la solicitud para obtener el último id_cabecera_factura.');
+            }
+        });
+    }
+    
+    
+
+    $('#submit_factura').on('click', function() {
+        // Registrar la factura antes de obtener el último ID
+        $.ajax({
+            url: '../../facturacion/carga_factura.php', // Archivo PHP que registra la factura
+            method: 'POST',
+            data: $('#form-factura').serialize(), // Serializa todos los datos del formulario de factura
+            success: function (response) {
+                try {
+                    response = JSON.parse(response);
+                } catch (e) {
+                    alert('Error en la respuesta del servidor.');
+                    return;
+                }
+    
+                if (response.status === 'success') {
+                    alert('Factura registrada correctamente.');
+                    // Llamar la función para obtener el último ID
+                    obtenerUltimoIdCabeceraFactura(); // Redirige a la página del PDF
+                } else {
+                    alert('Hubo un error al registrar la factura: ' + (response.message || ''));
+                }
+            },
+            error: function () {
+                alert('Hubo un error al registrar la factura.');
+            }
+        });
+    });
+    
 });
