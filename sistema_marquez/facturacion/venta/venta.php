@@ -1,6 +1,22 @@
 <?php
 require_once '../../base_datos/db.php';
 
+
+// Verificar si el usuario ha iniciado sesión y obtener el id desde la sesión
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+if (!isset($_SESSION['user_id']) || !isset($_SESSION['role']) || !in_array($_SESSION['role'], [1, 2])) {
+    header("Location: ../login/login.php");
+    exit;
+}
+
+// Obtener el id_usuario desde la sesión
+$id_usuario = $_SESSION['user_id'];
+$id_operacion = 1;
+echo "usuario: " . $id_usuario;
+
 $query_tipo_pago = "SELECT id_tipo_de_pago, descripcion_de_pago FROM tipo_de_pago";
 $result_tipo_pago = mysqli_query($conn, $query_tipo_pago);
 
@@ -10,6 +26,7 @@ $result_tipo_comprobante = mysqli_query($conn, $query_tipo_comprobante);
 $query_accesorios_componentes = "SELECT id_accesorios_y_componentes, nombre, precio FROM accesorios_y_componentes";
 $result_accesorios_componentes = mysqli_query($conn, $query_accesorios_componentes);
 ?>
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -222,6 +239,7 @@ $result_accesorios_componentes = mysqli_query($conn, $query_accesorios_component
                     <label for="total" id="total_label">Total:</label>
                     <input type="text" id="total" name="total" value="" readonly>
                 </div>
+
                 <button type="submit" class="btn btn-custom" id="submit_button" disabled>Registrar Factura</button>
             </div>
         </form>
