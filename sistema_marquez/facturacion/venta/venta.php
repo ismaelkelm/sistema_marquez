@@ -15,7 +15,6 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['role']) || !in_array($_SES
 // Obtener el id_usuario desde la sesión
 $id_usuario = $_SESSION['user_id'];
 $id_operacion = 1;
-echo "usuario: " . $id_usuario;
 
 $query_tipo_pago = "SELECT id_tipo_de_pago, descripcion_de_pago FROM tipo_de_pago";
 $result_tipo_pago = mysqli_query($conn, $query_tipo_pago);
@@ -181,6 +180,7 @@ $result_accesorios_componentes = mysqli_query($conn, $query_accesorios_component
 
                 <input type="hidden" id="id_usuario" name="id_usuario" value="<?php echo $id_usuario; ?>">
                 <input type="hidden" id="id_operacion" name="id_operacion" value="<?php echo $id_operacion; ?>">
+                <input type="hidden" id="id_servicio" name="id_servicio" value="0">
             </div>
 
             <div class="form-section">

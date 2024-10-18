@@ -1,6 +1,6 @@
 <?php
 // Incluir el archivo de conexión a la base de datos
-include '../../base_datos/db.php';
+include '../base_datos/db.php';
 
 if (isset($_POST['id_dispositivos']) && isset($_POST['id_detalle_reparaciones'])) {
     $id_dispositivos = $_POST['id_dispositivos'];

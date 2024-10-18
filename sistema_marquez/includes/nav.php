@@ -90,9 +90,9 @@ switch ($usuario_rol) {
             <?php endif; ?>
 
             <?php if ($usuario_rol === 3): ?>
-                <button><a class="dropdown-item" href="../tecnico/detalle_reparaciones/gestionar_tareas.php">Gestionar Tareas</a>
+                <button><a class="dropdown-item" href="../tecnico/gestionar_tareas.php">Gestionar Tareas</a>
                 </button>
-                <button><a class="dropdown-item" href="../tecnico/detalle_reparaciones/tareas_pendientes.php">Tareas Pendientes</a>
+                <button><a class="dropdown-item" href="../tecnico/tareas_pendientes.php">Tareas Pendientes</a>
                 </button>
 
             <?php endif; ?>

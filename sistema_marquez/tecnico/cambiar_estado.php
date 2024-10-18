@@ -1,6 +1,6 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    include '../../base_datos/db.php';
+    include '../base_datos/db.php';
 
     $numero_orden = $_POST['numero_orden'];
     $estado = $_POST['estado'];

@@ -1,6 +1,6 @@
 <?php
 // Incluir el archivo de conexión a la base de datos
-include '../../base_datos/db.php';
+include '../base_datos/db.php';
 
 // Iniciar la sesión y obtener el id_usuario
 if (session_status() == PHP_SESSION_NONE) {
