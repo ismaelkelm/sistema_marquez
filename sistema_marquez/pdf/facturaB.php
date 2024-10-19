@@ -367,7 +367,6 @@ class PDF extends FPDF
 
 }
 
-
 $pdf = new PDF();
 $pdf->AliasNbPages();
 $pdf->AddPage();
@@ -382,8 +381,9 @@ $result_tipo_comprobante = mysqli_query($conn, $query_tipo_comprobante);
 $query_accesorios_componentes = "SELECT id_accesorios_y_componentes, nombre, precio FROM accesorios_y_componentes";
 $result_accesorios_componentes = mysqli_query($conn, $query_accesorios_componentes);
 
-$query_clientes = "SELECT id_clientes, nombre, apellido, cuit, direccion FROM clientes"; // Incluyendo CUIT y dirección
+$query_clientes = "SELECT id_clientes, nombre, apellido, cuit, direccion FROM clientes";
 $result_clientes = mysqli_query($conn, $query_clientes);
+
 
 if ($result_tipo_comprobante && mysqli_num_rows($result_tipo_comprobante) > 1) {
     // Obtener el primer cliente como ejemplo
@@ -393,9 +393,26 @@ if ($result_tipo_comprobante && mysqli_num_rows($result_tipo_comprobante) > 1) {
     exit;
 }
 
+$query = "SELECT id_cabecera_factura FROM cabecera_factura ORDER BY id_cabecera_factura DESC LIMIT 1";
+$result = mysqli_query($conn, $query);
 
-// Consultar detalles de la factura y productos relacionados
-$id_cabecera_factura = 1; // Este valor puede ser dinámico, cambiable manualmente o por formulario
+// Manejo de resultados
+if ($result) {
+    if (mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        $ultimoId = $row['id_cabecera_factura'];
+        echo "Último ID de cabecera de factura: " . $ultimoId; // Muestra el último ID
+    } else {
+        echo "No se encontró ningún registro de cabecera de factura.";
+    }
+} else {
+    echo "Error en la consulta: " . mysqli_error($conn);
+}
+
+
+
+// Obtener el id_cabecera_factura de la URL
+$id_cabecera_factura = $ultimoId;
 
 if ($id_cabecera_factura == 0) {
 
@@ -472,4 +489,3 @@ $pdf->Output('I', 'factura.pdf'); // Cambia 'I' a 'D' para forzar la descarga
 mysqli_close($conn);
 
 ?>
-

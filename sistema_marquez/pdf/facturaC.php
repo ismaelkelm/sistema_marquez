@@ -263,6 +263,75 @@ class PDF extends FPDF
         $this->Ln(10); // Esto es opcional para agregar espacio después de la sección de totales
     }
 
+    // function AddInvoiceSection($products)
+    // {
+    //     // Establecer la fuente y los encabezados de la tabla
+    //     $this->SetFont('Arial', '', 10);
+    //     $this->SetFillColor(200, 220, 255);
+    //     $this->Cell(30, 10, 'Cantidad', 1, 0, 'C', true);
+    //     $this->Cell(70, 10, utf8_decode('Descripción'), 1, 0, 'C', true);
+    //     $this->Cell(30, 10, 'Precio Unitario', 1, 0, 'C', true);
+    //     $this->Cell(30, 10, 'IVA (21%)', 1, 0, 'C', true);
+    //     $this->Cell(30, 10, 'Total', 1, 1, 'C', true);
+
+    //     // Variables para los totales
+    //     $subTotal = 0;
+    //     $totalIVA = 0;
+    //     $totalFactura = 0;
+
+    //     // Máximo de productos a mostrar
+    //     $maxProducts = 19;
+    //     $lineHeight = 6; // Altura de cada línea de producto
+    //     $spaceForProducts = $lineHeight * $maxProducts; // Altura total disponible para productos
+
+    //     // Limitar el array de productos a 14 elementos
+    //     $productsToShow = array_slice($products, 0, $maxProducts);
+
+    //     // Posición inicial de la tabla de productos
+    //     $startY = $this->GetY();
+
+    //     // Mostrar productos y calcular totales
+    //     foreach ($productsToShow as $producto) {
+    //         $cantidad = $producto[0];
+    //         $descripcion = $producto[1];
+    //         $precio_unitario = $producto[2];
+    //         $total = $cantidad * $precio_unitario;
+    //         $iva = $total * 0.21;
+
+    //         // Acumular totales
+    //         $subTotal += $total;
+    //         $totalIVA += $iva;
+    //         $totalFactura += $total + $iva;
+
+    //         // Mostrar fila de producto
+    //         $this->Cell(30, $lineHeight, $cantidad, 0, 0, 'C');
+    //         $this->Cell(73, $lineHeight, utf8_decode($descripcion), 0, 0, 'L');
+    //         $this->Cell(30, $lineHeight, '$  ' . number_format($precio_unitario, 2), 0, 0, 'L');
+    //         $this->Cell(30, $lineHeight, '$  ' . number_format($iva, 2), 0, 0, 'L');
+    //         $this->Cell(30, $lineHeight, '$  ' . number_format($total + $iva, 2), 0, 1, 'L');
+    //     }
+
+    //     // Obtener la posición después de listar productos
+    //     $currentY = $this->GetY();
+    //     $productsHeight = $currentY - $startY;
+
+    //     // Asegurarse de que los totales estén exactamente a 120 mm del encabezado
+    //     $totalsPositionY = 133;
+
+    //     // Si la posición actual está por encima de 120 mm, mover el cursor a esa posición
+    //     if ($productsHeight < $spaceForProducts) {
+    //         // Si no hemos llenado todo el espacio destinado a productos, llenar con líneas vacías
+    //         $emptyLines = ($maxProducts - count($productsToShow)) * $lineHeight;
+    //         $this->Ln($emptyLines);
+    //     }
+
+    //     // Ahora establecer la posición fija para los totales
+    //     $this->SetY($totalsPositionY);
+
+    //     // Llamar a la función que muestra los totales
+    //     $this->AddTotalsSection($subTotal, $totalIVA, $totalFactura);
+    // }
+
     function AddInvoiceSection($products)
     {
         // Establecer la fuente y los encabezados de la tabla
@@ -336,13 +405,9 @@ class PDF extends FPDF
 
 }
 
-
 $pdf = new PDF();
 $pdf->AliasNbPages();
 $pdf->AddPage();
-
-
-require_once('../base_datos/db.php');
 
 // Consultas a la base de datos
 $query_tipo_pago = "SELECT id_tipo_de_pago, descripcion_de_pago FROM tipo_de_pago";
@@ -357,42 +422,39 @@ $result_accesorios_componentes = mysqli_query($conn, $query_accesorios_component
 $query_clientes = "SELECT id_clientes, nombre, apellido, cuit, direccion FROM clientes"; // Incluyendo CUIT y dirección
 $result_clientes = mysqli_query($conn, $query_clientes);
 
-$query_detalle_factura = "SELECT id_detalle_factura, cantidad_venta, precio_unitario_V, id_accesorios_y_componentes FROM detalle_factura";
-$result_detalle_factura = mysqli_query($conn, $query_detalle_factura);
-
-$query_cabecera_factura = "SELECT id_cabecera_factura, id_clientes, id_usuario FROM cabecera_factura";
-$result_cabecera_factura = mysqli_query($conn, $query_detalle_factura);
-
-
-$query_pedidos_de_reparacion = "SELECT id_pedidos_de_reparacion, observacion,id_clientes FROM pedidos_de_reparacion";
+$query_pedidos_de_reparacion = "SELECT id_pedidos_de_reparacion,numero_orden,id_clientes FROM pedidos_de_reparacion";
 $result_pedidos_de_reparacion = mysqli_query($conn, $query_pedidos_de_reparacion);
 
-$query_detalle_reparaciones = "SELECT id_detalle_reparaciones, descripcion, id_pedidos_de_reparacion, id_servicios, id_dispositivos FROM detalle_reparaciones";
-$result_detalle_reparaciones = mysqli_query($conn, $query_detalle_reparaciones);
+$query_detalle_reparaciones = "SELECT id_pedidos_de_reparacion, id_servicios,id_dipositivos,descripcion FROM pedidos_de_reparacion";
+$result_detalle_reparaciones = mysqli_query($conn, $query_pedidos_de_reparacion);
 
-$query_dispositivos = "SELECT id_dispositivos, marca, modelo FROM dispositivos";
-$result_dispositivos = mysqli_query($conn, $query_dispositivos);
-
-$query_servicios = "SELECT id_servicios, descripcion, precio_servicio FROM servicios";
+$query_servicios = "SELECT id_servicios,descripcion,precio_servicio FROM pedidos_de_reparacion";
 $result_servicios = mysqli_query($conn, $query_servicios);
 
-$query_proveedores = "SELECT id_proveedores, nombre, contacto, telefono,direccion FROM proveedores";
-$result_proveed = mysqli_query($conn, $query_detalle_factura);
+$query_dispositivos = "SELECT id_dispositivos,marca,modelo FROM pedidos_de_reparacion";
+$result_dispositivos = mysqli_query($conn, $query_dispositivos);
+
+// SELECT 
+//     c.nombre,
+//     c.apellido,
+//     c.cuit,
+//     c.direccion,
+//     pr.numero_orden,
+//     dr.descripcion AS descripcion_reparacion,
+//     s.descripcion AS servicio_descripcion,
+//     s.precio_servicio
+// FROM clientes c
+// JOIN pedidos_de_reparacion pr ON c.id_clientes = pr.id_clientes
+// JOIN detalle_reparaciones dr ON pr.id_pedidos_de_reparacion = dr.id_pedidos_de_reparacion
+// JOIN servicios s ON dr.id_servicios = s.id_servicios
+// WHERE pr.id_pedidos_de_reparacion = {ID_PEDIDO};  -- Reemplaza con el ID del pedido
 
 
 
-// Verificar si hay datos de clientes
-if ($result_clientes && mysqli_num_rows($result_clientes) > 0) {
-    // Obtener el primer cliente como ejemplo
-    $clientData = mysqli_fetch_assoc($result_clientes);
-} else {
-    echo "No se encontraron clientes.";
-    exit;
-}
 
 
-$query_accesorios_componentes = "SELECT id_accesorios_y_componentes, nombre, precio FROM accesorios_y_componentes";
-$result_accesorios_componentes = mysqli_query($conn, $query_accesorios_componentes);
+
+
 
 if ($result_tipo_comprobante && mysqli_num_rows($result_tipo_comprobante) > 1) {
     // Obtener el primer cliente como ejemplo
@@ -402,59 +464,177 @@ if ($result_tipo_comprobante && mysqli_num_rows($result_tipo_comprobante) > 1) {
     exit;
 }
 
+$query = "SELECT id_cabecera_factura FROM cabecera_factura ORDER BY id_cabecera_factura DESC LIMIT 1";
+$result = mysqli_query($conn, $query);
 
-$id_cabecera_factura = 3; // Puedes cambiarlo manualmente o ingresar por otro método (como un formulario)
-
-// **Paso 2**: Comprobar si $id_cabecera_factura es 0
-if ($id_cabecera_factura == 0) {
-    // Si id_cabecera_factura es 0, no buscar productos y pasar un array vacío
-    $productos = []; // No cargamos productos
+// Manejo de resultados
+if ($result) {
+    if (mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        $ultimoId = $row['id_cabecera_factura'];
+        echo "Último ID de cabecera de factura: " . $ultimoId; // Muestra el último ID
+    } else {
+        echo "No se encontró ningún registro de cabecera de factura.";
+    }
 } else {
-    // **Consulta de productos si el id_cabecera_factura no es 0**
+    echo "Error en la consulta: " . mysqli_error($conn);
+}
+
+
+
+// Obtener el id_cabecera_factura de la URL
+$id_cabecera_factura = $ultimoId;
+
+if ($id_cabecera_factura == 0) {
+
+    $productos = []; // No cargamos productos si no hay cabecera de factura
+} else {
     $query = "
         SELECT 
             df.cantidad_venta, 
             ac.nombre AS nombre_accesorio_componente, 
-            df.precio_unitario_V 
+            df.precio_unitario_V,
+            c.nombre AS nombre_cliente, 
+            c.apellido AS apellido_cliente, 
+            c.cuit AS cuit_cliente, 
+            c.direccion AS direccion_cliente
         FROM 
             detalle_factura df
         JOIN 
-            accesorios_y_componentes ac
-        ON 
-            df.id_accesorios_y_componentes = ac.id_accesorios_y_componentes
+            accesorios_y_componentes ac 
+            ON df.id_accesorios_y_componentes = ac.id_accesorios_y_componentes
+        JOIN 
+            cabecera_factura cf 
+            ON df.id_cabecera_factura = cf.id_cabecera_factura
+        JOIN 
+            clientes c 
+            ON cf.id_clientes = c.id_clientes
         WHERE 
             df.id_cabecera_factura = $id_cabecera_factura
     ";
 
     $result = mysqli_query($conn, $query);
 
-    // Inicializamos un array vacío para productos
-    $productos = [];
     if ($result && mysqli_num_rows($result) > 0) {
-        // Recorrer los resultados y construir la matriz de productos
+        // Almacenar productos y datos del cliente
+        $productos = [];
+        $cliente = [];
+    
         while ($row = mysqli_fetch_assoc($result)) {
+            // Almacenar productos
             $productos[] = [
-                $row['cantidad_venta'],             // Cantidad
-                $row['nombre_accesorio_componente'], // Descripción (nombre del accesorio/componente)
-                $row['precio_unitario_V']            // Precio unitario
+                $row['cantidad_venta'], 
+                $row['nombre_accesorio_componente'], 
+                $row['precio_unitario_V']
             ];
+    
+            // Almacenar datos del cliente si aún no están
+            if (empty($cliente)) {
+                $cliente = [
+                    'nombre' => $row['nombre_cliente'],
+                    'apellido' => $row['apellido_cliente'],
+                    'cuit' => $row['cuit_cliente'],
+                    'direccion' => $row['direccion_cliente']
+                ];
+            }
         }
     } else {
-        // Si no se encuentran productos, el array de productos seguirá vacío
-        echo "No se encontraron productos para el id_cabecera_factura = " . $id_cabecera_factura;
+        echo "No se encontraron productos ni cliente para la factura.";
         exit;
     }
 }
 
-// Generar la sección de la factura con los datos del cliente y productos
-$pdf->AddEmpresaSection($titulocomprobante);
-$pdf->AddClienteSection($clientData);
-$pdf->AddInvoiceSection($productos); // Pasar los productos o array vacío
+// Sección de generación del PDF
+$clientData = $cliente;
+ob_start();
+
+// Añadir secciones de empresa, cliente y factura
+$pdf->AddEmpresaSection($titulocomprobante); // Asegúrate de que esta función esté definida
+$pdf->AddClienteSection($clientData); // Pasar los datos del cliente
+$pdf->AddInvoiceSection($productos); // Pasar los productos
 
 // Salida del PDF
-$pdf->Output('I', 'factura.pdf'); // Cambia 'I' a 'D' si deseas forzar la descarga
+$pdf->Output('I', 'factura.pdf'); // Cambia 'I' a 'D' para forzar la descarga
 
 // Cerrar la conexión a la base de datos
 mysqli_close($conn);
 
+?>
+
+<?php
+require('fpdf.php');
+include('../../config/database.php'); // Incluye la conexión a la base de datos
+
+// Obtén el id_cabecera_factura de la URL
+$id_cabecera_factura = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+
+if ($id_cabecera_factura === 0) {
+    echo "ID de factura no válido.";
+    exit;
+}
+
+// Consultar los datos de la cabecera y los productos relacionados
+$query = "
+    SELECT 
+        df.cantidad_venta, 
+        ac.nombre AS nombre_accesorio_componente, 
+        df.precio_unitario_V,
+        c.nombre AS nombre_cliente, 
+        c.apellido AS apellido_cliente, 
+        c.cuit AS cuit_cliente, 
+        c.direccion AS direccion_cliente
+    FROM 
+        detalle_factura df
+    JOIN 
+        accesorios_y_componentes ac 
+        ON df.id_accesorios_y_componentes = ac.id_accesorios_y_componentes
+    JOIN 
+        cabecera_factura cf 
+        ON df.id_cabecera_factura = cf.id_cabecera_factura
+    JOIN 
+        clientes c 
+        ON cf.id_clientes = c.id_clientes
+    WHERE 
+        df.id_cabecera_factura = $id_cabecera_factura
+";
+
+$result = mysqli_query($conn, $query);
+
+if ($result && mysqli_num_rows($result) > 0) {
+    $productos = [];
+    $cliente = [];
+
+    while ($row = mysqli_fetch_assoc($result)) {
+        // Almacenar productos
+        $productos[] = [
+            'cantidad' => $row['cantidad_venta'],
+            'nombre' => $row['nombre_accesorio_componente'],
+            'precio' => $row['precio_unitario_V']
+        ];
+
+        // Almacenar datos del cliente si aún no están
+        if (empty($cliente)) {
+            $cliente = [
+                'nombre' => $row['nombre_cliente'],
+                'apellido' => $row['apellido_cliente'],
+                'cuit' => $row['cuit_cliente'],
+                'direccion' => $row['direccion_cliente']
+            ];
+        }
+    }
+
+    // Generar el PDF
+    $pdf = new PDF();
+    $pdf->AliasNbPages();
+    $pdf->AddPage();
+
+
+    $pdf->Output('D', 'factura.pdf');
+
+} else {
+    echo "No se encontraron productos para esta factura.";
+    exit;
+}
+
+mysqli_close($conn);
 ?>

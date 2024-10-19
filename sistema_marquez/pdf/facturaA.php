@@ -360,6 +360,10 @@ $result_clientes = mysqli_query($conn, $query_clientes);
 $query_pedidos_de_reparacion = "SELECT id_pedidos_de_reparacion, fecha_de_pedido,numero_orden, observacion FROM pedidos_de_reparacion";
 $result_pedidos_de_reparacion = mysqli_query($conn, $query_pedidos_de_reparacion);
 
+
+
+
+
 $query_detalle_factura = "SELECT id_detalle_factura, cantidad_venta, precio_unitario_V, id_accesorios_y_componentes FROM detalle_factura";
 $result_detalle_factura = mysqli_query($conn, $query_detalle_factura);
 

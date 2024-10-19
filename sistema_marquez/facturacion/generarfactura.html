@@ -3,102 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Factura de Compra</title>
+    <title>Opciones de Factura</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+            text-align: center;
+            padding: 50px;
         }
         .container {
-            width: 80%;
-            margin: auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 0 auto;
         }
-        .header, .footer {
-            text-align: center;
-            padding: 10px;
+        h1 {
+            color: #333;
+            font-size: 24px;
         }
-        .header h1 {
-            margin: 0;
+        p {
+            font-size: 18px;
+            color: #666;
         }
-        .invoice-details {
-            margin: 20px 0;
+        .options {
+            margin-top: 30px;
         }
-        .invoice-details th, .invoice-details td {
-            border: 1px solid #ddd;
-            padding: 8px;
+        .options a {
+            display: inline-block;
+            text-decoration: none;
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            margin: 10px;
+            transition: background-color 0.3s ease;
         }
-        .invoice-details th {
-            background-color: #f2f2f2;
-        }
-        .total {
-            text-align: right;
-            margin-top: 20px;
+        .options a:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h1>Factura de Compra</h1>
-            <p>Nombre de la Empresa</p>
-            <p>Dirección de la Empresa</p>
-            <p>Teléfono: (123) 456-7890</p>
-            <p>Correo: info@empresa.com</p>
-        </div>
-        
-        <div class="invoice-details">
-            <table width="100%">
-                <tr>
-                    <th>Fecha:</th>
-                    <td>[Fecha]</td>
-                </tr>
-                <tr>
-                    <th>Número de Factura:</th>
-                    <td>[Número de Factura]</td>
-                </tr>
-                <tr>
-                    <th>Proveedor:</th>
-                    <td>[Nombre del Proveedor]</td>
-                </tr>
-                <tr>
-                    <th>Dirección del Proveedor:</th>
-                    <td>[Dirección del Proveedor]</td>
-                </tr>
-                <tr>
-                    <th>Teléfono del Proveedor:</th>
-                    <td>[Teléfono del Proveedor]</td>
-                </tr>
-            </table>
-        </div>
-
-        <table class="invoice-details" width="100%">
-            <thead>
-                <tr>
-                    <th>Descripción</th>
-                    <th>Cantidad</th>
-                    <th>Precio Unitario</th>
-                    <th>Total</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Repetir esta fila para cada producto -->
-                <tr>
-                    <td>[Descripción del Producto]</td>
-                    <td>[Cantidad]</td>
-                    <td>[Precio Unitario]</td>
-                    <td>[Total]</td>
-                </tr>
-                <!-- Fin de fila de producto -->
-            </tbody>
-        </table>
-
-        <div class="total">
-            <p><strong>Total:</strong> [Monto Total]</p>
-        </div>
-
-        <div class="footer">
-            <p>Gracias por su compra.</p>
+        <h1>Opciones de Factura</h1>
+        <p>Elige una opción para continuar:</p>
+        <div class="options">
+            <a href="ver_factura.php?id=123" target="_blank">Ver Factura</a>
+            <a href="guardar_factura.php?id=123" download="factura.pdf">Guardar Factura</a>
+            <a href="seguir_comprando.php">Seguir Comprando</a>
         </div>
     </div>
 </body>

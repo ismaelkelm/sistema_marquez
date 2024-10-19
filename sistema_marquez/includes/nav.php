@@ -53,6 +53,7 @@ switch ($usuario_rol) {
                         <a class="dropdown-item" href="../facturacion/plantillas/inframe-dark.html">Plantillas</a>
                         <a class="dropdown-item" href="../login/send_mail.php">enviar correo</a>
 
+                        
                     </div>
                 </li>
             <?php endif; ?>
@@ -67,6 +68,8 @@ switch ($usuario_rol) {
                         <a class="dropdown-item" href="../pdf/facturaB.php">Factura B</a>
                         <a class="dropdown-item" href="../pdf/facturaC.php">Factura c</a>
                         <a class="dropdown-item" href="../facturacion/pdf2/venta.php">Factura XXX</a>
+                        <a class="dropdown-item" href="../facturacion/generarfactura.html">Factura generity</a>
+
 
                         <!-- <a class="dropdown-item" href="../pdf/PruebaH.php">Factura ejemplo</a>
                         <a class="dropdown-item" href="../pdf/PruebaV.php">Factura Venta</a>
@@ -90,11 +93,17 @@ switch ($usuario_rol) {
             <?php endif; ?>
 
             <?php if ($usuario_rol === 3): ?>
-                <button><a class="dropdown-item" href="../tecnico/gestionar_tareas.php">Gestionar Tareas</a>
-                </button>
-                <button><a class="dropdown-item" href="../tecnico/tareas_pendientes.php">Tareas Pendientes</a>
-                </button>
-
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="tecnicoDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Reparaciones
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="tecnicoDropdown">
+                        <a class="dropdown-item" href="../tecnico/listar_reparaciones.php">Listar Reparaciones</a>
+                        <a class="dropdown-item" href="../tecnico/gestionar_tareas.php">Gestionar Tareas</a>
+                        <a class="dropdown-item" href="../tecnico/notificar_completado.php">Notificar Completado</a>
+                        <a class="dropdown-item" href="../tecnico/ver_notificacion.php">Ver Notificaciones</a>
+                    </div>
+                </li>
             <?php endif; ?>
 
             <?php if ($usuario_rol === 4): ?>
