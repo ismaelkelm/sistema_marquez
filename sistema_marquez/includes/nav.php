@@ -97,6 +97,11 @@ switch ($usuario_rol) {
                     <a class="nav-link dropdown-toggle" href="#" id="tecnicoDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Reparaciones
                     </a>
+                    <button><a class="dropdown-item" href="../tecnico/gestionar_tareas.php">Gestionar Tareas</a>
+                    </button>
+                    <button><a class="dropdown-item" href="../tecnico/tareas_pendientes.php">Tareas Pendientes</a>
+                    </button>
+
                     <div class="dropdown-menu" aria-labelledby="tecnicoDropdown">
                         <a class="dropdown-item" href="../tecnico/listar_reparaciones.php">Listar Reparaciones</a>
                         <a class="dropdown-item" href="../tecnico/gestionar_tareas.php">Gestionar Tareas</a>
