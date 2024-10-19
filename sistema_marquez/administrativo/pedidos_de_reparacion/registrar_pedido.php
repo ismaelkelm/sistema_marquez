@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // Redirigir a asignacion_tareas.php si todos los registros fueron exitosos
-        header("Location: ../../tecnico/detalle_reparaciones/gestionar_tareas.php");
+        header("Location: ../../tecnico/gestionar_tareas.php");
         exit;  // Asegúrate de salir después de la redirección
     } else {
         echo "Error al registrar el pedido: " . mysqli_error($conn);
