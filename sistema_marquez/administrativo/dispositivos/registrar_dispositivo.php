@@ -51,12 +51,14 @@ if ($stmt_insertar->error) {
 $stmt_insertar->bind_param("ssss", $marca, $modelo, $numero_serie, $fecha_actual);
 
 if ($stmt_insertar->execute()) {
-    echo json_encode(['status' => 'success', 'message' => 'Dispositivo registrado con éxito.']);
+    // Obtener el ID del último dispositivo insertado
+    $ultimo_id = $conn->insert_id;
+
+    echo json_encode(['status' => 'success', 'message' => 'Dispositivo registrado con éxito.', 'id' => $ultimo_id]);
 } else {
     // Capturamos el error de ejecución
     echo json_encode(['status' => 'error', 'message' => 'Error al registrar el dispositivo: ' . $stmt_insertar->error]);
 }
-
 // Cerramos el statement
 $stmt_insertar->close();
 $conn->close();

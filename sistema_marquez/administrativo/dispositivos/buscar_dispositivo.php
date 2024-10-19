@@ -2,24 +2,22 @@
 // Conexión a la base de datos
 include '../../base_datos/db.php'; 
 
-$numero_serie = $_POST['numero_serie'];
+// Consulta para obtener los dispositivos
+$sql = "SELECT id_dispositivos, numero_de_serie, marca FROM dispositivos ORDER BY fecha_de_carga DESC";
+$result = $conn->query($sql);
 
-$query = "SELECT * FROM dispositivos WHERE numero_de_serie = ?";
-$stmt = $conn->prepare($query);
-$stmt->bind_param("s", $numero_serie);
-$stmt->execute();
-$result = $stmt->get_result();
+// Crear un array para almacenar los dispositivos
+$dispositivos = [];
 
 if ($result->num_rows > 0) {
-    $dispositivo = $result->fetch_assoc();
-    echo json_encode([
-        'status' => 'exists',
-        'dispositivo' => $dispositivo
-    ]);
-} else {
-    echo json_encode(['status' => 'not_found']);
+    // Guardar cada dispositivo en el array
+    while($row = $result->fetch_assoc()) {
+        $dispositivos[] = $row;
+    }
 }
 
-$stmt->close();
-$conn->close();
+// Devolver los dispositivos como JSON
+echo json_encode($dispositivos);
+
+$conexion->close();
 ?>

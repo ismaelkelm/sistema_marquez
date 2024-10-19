@@ -1,9 +1,6 @@
 <?php
 // Incluir el archivo de conexión a la base de datos
 include '../../base_datos/db.php'; 
-// Consulta para obtener los usuarios con el rol 3 (técnicos)
-$sql = "SELECT id_usuario, nombre FROM usuario WHERE id_roles = 3";
-$resultado = $conn->query($sql);
 
 // Obtener el siguiente ID de pedido de reparación
 $query_order_id = "SELECT MAX(id_pedidos_de_reparacion) AS max_order_id FROM pedidos_de_reparacion";
@@ -18,6 +15,9 @@ $last_order_number = $last_order_row['numero_orden'] ?? 'ORD0000';
 $next_order = (int) substr($last_order_number, 3) + 1;
 $formatted_order_number = 'ORD' . str_pad($next_order, 4, '0', STR_PAD_LEFT);
 
+// Consulta para obtener los dispositivos ordenados desde el último dispositivo cargado
+$sql = "SELECT id_dispositivos, marca, modelo FROM dispositivos ORDER BY fecha_de_carga DESC";
+$result = $conn->query($sql);
 ?>
 
 <?php include('../../includes/header.php'); ?>
@@ -26,16 +26,61 @@ $formatted_order_number = 'ORD' . str_pad($next_order, 4, '0', STR_PAD_LEFT);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="cliente.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <title>Registrar Pedido</title>
 </head>
 <body>
-    <form id="" action="registrar_pedido.php" method="POST">
+    <form action="registrar_pedido.php" method="POST">
         <div class="container mt-5">
             <a href="../administrativo.php" class="btn btn-secondary mb-3">Volver</a>
+            <br>
+            <!-- Botones para alternar entre formulario de dispositivo existente y nuevo -->
+            <button type="button" id="buscar-dispositivo-btn">Buscar Dispositivo Cargado</button>
+            <!-- Botón para cargar nuevo dispositivo -->
+            <button type="button" id="nuevo-dispositivo-btn">Cargar Nuevo Dispositivo</button>
 
+            <br>
+            <!-- Contenedor del select que inicialmente estará oculto -->
+            <div id="dispositivo-container" style="display:none;">
+                <label for="dispositivo">Selecciona un dispositivo:</label>
+                <select id="dispositivo-select">
+                    <?php
+                    if ($result->num_rows > 0) {
+                        // Mostrar los dispositivos en el dropdown
+                        while ($row = $result->fetch_assoc()) {
+                            echo "<option value='" . $row['id_dispositivos'] . "'>" . $row['marca'] . " - " . $row['modelo'] . "</option>";
+                        }
+                    } else {
+                        echo "<option>No hay dispositivos disponibles</option>";
+                    }
+                    ?>
+                </select>
+                <button type="button" id="agregar-dispositivo-btn">Agregar dispositivo</button>
+
+                <!-- Lista donde se mostrarán los dispositivos seleccionados -->
+                <ul id="dispositivo-list"></ul>
+
+                <!-- Campo oculto que contendrá los IDs de los dispositivos seleccionados -->
+                <input type="hidden" name="dispositivos_seleccionados" id="dispositivos-seleccionados">
+            </div>
+           <!-- Formulario para registrar nuevo dispositivo, oculto por defecto -->
+            <div id="nuevo-dispositivo-form" style="display:none;">
+                <h3>Nuevo Dispositivo</h3>
+                <label for="nueva_marca">Marca:</label>
+                <input type="text" id="nueva_marca" name="nueva_marca"><br><br>
+
+                <label for="nuevo_modelo">Modelo:</label>
+                <input type="text" id="nuevo_modelo" name="nuevo_modelo"><br><br>
+
+                <label for="nuevo_numero_serie">Número de Serie:</label>
+                <input type="text" id="nuevo_numero_serie" name="nuevo_numero_serie"><br><br>
+
+                <button type="button" id="registrar_dispositivo">Registrar Dispositivo</button>
+                
+                <!-- Aquí se mostrará el mensaje de éxito o error -->
+                <div id="mensaje-registro" style="color: red;"></div>
+            </div>
+            <br>
             <!-- Datos del cliente -->
             <label for="dni_cliente">DNI del Cliente:</label>
             <input type="number" id="dni_cliente" name="dni_cliente" required><br><br>
@@ -45,7 +90,7 @@ $formatted_order_number = 'ORD' . str_pad($next_order, 4, '0', STR_PAD_LEFT);
 
             <input type="hidden" id="id_clientes" name="id_clientes">
             <div id="mensaje_cliente" style="color:red;"></div>
-
+            
             <!-- Formulario para levantar cliente si no existe -->
             <div id="form-levantar-cliente" style="display:none;">
                 <h3>Nuevo Cliente</h3>
@@ -66,51 +111,7 @@ $formatted_order_number = 'ORD' . str_pad($next_order, 4, '0', STR_PAD_LEFT);
 
                 <button type="button" id="registrar_cliente">Registrar Cliente</button>
             </div>
-            <!-- Botones para seleccionar la acción -->
-            <button type="button" id="buscar-dispositivo-btn">Buscar Dispositivo Cargado</button>
-            <button type="button" id="nuevo-dispositivo-btn">Cargar Nuevo Dispositivo</button>
-
-            <!-- Datos del dispositivo -->
-            <div id="buscar-dispositivo-form" style="display:none;">
-                <h2 class="mt-5">Seleccionar Dispositivo</h2>
-
-                <div id="dispositivo-contenedor">
-                    <div class="dispositivo-item">
-                        <label for="numero_serie_dispositivo">Número de Serie del Dispositivo:</label>
-                        <button type="button" id="traer_dispositivos">¿Traer los últimos dispositivos cargados?</button>
-                        <input type="text" class="numero_serie_dispositivo" name="numero_serie_dispositivo[]" required><br><br>
-
-                        <<label for="marca_dispositivo">Marca del Dispositivo:</label>
-                        <input type="text" class="marca_dispositivo" name="marca_dispositivo[]" required><br><br>
-
-                        <label for="modelo_dispositivo">Modelo del Dispositivo:</label>
-                        <input type="text" class="modelo_dispositivo" name="modelo_dispositivo[]" required><br><br>
-                        
-                        <input type="hidden" class="id_dispositivos" name="id_dispositivos[]">
-                    </div>
-                </div>
-
-                <button type="button" id="agregar-dispositivo-btn">Agregar otro dispositivo</button>
-            </div>
-
-            <!-- Formulario para registrar nuevo dispositivo -->
-            <div id="nuevo-dispositivo-form" style="display:none;">
-                <h3>Nuevo Dispositivo</h3>
-                <label for="nueva_marca">Marca:</label>
-                <input type="text" id="nueva_marca" name="nueva_marca"><br><br>
-
-                <label for="nuevo_modelo">Modelo:</label>
-                <input type="text" id="nuevo_modelo" name="nuevo_modelo"><br><br>
-
-                <label for="nuevo_numero_serie">Número de Serie:</label>
-                <input type="text" id="nuevo_numero_serie" name="nuevo_numero_serie"><br><br>
-
-                <button type="button" id="registrar_dispositivo">Registrar Dispositivo</button>
-                <button type="button" id="sugerir_numero_serie">Sugerir Número de Serie</button>
-            </div>
-            <script src="dispositivos.js"></script>
-
-                        <!-- Formulario para registrar un nuevo pedido de reparación -->
+            <!-- Formulario para registrar un nuevo pedido de reparación -->
             <h1 class="mb-4 mt-5">Registrar Nuevo Pedido de Reparación</h1>
             <div class="row g-3">
                 <div class="col-md-6 form-floating">
@@ -121,7 +122,7 @@ $formatted_order_number = 'ORD' . str_pad($next_order, 4, '0', STR_PAD_LEFT);
                     <input type="text" class="form-control" id="fecha_pedido" name="fecha_pedido" value="<?php echo date('Y-m-d'); ?>">
                     <label for="fecha_pedido">Fecha de Pedido</label>
                 </div>
-
+  
                 <div class="col-md-6 form-floating">
                     <input type="text" class="form-control" id="numero_orden" name="numero_orden" value="<?php echo $formatted_order_number; ?>" readonly>
                     <label for="numero_orden">Número de Orden</label>
@@ -130,64 +131,23 @@ $formatted_order_number = 'ORD' . str_pad($next_order, 4, '0', STR_PAD_LEFT);
                     <textarea class="form-control" id="observacion" name="observacion" placeholder="Observación" required></textarea>
                     <label for="observacion">Observación</label>
                 </div>
+
                 <!-- Campo oculto por defecto -->
                 <input type="hidden" id="id_tecnicos" name="id_tecnicos" value="0">
-                <input type="hidden" id="id_servicio" name="id_servicio" value="1">
                 <input type="hidden" id="estado_reparacion" name="estado_reparacion" value="Pendiente">
+            </div>
 
-                <!-- Contenedor que se mostrará cuando el usuario haga clic en el botón -->
-                <div id="asignar_tecnico_container" style="display:none;">
-                    <!-- Aquí se mostrará el select de los técnicos (usuarios con rol 3) -->
-                    <?php if ($resultado->num_rows > 0): ?>
-                        <label for="input_id_tecnico">Seleccionar Técnico:</label>
-                        <select id="input_id_tecnico" name="input_id_tecnico" onchange="asignarTecnico(this.value)">
-                            <option value="0">Selecciona un técnico</option> <!-- Opción por defecto -->
-                            <?php while ($fila = $resultado->fetch_assoc()): ?>
-                                <option value="<?php echo $fila['id_usuario']; ?>"><?php echo $fila['nombre']; ?></option>
-                            <?php endwhile; ?>
-                        </select>
-                    <?php else: ?>
-                        <p>No se encontraron técnicos</p>
-                    <?php endif; ?>
-
-                    <!-- Botón de Cancelar -->
-                    <button type="button" onclick="ocultarCampoTecnico()">Cancelar</button>
-                </div>
-
-                <script>
-                    document.getElementById('agregar-dispositivo-btn').addEventListener('click', function() {
-                        var numeroSerie = document.querySelector('.numero_serie_dispositivo').value;
-                        var marca = document.querySelector('.marca_dispositivo').value;
-                        var modelo = document.querySelector('.modelo_dispositivo').value;
-
-                        // Verifica que los campos estén completos antes de enviar
-                        if (numeroSerie && marca && modelo) {
-                            // Enviar datos a través de AJAX para insertar dispositivo
-                            var xhr = new XMLHttpRequest();
-                            xhr.open("POST", "insertar_dispositivo.php", true);
-                            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                            
-                            xhr.onreadystatechange = function () {
-                                if (xhr.readyState === 4 && xhr.status === 200) {
-                                    // Una vez insertado, se recibe el ID del dispositivo
-                                    var idDispositivo = xhr.responseText;
-                                    document.querySelector('.id_dispositivos').value = idDispositivo; // Guardar ID en campo oculto
-                                }
-                            };
-
-                            // Enviar los datos del dispositivo al servidor
-                            xhr.send("numero_serie=" + numeroSerie + "&marca=" + marca + "&modelo=" + modelo);
-                        } else {
-                            alert("Por favor, completa todos los campos del dispositivo.");
-                        }
-                    });
-                </script>
-
-                <div class="col-md-10">
-                    <button type="submit" name="registrar_pedido" class="btn btn-primary">Registrar Pedido</button>
-                </div>
+            <div class="col-md-10">
+                <button type="submit" name="registrar_pedido" class="btn btn-primary">Registrar Pedido</button>
             </div>
         </div>
     </form>
+    <script>
+
+    </script>
+    <!-- Scripts colocados al final para evitar conflictos -->
+    <script src="cliente.js"></script>
+    <script src="eliminar.js"></script>
+    <script src="dispositivos.js"></script>
 </body>
 </html>

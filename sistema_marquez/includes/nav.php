@@ -53,6 +53,7 @@ switch ($usuario_rol) {
                         <a class="dropdown-item" href="../facturacion/plantillas/inframe-dark.html">Plantillas</a>
                         <a class="dropdown-item" href="../login/send_mail.php">enviar correo</a>
 
+                        
                     </div>
                 </li>
             <?php endif; ?>
@@ -86,7 +87,7 @@ switch ($usuario_rol) {
                         <a class="dropdown-item" href="../facturacion/factura.php">Reparación</a>
                         <a class="dropdown-item" href="../facturacion/factura.php">Venta y Reparación</a>
                         <a class="dropdown-item" href="../facturacion/factura.php">Compra</a>
-                        <a class="dropdown-item" href="./pedidos_de_reparacion/copia.php">copia</a>
+                        <a class="dropdown-item" href="../tecnico/gestionar_tareas.php">Gestionar Tareas</a>
                     </div>
                 </li>
             <?php endif; ?>
@@ -96,6 +97,11 @@ switch ($usuario_rol) {
                     <a class="nav-link dropdown-toggle" href="#" id="tecnicoDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Reparaciones
                     </a>
+                    <button><a class="dropdown-item" href="../tecnico/gestionar_tareas.php">Gestionar Tareas</a>
+                    </button>
+                    <button><a class="dropdown-item" href="../tecnico/tareas_pendientes.php">Tareas Pendientes</a>
+                    </button>
+
                     <div class="dropdown-menu" aria-labelledby="tecnicoDropdown">
                         <a class="dropdown-item" href="../tecnico/listar_reparaciones.php">Listar Reparaciones</a>
                         <a class="dropdown-item" href="../tecnico/gestionar_tareas.php">Gestionar Tareas</a>
