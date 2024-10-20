@@ -88,6 +88,8 @@ switch ($usuario_rol) {
                         <a class="dropdown-item" href="../facturacion/factura.php">Venta y Reparación</a>
                         <a class="dropdown-item" href="../facturacion/factura.php">Compra</a>
                         <a class="dropdown-item" href="../tecnico/gestionar_tareas.php">Gestionar Tareas</a>
+                        <a class="dropdown-item" href="../facturacion/reparacion/reparacion.php">Facturar Pedidos</a>
+                        <a class="dropdown-item" href="../tecnico/tt.php">Historial de pedidos</a>
                     </div>
                 </li>
             <?php endif; ?>

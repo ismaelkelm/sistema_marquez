@@ -37,8 +37,8 @@ $sql = "
     JOIN pedidos_de_reparacion pr ON dr.id_pedidos_de_reparacion = pr.id_pedidos_de_reparacion
     JOIN dispositivos di ON dr.id_dispositivos = di.id_dispositivos
     WHERE dr.estado_dispositivo = 0
-    AND dr.id_detalle_reparaciones = (
-        SELECT MAX(dr2.id_detalle_reparaciones)
+    AND dr.fecha_seguimiento = (
+        SELECT MAX(dr2.fecha_seguimiento)
         FROM detalle_reparaciones dr2
         WHERE dr2.id_dispositivos = dr.id_dispositivos
     )
@@ -72,47 +72,20 @@ $result = $conn->query($sql);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Filtrar Detalle de Reparaciones</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            padding: 8px 12px;
-            border: 1px solid #ddd;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        .button {
-            margin: 10px 0;
-            padding: 10px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            cursor: pointer;
-            text-align: center;
-        }
-        .button:hover {
-            background-color: #0056b3;
-        }
-    </style>
+    <link rel="stylesheet" href="tareas.css"> <!-- Enlace al archivo CSS -->
+   
 </head>
 <body>
-
-<h1>GESTION DE TAREAS PENDIENTES</h1>
-<button onclick="history.back();" class="button">Volver</button>
+<div class="container">
+        <h1>GESTION DE TAREAS PENDIENTES</h1>
+        <button onclick="history.back();" class="button button-back">Volver</button>
 
 <!-- Formulario para filtrar por fecha -->
 <form method="POST" action="">
     <label for="fecha_de_pedido">Selecciona la fecha del pedido:</label>
-    <input type="date" name="fecha_de_pedido" value="<?php echo htmlspecialchars($fechaFiltrada); ?>">
-    <input type="submit" value="Filtrar">
+    <input type="date" id="fecha_pedido" name="fecha_de_pedido" value="<?php echo htmlspecialchars($fechaFiltrada); ?>">
+    <input type="submit" class="button button-filter" value="Filtrar">
 </form>
-
-<!-- Mostrar el ID de usuario -->
-<p>Usuario: <?php echo htmlspecialchars($id_usuario); ?></p>
 
 <!-- Mostrar los detalles de las reparaciones -->
 <?php
@@ -155,7 +128,7 @@ if ($result->num_rows > 0) {
                 echo '<option value="' . htmlspecialchars($rowTecnico['id_usuario']) . '" ' . $selected . '>' . htmlspecialchars($rowTecnico['nombre']) . '</option>';
             }
             echo '</select>';
-            echo '<input type="hidden" name="id_detalle_reparacion" value="' . htmlspecialchars($row['id_detalle_reparaciones']) . '">';
+            echo '<input type="hidden" name="id_dispositivos" value="' . htmlspecialchars($row['id_dispositivos']) . '">';
             
             // Ya no necesitas incluir el ID del usuario aquí
             echo '<button type="submit" class="button">Asignar Tarea</button>';
@@ -163,15 +136,7 @@ if ($result->num_rows > 0) {
         }elseif ($rol_usuario == 3) {
             // Solo mostrar botón "Asignarme tarea" para rol 3
             echo '<form method="POST" action="asignar_tarea.php">';
-            echo '<input type="hidden" name="id_detalle_reparacion" value="' . htmlspecialchars($row['id_detalle_reparaciones']) . '">';
-            echo '<input type="hidden" name="id_tecnico" value="' . htmlspecialchars($id_usuario) . '">'; // Enviar el ID del usuario actual
-            echo '<button type="submit" class="button">Asignarme Tarea</button>';
-            echo '</form>';
-        
-        } elseif ($rol_usuario == 3) {
-            // Solo mostrar botón "Asignarme tarea" para rol 3
-            echo '<form method="POST" action="asignar_tarea.php">';
-            echo '<input type="hidden" name="id_detalle_reparacion" value="' . htmlspecialchars($row['id_detalle_reparaciones']) . '">';
+            echo '<input type="hidden" name="id_dispositivos" value="' . htmlspecialchars($row['id_dispositivos']) . '">';
             echo '<input type="hidden" name="id_tecnico" value="' . htmlspecialchars($id_usuario) . '">'; // Enviar el ID del usuario actual
             echo '<button type="submit" class="button">Asignarme Tarea</button>';
             echo '</form>';
@@ -189,5 +154,6 @@ if ($result->num_rows > 0) {
 // Cerrar la conexión
 $conn->close();
 ?>
+</div>
 </body>
 </html>
