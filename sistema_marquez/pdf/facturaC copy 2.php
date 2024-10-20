@@ -549,6 +549,7 @@ if ($result_tipo_comprobante && mysqli_num_rows($result_tipo_comprobante) > 1) {
     exit;
 }
 
+
 // Consulta para obtener el último ID de cabecera de factura
 $query = "SELECT id_cabecera_factura FROM cabecera_factura ORDER BY id_cabecera_factura DESC LIMIT 1";
 $result = mysqli_query($conn, $query);
@@ -601,7 +602,6 @@ if ($tipo_comprobante && mysqli_num_rows($tipo_comprobante) > 0) {
 $query_detalle = "SELECT id_detalle_reparaciones FROM detalle_reparaciones ORDER BY id_detalle_reparaciones DESC LIMIT 1";
 $result_detalle = mysqli_query($conn, $query_detalle);
 
-
 if ($result_detalle && mysqli_num_rows($result_detalle) > 0) {
     $row_detalle = mysqli_fetch_assoc($result_detalle);
     $ultimoIdDetalle = $row_detalle['id_detalle_reparaciones'];
@@ -610,9 +610,6 @@ if ($result_detalle && mysqli_num_rows($result_detalle) > 0) {
     // echo "No se encontró ningún registro de detalles de reparación.";
     exit;
 }
-
-
-
 
 // Consulta para obtener los detalles del último detalle de reparación
 $query = "
@@ -718,49 +715,8 @@ if (mysqli_num_rows($result) > 0) {
         $pdf->AddAccessories($accesorios);
     }
 
-    // Ruta para guardar los archivos PDF
-    $directorio_guardado = '../pdf/facturapedido'; // Carpeta donde se guardarán las facturas
-    if (!file_exists($directorio_guardado)) {
-        mkdir($directorio_guardado, 0777, true); // Crea el directorio si no existe
-    }
-
-    // Formato de la fecha
-    $fechaActual = date('Y-m-d'); // Fecha actual en formato YYYY-MM-DD
-    $nombreCliente = strtolower($cliente['nombre']); // Convertir a minúsculas
-    $apellidoCliente = strtolower($cliente['apellido']); // Convertir a minúsculas
-
-    // Guardar el PDF como original
-    $archivoOriginal = $directorio_guardado . '/' . $nombreCliente . '_' . $apellidoCliente . '_factura_original_' . $fechaActual . '.pdf'; // Nombre del archivo
-    $pdf->Output('F', $archivoOriginal); // Guarda como original
-
-    // Mostrar el PDF "Original" en el navegador
-    $pdf->Output('I', 'factura_original.pdf'); // 'I' muestra el PDF en el navegador
-
-    // Generar el PDF duplicado
-    $pdfDuplicado = new PDF('Duplicado');
-    $pdfDuplicado->AliasNbPages();
-    $pdfDuplicado->AddPage();
-
-    // Agregar secciones al PDF duplicado
-    if (isset($titulocomprobante) && isset($ultimoId)) {
-        $pdfDuplicado->AddEmpresaSection($titulocomprobante, $ultimoId); // Asegúrate de acceder correctamente al tipo de comprobante
-    } else {
-        echo "Error: No se pudo obtener el título del comprobante o el último ID.";
-        exit;
-    }
-
-    if (!empty($servicios) || !empty($accesorios) || !empty($dispositivo)) {
-        $pdfDuplicado->AddInvoiceSection($servicios, $accesorios, [$dispositivo]);
-        $pdfDuplicado->AddClienteSection($cliente);
-        $pdfDuplicado->AddDevices([$dispositivo]);
-        $pdfDuplicado->AddAccessories($accesorios);
-    }
-
-    // Guardar el PDF como duplicado
-    $archivoDuplicado = $directorio_guardado . '/' . $nombreCliente . '_' . $apellidoCliente . '_factura_duplicado_' . $fechaActual . '.pdf'; // Nombre del archivo
-    $pdfDuplicado->Output('F', $archivoDuplicado); // Guarda como duplicado
-
     ob_end_flush(); // Enviar el contenido del buffer y limpiar
+    $pdf->Output();
 } else {
     echo "No se encontraron resultados para el último detalle de reparación.";
 }
@@ -768,6 +724,3 @@ if (mysqli_num_rows($result) > 0) {
 // Cerrar la conexión a la base de datos
 mysqli_close($conn);
 ?>
-
-
-

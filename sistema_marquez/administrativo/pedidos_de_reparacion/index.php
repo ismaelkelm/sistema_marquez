@@ -138,8 +138,15 @@ $result = $conn->query($sql);
             </div>
 
             <div class="col-md-10">
+            <button type="submit" name="registrar_pedido" class="btn btn-primary" onclick="setTimeout(() => { window.location.href = '../../pdf/facturaC.php'; }, 2000);">Registrar Pedido</button>
+        </div>
+
+
+
+            <!-- <div class="col-md-10">
                 <button type="submit" name="registrar_pedido" class="btn btn-primary">Registrar Pedido</button>
-            </div>
+
+            </div> -->
         </div>
     </form>
     <script>

@@ -35,14 +35,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Insertar los detalles de reparación correspondientes a cada dispositivo
             $query_detalle = "INSERT INTO detalle_reparaciones 
-                              (fecha_seguimiento, descripcion, estado_dispositivo, id_pedidos_de_reparacion, id_servicios, id_dispositivos, id_tecnico, id_accesorio, cantidad_usada)
+                              (fecha_seguimiento, descripcion, estado_dispositivo, id_pedidos_de_reparacion, id_servicios, id_dispositivos, id_tecnicos, id_accesorio, cantidad_usada)
                               VALUES ('$fecha_seguimiento', '$descripcion', '$estado_dispositivo', '$id_pedidos_de_reparacion', '$id_servicios', '$id_dispositivo', '$id_tecnicos', '$id_accesorio', '$cantidad_usada')";
 
             if (!mysqli_query($conn, $query_detalle)) {
                 echo "Error al registrar el detalle de reparación: " . mysqli_error($conn) . "<br>";
             }
         }
-
+        header("Location: ../../pdf/facturapedido");
         // Redirigir a asignacion_tareas.php si todos los registros fueron exitosos
         header("Location: ../../tecnico/gestionar_tareas.php");
         exit;  // Asegúrate de salir después de la redirección

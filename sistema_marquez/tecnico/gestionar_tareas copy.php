@@ -1,9 +1,9 @@
 
-<?php
 
+<?php
 // Incluir el archivo de conexión a la base de datos
 include '../base_datos/db.php';
-// include '../pdf/facturaC.php'; // Asegúrate de que la ruta sea correcta
+
 // Iniciar la sesión y obtener el id_usuario
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
