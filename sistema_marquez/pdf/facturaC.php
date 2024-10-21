@@ -523,7 +523,7 @@ if ($tipo_comprobante && mysqli_num_rows($tipo_comprobante) > 0) {
 // }
 
 
-$ultimoIdDetalle = 4;
+$ultimoIdDetalle = 15;
 
 // Consulta para obtener los detalles del último detalle de reparación
 $query = "

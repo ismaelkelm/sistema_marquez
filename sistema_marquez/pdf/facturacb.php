@@ -214,7 +214,82 @@ class PDF extends FPDF
     }
 
 
-    function AddInvoiceSection($servicios, $dispositivos)
+    // function AddInvoiceSection($servicios, $dispositivos)
+    // {
+    //     // Posición actual
+    //     $currentY = $this->GetY();
+    //     $this->SetY($currentY + 42); // Ajusta el valor según tu diseño
+
+    //     // Encabezado
+    //     $this->SetFont('Arial', '', 10);
+    //     $this->SetFillColor(200, 220, 255);
+    //     $this->Cell(30, 10, 'Cantidad', 1, 0, 'C', true);
+    //     $this->Cell(70, 10, utf8_decode('Descripción'), 1, 0, 'C', true);
+    //     $this->Cell(30, 10, 'Precio Unitario', 1, 0, 'C', true);
+    //     $this->Cell(30, 10, 'IVA (21%)', 1, 0, 'C', true);
+    //     $this->Cell(30, 10, 'Total', 1, 1, 'C', true);
+
+    //     // Variables para totales
+    //     $subTotal = 0;
+    //     $totalIVA = 0;
+    //     $totalFactura = 0;
+    //     $lineHeight = 6; // Altura de la celda
+
+    //     // Agregar servicios
+    //     if (!empty($servicios)) {
+    //         foreach ($servicios as $servicio) {
+    //             $this->Cell(30, $lineHeight, '1', 0, 0, 'C');
+    //             $this->Cell(70, $lineHeight, utf8_decode($servicio['descripcion']), 0, 0, 'L');
+    //             $this->Cell(30, $lineHeight, '$  ' . number_format($servicio['precio'], 2), 0, 0, 'L');
+    //             $ivaServicio = $servicio['precio'] * 0.21;
+    //             $this->Cell(30, $lineHeight, '$  ' . number_format($ivaServicio, 2), 0, 0, 'L');
+    //             $this->Cell(30, $lineHeight, '$  ' . number_format($servicio['precio'] + $ivaServicio, 2), 0, 1, 'L');
+    //             $subTotal += $servicio['precio'];
+    //             $totalIVA += $ivaServicio;
+    //             $totalFactura += $servicio['precio'] + $ivaServicio;
+    //         }
+    //     }
+
+    //     // Agregar dispositivos
+    //     if (!empty($dispositivos)) {
+    //         foreach ($dispositivos as $dispositivo) {
+    //             // Asegúrate de que el dispositivo tenga marca y modelo
+    //             if (!empty($dispositivo['marca']) && !empty($dispositivo['modelo'])) {
+    //                 $this->Cell(30, $lineHeight, '1', 0, 0, 'C');
+    //                 $this->Cell(70, $lineHeight, utf8_decode($dispositivo['marca'] . ' ' . $dispositivo['modelo']), 0, 0, 'L');
+    //                 $this->Cell(30, $lineHeight, 'N/A', 0, 0, 'L');
+    //                 $this->Cell(30, $lineHeight, 'N/A', 0, 0, 'L');
+    //                 $this->Cell(30, $lineHeight, 'N/A', 0, 1, 'L'); // No hay precio ni IVA para dispositivos
+    //             }
+    //         }
+    //     }
+
+    //     // Posición para los totales
+    //     $fixedY = 145;
+    //     $this->SetY($fixedY);
+
+    //     // Mostrar totales
+    //     $this->AddTotalsSection($subTotal, $totalIVA, $totalFactura);
+    // }
+
+
+    function AddDevices($dispositivos, $lineHeight)
+    {
+        if (!empty($dispositivos)) {
+            foreach ($dispositivos as $dispositivo) {
+                // Solo imprime el dispositivo si tiene marca y modelo
+                if (!empty($dispositivo['marca']) && !empty($dispositivo['modelo'])) {
+                    $this->Cell(30, $lineHeight, '1', 0, 0, 'C'); // Cantidad fija como 1 para dispositivos
+                    $this->Cell(70, $lineHeight, utf8_decode($dispositivo['marca'] . ' ' . $dispositivo['modelo']), 0, 0, 'L');
+                    $this->Cell(30, $lineHeight, 'N/A', 0, 0, 'L'); // Precio no aplicable
+                    $this->Cell(30, $lineHeight, 'N/A', 0, 0, 'L'); // IVA no aplicable
+                    $this->Cell(30, $lineHeight, 'N/A', 0, 1, 'L'); // Total no aplicable
+                }
+            }
+        }
+    }
+    
+    function AddInvoiceSection($servicios, $dispositivos, $productos = [])
     {
         // Posición actual
         $currentY = $this->GetY();
@@ -243,37 +318,74 @@ class PDF extends FPDF
                 $this->Cell(30, $lineHeight, '$  ' . number_format($servicio['precio'], 2), 0, 0, 'L');
                 $ivaServicio = $servicio['precio'] * 0.21;
                 $this->Cell(30, $lineHeight, '$  ' . number_format($ivaServicio, 2), 0, 0, 'L');
-                $this->Cell(30, $lineHeight, '$  ' . number_format($servicio['precio'] + $ivaServicio, 2), 0, 1, 'L');
+                $totalServicio = $servicio['precio'] + $ivaServicio;
+                $this->Cell(30, $lineHeight, '$  ' . number_format($totalServicio, 2), 0, 1, 'L');
                 $subTotal += $servicio['precio'];
                 $totalIVA += $ivaServicio;
-                $totalFactura += $servicio['precio'] + $ivaServicio;
+                $totalFactura += $totalServicio;
             }
         }
 
-        // Agregar dispositivos
-        if (!empty($dispositivos)) {
-            foreach ($dispositivos as $dispositivo) {
-                // Asegúrate de que el dispositivo tenga marca y modelo
-                if (!empty($dispositivo['marca']) && !empty($dispositivo['modelo'])) {
-                    $this->Cell(30, $lineHeight, '1', 0, 0, 'C');
-                    $this->Cell(70, $lineHeight, utf8_decode($dispositivo['marca'] . ' ' . $dispositivo['modelo']), 0, 0, 'L');
-                    $this->Cell(30, $lineHeight, 'N/A', 0, 0, 'L');
-                    $this->Cell(30, $lineHeight, 'N/A', 0, 0, 'L');
-                    $this->Cell(30, $lineHeight, 'N/A', 0, 1, 'L'); // No hay precio ni IVA para dispositivos
-                }
+        
+
+        // Imprimir dispositivos utilizando la función AddDevices
+        $this->AddDevices($dispositivos, $lineHeight);
+
+        // Agregar productos
+        if (!empty($productos)) {
+            foreach ($productos as $producto) {
+                $cantidad = $producto[0]; // Cantidad
+                $descripcion = $producto[1]; // Descripción
+                $precio_unitario = $producto[2]; // Precio unitario
+                $total = $cantidad * $precio_unitario; // Total
+                $iva = $total * 0.21; // IVA
+
+                // Mostrar cada producto en una fila
+                $this->Cell(30, $lineHeight, $cantidad, 0, 0, 'C');
+                $this->Cell(70, $lineHeight, utf8_decode($descripcion), 0, 0, 'L');
+                $this->Cell(30, $lineHeight, '$  ' . number_format($precio_unitario, 2), 0, 0, 'L');
+                $this->Cell(30, $lineHeight, '$  ' . number_format($iva, 2), 0, 0, 'L');
+                $this->Cell(30, $lineHeight, '$  ' . number_format($total + $iva, 2), 0, 1, 'L');
+
+                // Sumar los totales
+                $subTotal += $total;
+                $totalIVA += $iva;
+                $totalFactura += $total + $iva;
             }
         }
 
         // Posición para los totales
-        $fixedY = 145;
+        $fixedY = 145; // Ajusta esto según tu diseño
         $this->SetY($fixedY);
 
         // Mostrar totales
         $this->AddTotalsSection($subTotal, $totalIVA, $totalFactura);
     }
 
+    
 
-
+    function Addproducts($productos)
+    {
+        $productosAlmacenados = []; // Array para almacenar los productos
+    
+        foreach ($productos as $producto) {
+            if (count($producto) === 3) { // Asegúrate de que el producto tenga 3 elementos
+                $cantidad = $producto[0];
+                $descripcion = $producto[1];
+                $precio_unitario = $producto[2];
+    
+                // Almacena los datos del producto en un array
+                $productosAlmacenados[] = [
+                    'cantidad' => $cantidad,
+                    'descripcion' => $descripcion,
+                    'precio_unitario' => $precio_unitario
+                ];
+            }
+        }
+    
+        return $productosAlmacenados; // Devuelve el array de productos almacenados
+    }
+    
 
     function AddServices($servicios)
     {
@@ -285,13 +397,12 @@ class PDF extends FPDF
 
     }
 
-
-    function AddDevices($dispositivos)
-    {
-        foreach ($dispositivos as $dispositivo) {
-            // $this->Cell(80, 10, utf8_decode($dispositivo['marca'] . ' ' . $dispositivo['modelo']), 1);
-        }
-    }
+    // function AddDevices($dispositivos)
+    // {
+    //     foreach ($dispositivos as $dispositivo) {
+    //         // $this->Cell(80, 10, utf8_decode($dispositivo['marca'] . ' ' . $dispositivo['modelo']), 1);
+    //     }
+    // }
 
     function AddClienteSection($cliente)
     {
@@ -334,37 +445,21 @@ class PDF extends FPDF
 
 }
 
+
+
+// Consultas a la base de datos
 $query_tipo_comprobante = "SELECT id_tipo_comprobante, tipo_comprobante FROM tipo_comprobante";
 $result_tipo_comprobante = mysqli_query($conn, $query_tipo_comprobante);
 
-if ($result_tipo_comprobante && mysqli_num_rows($result_tipo_comprobante) > 1) {
-    // Obtener el primer cliente como ejemplo
+if ($result_tipo_comprobante && mysqli_num_rows($result_tipo_comprobante) > 0) {
+    // Obtener el primer tipo de comprobante como ejemplo
     $titulocomprobante = mysqli_fetch_assoc($result_tipo_comprobante);
 } else {
-    // echo "No se encontraron clientes.";
+    echo "No se encontraron tipos de comprobante.";
     exit;
 }
 
-// Consulta para obtener el último ID de cabecera de factura
-$query = "SELECT id_cabecera_factura FROM cabecera_factura ORDER BY id_cabecera_factura DESC LIMIT 1";
-$result = mysqli_query($conn, $query);
-
-// Manejo de resultados
-if ($result) {
-    if (mysqli_num_rows($result) > 0) {
-        $row = mysqli_fetch_assoc($result);
-        $ultimoId = $row['id_cabecera_factura'];
-        // echo "Último ID de cabecera de factura: " . $ultimoId . "<br>"; // Muestra el último ID
-    } else {
-        // echo "No se encontró ningún registro de cabecera de factura.";
-        exit;
-    }
-} else {
-    // echo "Error en la consulta: " . mysqli_error($conn);
-    exit;
-}
-
-// Consultas a la base de datos
+// Consultas generales
 $querys = [
     'tipo_pago' => "SELECT id_tipo_de_pago, descripcion_de_pago FROM tipo_de_pago",
     'tipo_comprobante' => "SELECT id_tipo_comprobante, tipo_comprobante FROM tipo_comprobante",
@@ -379,24 +474,96 @@ $querys = [
 foreach ($querys as $key => $query) {
     $$key = mysqli_query($conn, $query);
     if (!$$key) {
-        // echo "Error en la consulta de $key: " . mysqli_error($conn);
+        echo "Error en la consulta de $key: " . mysqli_error($conn);
         exit;
     }
 }
 
 // Verificar resultados de tipo de comprobante
-if ($tipo_comprobante && mysqli_num_rows($tipo_comprobante) > 0) {
+if (isset($tipo_comprobante) && mysqli_num_rows($tipo_comprobante) > 0) {
     $titulocomprobante = mysqli_fetch_assoc($tipo_comprobante);
 } else {
-    // echo "No se encontraron tipos de comprobante.";
+    echo "No se encontraron tipos de comprobante.";
     exit;
 }
 
+// Ingresar manualmente el ID de cabecera de factura
+$id_cabecera_factura = 13; // Cambia este valor por el ID que deseas usar
 
+// Validar ID de cabecera de factura
+$id_cabecera_factura = intval($id_cabecera_factura);
 
-$ultimoIdDetalle = 4;
+// Consultar si el id_cabecera_factura existe
+$query = "SELECT * FROM cabecera_factura WHERE id_cabecera_factura = ?";
+$stmt = mysqli_prepare($conn, $query);
+mysqli_stmt_bind_param($stmt, 'i', $id_cabecera_factura);
+mysqli_stmt_execute($stmt);
+$result = mysqli_stmt_get_result($stmt);
+
+if ($result && mysqli_num_rows($result) > 0) {
+    // ID válido, proceder a la consulta de detalles
+    $queryDetalles = "
+        SELECT 
+            df.cantidad_venta, 
+            ac.nombre AS nombre_accesorio_componente, 
+            df.precio_unitario_V,
+            c.nombre AS nombre_cliente, 
+            c.apellido AS apellido_cliente,
+            c.dni AS dni_cliente, 
+            c.cuit AS cuit_cliente, 
+            c.direccion AS direccion_cliente
+        FROM 
+            detalle_factura df
+        JOIN 
+            accesorios_y_componentes ac 
+            ON df.id_accesorios_y_componentes = ac.id_accesorios_y_componentes
+        JOIN 
+            cabecera_factura cf 
+            ON df.id_cabecera_factura = cf.id_cabecera_factura
+        JOIN 
+            clientes c 
+            ON cf.id_clientes = c.id_clientes
+        WHERE 
+            df.id_cabecera_factura = $id_cabecera_factura
+    ";
+
+    $resultDetalles = mysqli_query($conn, $queryDetalles);
+
+    if ($resultDetalles && mysqli_num_rows($resultDetalles) > 0) {
+        // Almacenar productos y datos del cliente
+        $productos = [];
+        $cliente = [];
+
+        while ($row = mysqli_fetch_assoc($resultDetalles)) {
+            // Almacenar productos
+            $productos[] = [
+                $row['cantidad_venta'], 
+                $row['nombre_accesorio_componente'], 
+                $row['precio_unitario_V']
+            ];
+
+            // Almacenar datos del cliente si aún no están
+            if (empty($cliente)) {
+                $cliente = [
+                    'nombre' => $row['nombre_cliente'],
+                    'apellido' => $row['apellido_cliente'],
+                    'dni' => $row['dni_cliente'],
+                    'cuit' => $row['cuit_cliente'],
+                    'direccion' => $row['direccion_cliente']
+                ];
+            }
+        }
+    } else {
+        echo "No se encontraron productos ni cliente para la factura.";
+        exit; // Salir si no hay productos
+    }
+} else {
+    echo "No se encontró ninguna cabecera de factura con el ID ingresado.";
+    exit; // Salir si el ID no es válido
+}
 
 // Consulta para obtener los detalles del último detalle de reparación
+$ultimoIdDetalle = 20; // Cambia este valor según sea necesario
 $query = "
 SELECT
     pr.numero_orden,
@@ -471,16 +638,58 @@ if (mysqli_num_rows($result) > 0) {
     $pdf = new PDF('Original');
     $pdf->AddPage();
 
-    // Agregar secciones al PDF
-    if (isset($titulocomprobante) && isset($ultimoId)) {
-        $pdf->AddEmpresaSection($titulocomprobante, $ultimoId); // Asegúrate de acceder correctamente al tipo de comprobante
+// Consultas a la base de datos
+$query_tipo_comprobante = "SELECT id_tipo_comprobante, tipo_comprobante FROM tipo_comprobante";
+$result_tipo_comprobante = mysqli_query($conn, $query_tipo_comprobante);
+
+if ($result_tipo_comprobante && mysqli_num_rows($result_tipo_comprobante) > 0) {
+    // Obtener el primer tipo de comprobante como ejemplo
+    $titulocomprobante = mysqli_fetch_assoc($result_tipo_comprobante);
+} else {
+    echo "No se encontraron tipos de comprobante.";
+    exit;
+}
+
+// Ingresar manualmente el ID de cabecera de factura
+$id_cabecera_factura = 3; // Cambia este valor por el ID que deseas usar
+
+// Verificar si se ingresó un ID
+if ($id_cabecera_factura > 0) {
+    // Consultar si el id_cabecera_factura existe
+    $query = "SELECT * FROM cabecera_factura WHERE id_cabecera_factura = ?";
+    $stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($stmt, 'i', $id_cabecera_factura);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+
+    if ($result && mysqli_num_rows($result) > 0) {
+        // ID válido, proceder a la consulta de detalles
+        $rowCabecera = mysqli_fetch_assoc($result);
+        $ultimoId = $rowCabecera['id_cabecera_factura']; // Asignar el ID
+
+        // Aquí puedes proceder a consultar los detalles de la factura
+        // (agrega tu lógica para obtener detalles de la factura aquí)
     } else {
-        echo "Error: No se pudo obtener el título del comprobante o el último ID.";
-        exit;
+        echo "No se encontró ninguna cabecera de factura con el ID ingresado.";
+        exit; // Salir si el ID no es válido
     }
+} else {
+    echo "Por favor, ingrese un ID de cabecera de factura válido.";
+    exit; // Salir si el ID es 0 o no se ingresó
+}
+
+// Ahora llamamos a la función AddInvoiceSection
+// Verificamos que $titulocomprobante y $ultimoId estén disponibles
+if (isset($titulocomprobante) && isset($ultimoId)) {
+    $pdf->AddEmpresaSection($titulocomprobante, $ultimoId); // Asegúrate de acceder correctamente al tipo de comprobante
+} else {
+    echo "Error: No se pudo obtener el título del comprobante o el último ID.";
+    exit;
+}
+
 
     if (!empty($servicios) || !empty($dispositivo)) {
-        $pdf->AddInvoiceSection($servicios, [$dispositivo]);
+        $pdf->AddInvoiceSection($servicios, $dispositivo, $productos);
         $pdf->AddClienteSection($cliente);
     }
 
@@ -504,34 +713,17 @@ if (mysqli_num_rows($result) > 0) {
 
     // Generar el PDF duplicado
     $pdfDuplicado = new PDF('Duplicado');
-    $pdfDuplicado->AliasNbPages();
     $pdfDuplicado->AddPage();
-
-    // Agregar secciones al PDF duplicado
-    if (isset($titulocomprobante) && isset($ultimoId)) {
-        $pdfDuplicado->AddEmpresaSection($titulocomprobante, $ultimoId); // Asegúrate de acceder correctamente al tipo de comprobante
-    } else {
-        echo "Error: No se pudo obtener el título del comprobante o el último ID.";
-        exit;
-    }
-
-    if (!empty($servicios) || !empty($dispositivo)) {
-        $pdfDuplicado->AddInvoiceSection($servicios, [$dispositivo]);
-        $pdfDuplicado->AddClienteSection($cliente);
-    }
-
-    // Guardar el PDF como duplicado
+    $pdfDuplicado->AddEmpresaSection($titulocomprobante, $ultimoId); // Asegúrate de acceder correctamente al tipo de comprobante
+    $pdfDuplicado->AddInvoiceSection($servicios, $dispositivo, $productos);
+    $pdfDuplicado->AddClienteSection($cliente);
     $archivoDuplicado = $directorio_guardado . '/' . $nombreCliente . '_' . $apellidoCliente . '_factura_duplicado_' . $fechaActual . '.pdf'; // Nombre del archivo
     $pdfDuplicado->Output('F', $archivoDuplicado); // Guarda como duplicado
-
-    ob_end_flush(); // Enviar el contenido del buffer y limpiar
 } else {
-    echo "No se encontraron resultados para el último detalle de reparación.";
+    echo "No se encontraron detalles de reparación.";
+    exit;
 }
-
-// Cerrar la conexión a la base de datos
 mysqli_close($conn);
-
 ?>
 
 
