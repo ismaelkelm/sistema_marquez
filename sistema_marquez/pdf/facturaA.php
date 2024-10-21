@@ -5,6 +5,19 @@ require('./fpdf.php');
 require_once('../base_datos/db.php');
 
 
+// Consultas a la base de datos
+$query_tipo_pago = "SELECT id_tipo_de_pago, descripcion_de_pago FROM tipo_de_pago";
+$result_tipo_pago = mysqli_query($conn, $query_tipo_pago);
+
+$query_tipo_comprobante = "SELECT id_tipo_comprobante, tipo_comprobante FROM tipo_comprobante";
+$result_tipo_comprobante = mysqli_query($conn, $query_tipo_comprobante);
+
+$query_accesorios_componentes = "SELECT id_accesorios_y_componentes, nombre, precio FROM accesorios_y_componentes";
+$result_accesorios_componentes = mysqli_query($conn, $query_accesorios_componentes);
+
+$query_clientes = "SELECT id_clientes, nombre, apellido, dni, cuit, direccion FROM clientes";
+$result_clientes = mysqli_query($conn, $query_clientes);
+
 class PDF extends FPDF
 {
     // Constructor
@@ -18,54 +31,6 @@ class PDF extends FPDF
         $this->SetAutoPageBreak(true, 10); // Habilitar saltos de página automáticos
         $this->tituloFactura = $tituloFactura; // Asignar el título de la factura
     }
-
-    // function Header()
-    // {
-    //     // Título "Original"
-    //     $this->SetFont('Arial', '', 10);
-    //     $this->SetXY(10, 10); // Posicionar el texto "Original" en la parte superior del primer recuadro
-    //     $this->Cell(190, 10, 'Original', 0, 0, 'C'); // Alinear en el centro del recuadro
-
-        
-    //     // Crear recuadro para "Original"
-    //     $this->Rect(10, 10, 190, 10);  // X, Y, Ancho, Alto
-    
-        
-    //     // Posición Y para el siguiente recuadro
-    //     $y = 20; // Cambiar esto si es necesario para otros elementos
-
-    //     // Título "A" con tamaño grande
-    //     $this->SetFont('Arial', 'B', 22);
-    //     $titulo = 'B';
-    //     $tituloWidth = $this->GetStringWidth($titulo); // Obtener el ancho del texto del título
-        
-    //     // Subtítulo "cod 001" con tamaño más pequeño
-    //     $this->SetFont('Arial', '', 10);
-    //     $subtitulo = 'cod 001'; // Nuevo texto a agregar
-    //     $subtituloWidth = $this->GetStringWidth($subtitulo); // Obtener el ancho del subtítulo
-
-    //     // Aumentar el ancho total del recuadro para el más ancho de los dos textos
-    //     $totalWidth = max($tituloWidth, $subtituloWidth) + 4; // Agregamos un margen adicional de 10
-        
-    //     // Calcular la posición X para centrar el recuadro
-    //     $x = 10 + (190 - $totalWidth) / 2;
-
-    //     // Crear recuadro centrado alrededor del título y subtítulo
-    //     $this->Rect($x, $y, $totalWidth, 20 ); // Altura aumentada para dos líneas de texto
-
-    //     // Posicionar el texto "A" en el centro del recuadro
-    //     $this->SetXY($x, $y + 2); // Mover un poco hacia abajo para que quede mejor centrado
-    //     $this->SetFont('Arial', 'B', 16); // Tamaño grande para el título
-    //     $this->Cell($totalWidth, 8, $titulo, 0, 0, 'C'); // Alinear el título en el centro
-
-    //     // Posicionar el texto "001" en el centro del recuadro debajo de "A"
-    //     $this->SetXY($x, $y + 12); // Mover hacia abajo para el subtítulo
-    //     $this->SetFont('Arial', 'B', 10); // Tamaño más pequeño para el subtítulo
-    //     $this->Cell($totalWidth, 5, $subtitulo, 0, 0, 'C'); // Alinear el subtítulo en el centro
-
-    //     $this->Ln(-7); // Espacio después del recuadro
-        
-    // }
 
     function Header()
     {
@@ -201,7 +166,6 @@ class PDF extends FPDF
 
         }
     }
-
 
 
     function AddEmpresaSection($titulocomprobante, $ultimoId)
@@ -400,18 +364,6 @@ class PDF extends FPDF
 
 
 
-// Consultas a la base de datos
-$query_tipo_pago = "SELECT id_tipo_de_pago, descripcion_de_pago FROM tipo_de_pago";
-$result_tipo_pago = mysqli_query($conn, $query_tipo_pago);
-
-$query_tipo_comprobante = "SELECT id_tipo_comprobante, tipo_comprobante FROM tipo_comprobante";
-$result_tipo_comprobante = mysqli_query($conn, $query_tipo_comprobante);
-
-$query_accesorios_componentes = "SELECT id_accesorios_y_componentes, nombre, precio FROM accesorios_y_componentes";
-$result_accesorios_componentes = mysqli_query($conn, $query_accesorios_componentes);
-
-$query_clientes = "SELECT id_clientes, nombre, apellido, dni, cuit, direccion FROM clientes";
-$result_clientes = mysqli_query($conn, $query_clientes);
 
 
 if ($result_tipo_comprobante && mysqli_num_rows($result_tipo_comprobante) > 1) {

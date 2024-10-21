@@ -293,95 +293,6 @@ class PDF extends FPDF
     }
 
 
-    // function AddInvoiceSection($servicios, $accesorios, $dispositivos)
-    // {
-        
-    //     // Guardar la posición actual Y para asegurarse de que se imprime después de las funciones anteriores
-    //     $currentY = $this->GetY();
-
-    //     // Establecer la distancia adicional antes de imprimir la sección de la factura
-    //     $this->SetY($currentY +70); // Ajusta 50 a la distancia deseada después de la última sección
-
-    //     // Encabezado común para servicios, accesorios y dispositivos
-    //     $this->SetFont('Arial', '', 10);
-    //     $this->SetFillColor(200, 220, 255);
-    //     $this->Cell(30, 10, 'Cantidad', 1, 0, 'C', true);
-    //     $this->Cell(70, 10, utf8_decode('Descripción'), 1, 0, 'C', true);
-    //     $this->Cell(30, 10, 'Precio Unitario', 1, 0, 'C', true);
-    //     $this->Cell(30, 10, 'IVA (21%)', 1, 0, 'C', true);
-    //     $this->Cell(30, 10, 'Total', 1, 1, 'C', true);
-
-    //     // Variables para los totales
-    //     $subTotal = 0;
-    //     $totalIVA = 0;
-    //     $totalFactura = 0;
-
-    //     // Altura de cada línea
-    //     $lineHeight = 6;
-
-    //     // Agregar servicios
-    //     if (!empty($servicios)) {
-    //         foreach ($servicios as $servicio) {
-    //             // Imprimir solo si el servicio tiene una descripción y un precio
-    //             if (!empty($servicio['descripcion']) && !empty($servicio['precio'])) {
-    //                 $this->Cell(30, $lineHeight, '1', 0, 0, 'C'); // Cantidad fija como 1 para servicios
-    //                 $this->Cell(70, $lineHeight, utf8_decode($servicio['descripcion']), 0, 0, 'L');
-    //                 $this->Cell(30, $lineHeight, '$  ' . number_format($servicio['precio'], 2), 0, 0, 'L');
-    //                 $ivaServicio = $servicio['precio'] * 0.21; // Calcular IVA
-    //                 $this->Cell(30, $lineHeight, '$  ' . number_format($ivaServicio, 2), 0, 0, 'L');
-    //                 $this->Cell(30, $lineHeight, '$  ' . number_format($servicio['precio'] + $ivaServicio, 2), 0, 1, 'L');
-
-    //                 // Acumular totales
-    //                 $subTotal += $servicio['precio'];
-    //                 $totalIVA += $ivaServicio;
-    //                 $totalFactura += $servicio['precio'] + $ivaServicio;
-    //             }
-    //         }
-    //     }
-
-    //     // Agregar accesorios
-    //     if (!empty($accesorios)) {
-    //         foreach ($accesorios as $accesorio) {
-    //             // Imprimir solo si el accesorio tiene un nombre y un precio
-    //             if (!empty($accesorio['nombre']) && !empty($accesorio['precio'])) {
-    //                 $this->Cell(30, $lineHeight, '1', 0, 0, 'C'); // Cantidad fija como 1 para accesorios
-    //                 $this->Cell(70, $lineHeight, utf8_decode($accesorio['nombre']), 0, 0, 'L');
-    //                 $this->Cell(30, $lineHeight, '$  ' . number_format($accesorio['precio'], 2), 0, 0, 'L');
-    //                 $ivaAccesorio = $accesorio['precio'] * 0.21; // Calcular IVA
-    //                 $this->Cell(30, $lineHeight, '$  ' . number_format($ivaAccesorio, 2), 0, 0, 'L');
-    //                 $this->Cell(30, $lineHeight, '$  ' . number_format($accesorio['precio'] + $ivaAccesorio, 2), 0, 1, 'L');
-
-    //                 // Acumular totales
-    //                 $subTotal += $accesorio['precio'];
-    //                 $totalIVA += $ivaAccesorio;
-    //                 $totalFactura += $accesorio['precio'] + $ivaAccesorio;
-    //             }
-    //         }
-    //     }
-
-    //     // Agregar dispositivos
-    //     if (!empty($dispositivos)) {
-    //         foreach ($dispositivos as $dispositivo) {
-    //             // Imprimir solo si el dispositivo tiene marca y modelo
-    //             if (!empty($dispositivo['marca']) && !empty($dispositivo['modelo'])) {
-    //                 $this->Cell(30, $lineHeight, '1', 0, 0, 'C'); // Cantidad fija como 1 para dispositivos
-    //                 $this->Cell(70, $lineHeight, utf8_decode($dispositivo['marca'] . ' ' . $dispositivo['modelo']), 0, 0, 'L');
-    //                 // Como no hay precio para dispositivos, muestra "N/A"
-    //                 $this->Cell(30, $lineHeight, 'N/A', 0, 0, 'L'); // Precio no aplicable
-    //                 $this->Cell(30, $lineHeight, 'N/A', 0, 0, 'L'); // IVA no aplicable
-    //                 $this->Cell(30, $lineHeight, 'N/A', 0, 1, 'L'); // Total no aplicable
-    //             }
-    //         }
-    //     }
-
-    //     // Llamar a la función que muestra los totales
-
-    //     // $this->SetY($currentY + 190);
-    //     // $this->Ln(-185);
-    //     $this->AddTotalsSection($subTotal, $totalIVA, $totalFactura);
-    //     $this->Ln(-85);
-    // }
-
     function AddInvoiceSection($servicios, $accesorios, $dispositivos)
     {
         // Guardar la posición actual Y para asegurarse de que se imprime después de las funciones anteriores
@@ -513,14 +424,14 @@ class PDF extends FPDF
         // Campo DNI al lado derecho en la misma altura del título "Cliente"
         $this->SetFont('Arial', '', 10); // Cambiar a fuente normal para el resto del texto
         $this->SetXY($xStart + 140, $yStart + 2); // Ajustar posición del DNI
-        $this->Cell(-4.8, 6, 'DNI: ' . $cliente['dni'], 0, 1, 'R'); // Posicionar el DNI a la derecha
+        $this->Cell(-10.8, 6, 'DNI: ' . $cliente['dni'], 0, 1, 'R'); // Posicionar el DNI a la derecha
 
         // Posicionar el resto de los campos más abajo
         $this->SetXY($xStart, $yStart + 10); // Ajustar posición para el resto del contenido
         $this->Cell(110, 6, utf8_decode('Nombre: ' . $cliente['nombre'] . ' ' . $cliente['apellido']), 0, 0, 'L'); // Nombre del cliente
-        $this->Cell(11.5, 6, 'CUIT: ' . $cliente['cuit'], 0, 1, 'R'); // CUIT del cliente
+        $this->Cell(35, 6, 'CUIT: ' . $cliente['cuit'], 0, 1, 'R'); // CUIT del cliente
         $this->Cell(110, 6, utf8_decode('Dirección: ' . $cliente['direccion']), 0, 0, 'L'); // Dirección del cliente
-        $this->Cell(53.5, 6, utf8_decode('Condición IVA: Consumidor Final'), 0, 1, 'R'); // Condición IVA del cliente
+        $this->Cell(53, 6, utf8_decode('Condición IVA: Consumidor Final'), 0, 1, 'R'); // Condición IVA del cliente
 
         // Espaciado adicional
         $this->Ln(1);
@@ -597,22 +508,22 @@ if ($tipo_comprobante && mysqli_num_rows($tipo_comprobante) > 0) {
     exit;
 }
 
-// Consulta para obtener el último ID de detalle de reparaciones
-$query_detalle = "SELECT id_detalle_reparaciones FROM detalle_reparaciones ORDER BY id_detalle_reparaciones DESC LIMIT 1";
-$result_detalle = mysqli_query($conn, $query_detalle);
+// // Consulta para obtener el último ID de detalle de reparaciones
+// $query_detalle = "SELECT id_detalle_reparaciones FROM detalle_reparaciones ORDER BY id_detalle_reparaciones DESC LIMIT 1";
+// $result_detalle = mysqli_query($conn, $query_detalle);
 
 
-if ($result_detalle && mysqli_num_rows($result_detalle) > 0) {
-    $row_detalle = mysqli_fetch_assoc($result_detalle);
-    $ultimoIdDetalle = $row_detalle['id_detalle_reparaciones'];
-    // echo "El último ID de detalle de reparación es: " . $ultimoIdDetalle . "<br>";
-} else {
-    // echo "No se encontró ningún registro de detalles de reparación.";
-    exit;
-}
+// if ($result_detalle && mysqli_num_rows($result_detalle) > 0) {
+//     $row_detalle = mysqli_fetch_assoc($result_detalle);
+//     $ultimoIdDetalle = $row_detalle['id_detalle_reparaciones'];
+//     // echo "El último ID de detalle de reparación es: " . $ultimoIdDetalle . "<br>";
+// } else {
+//     // echo "No se encontró ningún registro de detalles de reparación.";
+//     exit;
+// }
 
 
-
+$ultimoIdDetalle = 4;
 
 // Consulta para obtener los detalles del último detalle de reparación
 $query = "
