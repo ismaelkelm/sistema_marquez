@@ -1,35 +1,29 @@
+$(document).ready(function () {
+    // Escuchar cambios en el select del tipo de comprobante
+    $('#id_tipo_comprobante').change(function () {
+        // Obtener el valor del tipo de comprobante seleccionado
+        var tipoComprobante = $(this).val();
+        var subtotal = parseFloat($('#subtotal').val()); // Obtener el subtotal
+        var iva = 0;
+        var total = subtotal;
 
-$(document).ready(function() {
-    // Función que se ejecuta cuando se cambia el total o el tipo de comprobante
-    $('#total, #id_tipo_comprobante').on('input change', function() {
-        // Obtener los valores del formulario
-        var total = $('#total').val();
-        var id_tipo_comprobante = $('#id_tipo_comprobante').val();
+        // Si el tipo de comprobante es "Factura A" (suponiendo id 1 es "Factura A")
+        if (tipoComprobante == 1) { // Asegúrate de que el ID 1 corresponde a Factura A
+            iva = subtotal * 0.21; // Calcular el IVA 21%
+            total = subtotal + iva;
 
-        if (total && id_tipo_comprobante) {
-            // Enviar los datos al servidor usando AJAX
-            $.ajax({
-                url: 'calcular_iva.php',
-                type: 'POST',
-                data: {
-                    total: total,
-                    id_tipo_comprobante: id_tipo_comprobante
-                },
-                dataType: 'json',
-                success: function(response) {
-                    if (response.error) {
-                        $('#resultado').html(response.message);
-                    } else {
-                        $('#resultado').html(
-                            'IVA (21%): $' + response.iva + '<br>' +
-                            'Total con IVA: $' + response.total_con_iva
-                        );
-                    }
-                },
-                error: function() {
-                    $('#resultado').html('Hubo un error en el cálculo. Inténtalo nuevamente.');
-                }
-            });
+            // Mostrar los resultados del IVA y el total
+            $('#iva_resultados').show();
+            $('#iva_resultado').val(iva.toFixed(2)); // Mostrar IVA con 2 decimales
+            $('#total_resultados').show();
+            $('#total').val(total.toFixed(2)); // Mostrar total con 2 decimales
+        } else {
+            // Si no es "Factura A", ocultar los campos de IVA y Total
+            $('#iva_resultados').hide();
+            $('#total_resultados').hide();
+
+            // Mostrar un mensaje
+            $('#resultado').html("<p>Este tipo de comprobante no requiere IVA.</p>");
         }
     });
 });

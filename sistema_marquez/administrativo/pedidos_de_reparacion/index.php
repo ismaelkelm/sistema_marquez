@@ -26,7 +26,7 @@ $result = $conn->query($sql);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link rel="stylesheet" href="pedidos.css">
     <title>Registrar Pedido</title>
 </head>
 <body>
@@ -134,7 +134,11 @@ $result = $conn->query($sql);
 
                 <!-- Campo oculto por defecto -->
                 <input type="hidden" id="id_tecnicos" name="id_tecnicos" value="0">
-                <input type="hidden" id="estado_reparacion" name="estado_reparacion" value="Pendiente">
+                <div class="col-md-6 form-floating">
+                    <input type="date" class="form-control" id="fecha_estimada" name="fecha_estimada" value="<?php echo date('Y-m-d'); ?>">
+                    <label for="fecha_estimada">Fecha Estimada</label>
+                </div>
+
             </div>
 
             <div class="col-md-10">

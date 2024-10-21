@@ -1,0 +1,136 @@
+/* Estilos generales */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+/* Separación entre los botones y la parte superior */
+button[type="button"] {
+    margin-top: 20px; /* Añade un espacio de 20px entre los botones y la parte superior */
+}
+
+h1 {
+    color: #007bff;
+    text-align: center;
+    font-weight: 700;
+}
+
+label {
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"],
+textarea,
+select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: #fff;
+}
+/* Centrar el botón y ajustar su tamaño */
+button[type="submit"] {
+    display: block; /* Permite que el botón se comporte como un bloque */
+    margin: 20px auto; /* Centra el botón horizontalmente */
+    width: auto; /* Ajuste automático al contenido */
+    font-size: 16px; /* Tamaño de fuente adecuado */
+    padding: 10px 20px; /* Aumenta el tamaño del padding */
+    border-radius: 4px; /* Mantiene bordes redondeados */
+    cursor: pointer;
+}
+
+button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+}
+
+ul#dispositivo-list {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 10px;
+}
+
+ul#dispositivo-list li {
+    background-color: #e9ecef;
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+#mensaje-registro,
+#mensaje_cliente {
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+#form-levantar-cliente h3, 
+#nuevo-dispositivo-form h3 {
+    color: #28a745;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+button[type="submit"] {
+    display: block;
+    width: 100%;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+@media (min-width: 768px) {
+    .row.g-3 .col-md-6 {
+        flex: 0 0 48%;
+        max-width: 48%;
+    }
+
+    .row.g-3 {
+        justify-content: space-between;
+    }
+}

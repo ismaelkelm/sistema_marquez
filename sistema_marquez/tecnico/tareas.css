@@ -1,0 +1,94 @@
+/* Estilos generales */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+.container {
+    max-width: 1080px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* Título principal */
+h1 {
+    color: #007bff;
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+/* Estilo para tablas */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+    color: #333;
+}
+
+/* Estilo para botones */
+.button {
+    margin: 10px 0;
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 16px;
+    display: inline-block;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+
+/* Estilo para formularios */
+form {
+    margin-top: 20px;
+}
+
+label {
+    font-weight: bold;
+    margin-top: 10px;
+    display: block;
+}
+
+input[type="date"], select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    background-color: #fff;
+}
+
+/* Estilo para mensajes de error o vacío */
+p {
+    font-size: 14px;
+    color: #666;
+}
+
+/* Responsive */
+@media (min-width: 768px) {
+    .container {
+        width: 80%;
+    }
+}

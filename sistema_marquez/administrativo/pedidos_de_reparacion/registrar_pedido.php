@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Obtener los datos generales del pedido
     $id_pedidos_de_reparacion = trim($_POST['id_pedidos_de_reparacion']);
     $fecha_pedido = trim($_POST['fecha_pedido']);
-    $estado_reparacion = trim($_POST['estado_reparacion']);
+    $fecha_estimada = trim($_POST['fecha_estimada']);
     $numero_orden = trim($_POST['numero_orden']);
     $observacion = trim($_POST['observacion']);
     $id_clientes = trim($_POST['id_clientes']);
@@ -17,8 +17,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Insertar el nuevo pedido en la tabla pedidos_de_reparacion
     $query_pedido = "INSERT INTO pedidos_de_reparacion 
-                     (id_pedidos_de_reparacion, fecha_de_pedido, estado_reparacion, numero_orden, observacion, id_clientes)
-                     VALUES ('$id_pedidos_de_reparacion', '$fecha_pedido', '$estado_reparacion', '$numero_orden', '$observacion', '$id_clientes')";
+                     (id_pedidos_de_reparacion, fecha_de_pedido, fecha_estimada, numero_orden, observacion, id_clientes)
+                     VALUES ('$id_pedidos_de_reparacion', '$fecha_pedido', '$fecha_estimada', '$numero_orden', '$observacion', '$id_clientes')";
 
     if (mysqli_query($conn, $query_pedido)) {
         // Si el pedido se registró correctamente, iterar sobre los dispositivos
