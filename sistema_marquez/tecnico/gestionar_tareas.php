@@ -78,8 +78,7 @@ $result = $conn->query($sql);
 <body>
 <div class="container">
         <h1>GESTION DE TAREAS PENDIENTES</h1>
-        <button onclick="history.back();" class="button button-back">Volver</button>
-
+        <button onclick="location.href='../administrativo/administrativo.php'" class="button button-back">Volver</button>
 <!-- Formulario para filtrar por fecha -->
 <form method="POST" action="">
     <label for="fecha_de_pedido">Selecciona la fecha del pedido:</label>
