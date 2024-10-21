@@ -1,9 +1,7 @@
-
 <?php
-
 // Incluir el archivo de conexión a la base de datos
 include '../base_datos/db.php';
-// include '../pdf/facturaC.php'; // Asegúrate de que la ruta sea correcta
+
 // Iniciar la sesión y obtener el id_usuario
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
@@ -34,7 +32,7 @@ if ($resultRol->num_rows > 0) {
 }
 
 $sql = "
-    SELECT dr.id_detalle_reparaciones, dr.id_dispositivos, dr.estado_dispositivo, pr.observacion, pr.numero_orden, dr.id_tecnicos, di.marca
+    SELECT dr.id_detalle_reparaciones, dr.id_dispositivos, dr.estado_dispositivo, pr.observacion, pr.numero_orden, dr.id_tecnico, di.marca
     FROM detalle_reparaciones dr
     JOIN pedidos_de_reparacion pr ON dr.id_pedidos_de_reparacion = pr.id_pedidos_de_reparacion
     JOIN dispositivos di ON dr.id_dispositivos = di.id_dispositivos
@@ -54,7 +52,7 @@ if (!empty($fechaFiltrada)) {
 
 if ($rol_usuario == 3) {
     // Mostrar solo detalles sin asignar (técnico = 0)
-    $conditions[] = "dr.id_tecnicos = 0";
+    $conditions[] = "dr.id_tecnico = 0";
 }
 
 // Añadir las condiciones a la consulta
@@ -65,7 +63,6 @@ if (count($conditions) > 0) {
 $sql .= " ORDER BY dr.id_detalle_reparaciones DESC"; // Ordenar por el detalle más reciente
 
 $result = $conn->query($sql);
-
 
 // Generar el formulario HTML para filtrar por fecha
 ?>
@@ -102,7 +99,7 @@ if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         // Cambiar el estado del dispositivo a "Pendiente de revisión" si es 0
         $estadoDispositivo = ($row['estado_dispositivo'] == 0) ? "Pendiente de revisión" : $row['estado_dispositivo'];
-        $tecnicoAsignado = ($row['id_tecnicos'] == 0) ? "Sin Asignar" : $row['id_tecnicos'];
+        $tecnicoAsignado = ($row['id_tecnico'] == 0) ? "Sin Asignar" : $row['id_tecnico'];
 
         echo "<tr>";
         echo "<td>" . htmlspecialchars($estadoDispositivo) . "</td>";
@@ -121,13 +118,13 @@ if ($result->num_rows > 0) {
             
             echo '<form method="POST" action="asignar_tarea.php">';
             echo '<label for="tecnico">Selecciona un técnico:</label>';
-            echo '<select name="id_tecnicos" required>'; // Cambiado a "id_tecnico"
+            echo '<select name="id_tecnico" required>'; // Cambiado a "id_tecnico"
             echo '<option value="0" ' . ($tecnicoAsignado == "Sin Asignar" ? 'selected' : '') . '>Sin Asignar</option>';
             
             // Llenar el select con los técnicos disponibles
             while ($rowTecnico = $resultTecnicos->fetch_assoc()) {
                 // Marcar el técnico asignado como seleccionado
-                $selected = ($row['id_tecnicos'] == $rowTecnico['id_usuario']) ? 'selected' : '';
+                $selected = ($row['id_tecnico'] == $rowTecnico['id_usuario']) ? 'selected' : '';
                 echo '<option value="' . htmlspecialchars($rowTecnico['id_usuario']) . '" ' . $selected . '>' . htmlspecialchars($rowTecnico['nombre']) . '</option>';
             }
             echo '</select>';
