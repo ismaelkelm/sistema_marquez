@@ -19,3 +19,8 @@ if ($conn->connect_error) { // Si hay un error en la conexión...
 date_default_timezone_set('America/Argentina/Buenos_Aires'); // Cambia a tu zona horaria
 $fecha_hora_actual = date('Y-m-d H:i:s'); // Obtener fecha y hora actual
 ?>      
+
+<!-- $servername = "arielon23.duckdns.org:3306"; 
+$username = "marquez";      // Nombre de usuario para acceder a la base de datos.
+$password = "marquez2024";       // Contraseña del usuario para acceder a la base de datos.
+$dbname = "pruebas_marquez2"; // Nombre de la base   http://arielon23.duckdns.org:10000/ // Nombre de la base de datos a la cual se quiere conectar. -->
