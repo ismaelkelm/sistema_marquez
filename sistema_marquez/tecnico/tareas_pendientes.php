@@ -62,33 +62,10 @@ $estados = [
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reparaciones Asignadas</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        table, th, td {
-            border: 1px solid black;
-            padding: 10px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        button {
-            padding: 5px 10px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-        .quitar-tarea {
-            background-color: #f44336;
-        }
-    </style>
+    <link rel="stylesheet" href="./estilos/pendientes.css">  <!-- Enlace al archivo CSS -->
 </head>
 <body>
-
+<button onclick="location.href='../tecnico/tecnico_panel.php'" class="button button-back">Volver</button>
 <h2>Reparaciones Asignadas al Técnico</h2>
 
 <?php
@@ -115,17 +92,14 @@ if ($result->num_rows > 0) {
         // Estado del Dispositivo
         echo "<td>" . $estados[$row['estado_dispositivo']] . "</td>";
 
-        // Verificación del valor de id_detalle_reparaciones
         if (!empty($row['id_detalle_reparaciones'])) {
             echo "<td>";
-            // Enviar el id_dispositivos en lugar del id_detalle_reparaciones
             echo "<form action='detalles_de_pedido.php' method='POST'>";
-            echo "<input type='hidden' name='id_dispositivos' value='" . $row['id_dispositivos'] . "'>"; // Enviar el id_dispositivos
-            echo "<input type='hidden' name='id_detalle_reparaciones' value='" . $row['id_detalle_reparaciones'] . "'>"; // Enviar el id_detalle_reparaciones
-            echo "<button type='submit'>Ir a Tarea</button>";
+            echo "<input type='hidden' name='id_dispositivos' value='" . $row['id_dispositivos'] . "'>";
+            echo "<input type='hidden' name='id_detalle_reparaciones' value='" . $row['id_detalle_reparaciones'] . "'>";
+            echo "<button type='submit' class='ir-a-tarea'>Ir a Tarea</button>";
             echo "</form>";
-
-                echo "</td>";
+            echo "</td>";
         } else {
             echo "<td>Error: id_detalle_reparaciones no disponible</td>";
         }
@@ -143,7 +117,7 @@ if ($result->num_rows > 0) {
     
     echo "</table>";
 } else {
-    echo "No se encontraron reparaciones asignadas al técnico.";
+    echo "<h3>No se encontraron reparaciones asignadas al técnico.</h3>";
 }
 ?>
 

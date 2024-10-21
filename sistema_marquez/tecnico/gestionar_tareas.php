@@ -72,14 +72,21 @@ $result = $conn->query($sql);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Filtrar Detalle de Reparaciones</title>
-    <link rel="stylesheet" href="tareas.css"> <!-- Enlace al archivo CSS -->
+    <link rel="stylesheet" href="gestion_tareas.css"> <!-- Enlace al archivo CSS -->
    
 </head>
 <body>
 <div class="container">
         <h1>GESTION DE TAREAS PENDIENTES</h1>
-        <button onclick="location.href='../administrativo/administrativo.php'" class="button button-back">Volver</button>
-<!-- Formulario para filtrar por fecha -->
+        <?php
+    if ($rol_usuario == 2) {
+        // Para usuarios con rol 2 (administrativo)
+        echo '<button onclick="location.href=\'../administrativo/administrativo.php\'" class="button button-back">Volver</button>';
+    } elseif ($rol_usuario == 3) {
+        // Para usuarios con rol 3 (técnico)
+        echo '<button onclick="location.href=\'tecnico_panel.php\'" class="button button-back">Volver</button>';
+    }
+    ?>
 <form method="POST" action="">
     <label for="fecha_de_pedido">Selecciona la fecha del pedido:</label>
     <input type="date" id="fecha_pedido" name="fecha_de_pedido" value="<?php echo htmlspecialchars($fechaFiltrada); ?>">

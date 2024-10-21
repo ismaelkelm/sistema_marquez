@@ -1,3 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>wepp</title>
+</head>
+<body>
+<style>
+        body {
+            display: flex;
+            justify-content: center; /* Centra horizontalmente */
+            align-items: center; /* Centra verticalmente */
+            height: 100vh; /* Altura completa de la ventana */
+            margin: 0; /* Elimina márgenes */
+            flex-direction: column; /* Apila elementos en columna */
+        }
+        .mensaje-exito {
+            color: green;
+            font-weight: bold;
+            font-size: 20px; /* Tamaño de letra más grande */
+            border: 2px solid green;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            text-align: center; /* Centra el texto */
+        }
+        .mensaje-error {
+            color: red;
+            font-weight: bold;
+            font-size: 20px; /* Tamaño de letra más grande */
+            border: 2px solid red;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            text-align: center; /* Centra el texto */
+        }
+    </style>
+
+</body>
+</html>
 <?php
 // Incluir el archivo de conexión a la base de datos
 include '../base_datos/db.php';
@@ -47,12 +88,13 @@ function procesar_factura($conn, $id_clientes, $fecha_factura, $subtotal_factura
         // Commit si todo fue bien
         mysqli_commit($conn);
 
-        // Redireccionar o mostrar mensaje de éxito
-        echo "Factura procesada exitosamente!";
+     
+      // Redireccionar o mostrar mensaje de éxito
+        echo "<div class='mensaje-exito'>Factura procesada exitosamente!</div>";
     } catch (Exception $e) {
         // Si hay algún error, deshacer la transacción
         mysqli_rollback($conn);
-        echo "Error al procesar la factura: " . $e->getMessage();
+        echo "<div class='mensaje-error'>Error al procesar la factura: " . $e->getMessage() . "</div>";
     }
 }
 
@@ -105,7 +147,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Mostrar un mensaje de éxito o redirigir
-    echo "<h2>Detalles procesados exitosamente y stock actualizado.</h2>";
+
+    echo "<div class='mensaje-exito'>Detalles procesados exitosamente y stock actualizado.</div>";
     // Verificar si el estado del dispositivo es igual a 1
 
     if ($estado_dispositivo == 1) {
@@ -205,7 +248,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         );
     }
     
-
+    echo "<script>
+            setTimeout(function() {
+                window.location.href = 'tareas_pendientes.php';
+            }, 1500); 
+        </script>";
     exit();
 }
 
