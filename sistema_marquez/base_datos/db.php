@@ -13,4 +13,9 @@ if ($conn->connect_error) { // Si hay un error en la conexión...
     die("Conexión fallida: " . $conn->connect_error); // ...se muestra un mensaje de error y se termina el script.
 }
 // Si la conexión es exitosa, el script continúa ejecutándose sin mostrar ningún mensaje de error.
-?>
+
+
+
+date_default_timezone_set('America/Argentina/Buenos_Aires'); // Cambia a tu zona horaria
+$fecha_hora_actual = date('Y-m-d H:i:s'); // Obtener fecha y hora actual
+?>      

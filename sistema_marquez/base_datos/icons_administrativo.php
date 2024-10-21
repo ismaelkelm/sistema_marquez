@@ -11,10 +11,10 @@ function obtenerIconosPanel() {
     // Definir las rutas de los iconos
     $rutas = [
         'Compra' => ['icono' => 'fa-shopping-cart', 'ruta' => '../facturacion/venta/venta.php'],
-        'Venta' => ['icono' => 'fa-shopping-basket', 'ruta' => '../facturacion/cargaFactura.php'],
+        'Venta' => ['icono' => 'fa-shopping-basket', 'ruta' => '../facturacion/venta/venta.php'],
         'Reparación' => ['icono' => 'fa-tools', 'ruta' => '../../administrativo/pedidos_de_reparacion/index.php'],
-        'Reparación + Venta' => ['icono' => 'fa-exchange-alt', 'ruta' => '../facturacion/factura.html'],
-        'Comprobantes' => ['icono' => 'fa-file-alt', 'ruta' => '../pdf/facturaB.php'],
+        'Reparación + Venta' => ['icono' => 'fa-exchange-alt', 'ruta' => '../pdf/facturaC.php'],
+        'Comprobantes' => ['icono' => 'fa-file-alt', 'ruta' => '../pdf/opciones.html'],
     ];
     
     if ($result && $result->num_rows > 0) {
