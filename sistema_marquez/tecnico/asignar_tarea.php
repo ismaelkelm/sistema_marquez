@@ -1,6 +1,8 @@
 <?php
 // Incluir el archivo de conexión a la base de datos
 include '../base_datos/db.php';
+// Establecer la zona horaria
+date_default_timezone_set('America/Argentina/Buenos_Aires');
 
 // Variable para almacenar el mensaje de estado
 $message = "";
@@ -48,7 +50,7 @@ if (isset($_POST['id_tecnico']) && isset($_POST['id_dispositivos'])) {
 
             $stmt_insert = $conn->prepare($query_insert);
 
-            // Verificar si la consulta se preparó correctamente
+            // Verificar si la consulta se preparó correctamecnte
             if ($stmt_insert) {
                 // Vincular los parámetros a la consulta
                 $stmt_insert->bind_param("ssiiiiiis", $fecha_seguimiento, $descripcion, $estado_dispositivo, $id_pedidos_de_reparacion, $id_servicios, $id_dispositivo, $id_tecnico, $id_accesorio, $cantidad_usada);

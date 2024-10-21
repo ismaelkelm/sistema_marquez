@@ -12,6 +12,13 @@ $password = "marquez2024";       // Contraseña del usuario para acceder a la ba
 $dbname = "pruebas_marquez2"; // Nombre de la base   http://arielon23.duckdns.org:10000/ // Nombre de la base de datos a la cual se quiere conectar.
 
 
+
+// // Configuración de la base de datos: se establecen los parámetros para la conexión a la base de datos MySQL.
+// $servername = "localhost:3308"; // Nombre del servidor donde se aloja la base de datos.
+// $username = "root";        // Nombre de usuario para acceder a la base de datos.
+// $password = "";      // Contraseña del usuario para acceder a la base de datos.
+// $dbname = "pruebas_marquez2"; // Nombre de la base   http://arielon23.duckdns.org:10000/
+
 // Crear conexión: se crea un nuevo objeto mysqli para conectarse a la base de datos utilizando los parámetros definidos.
 $conn = new mysqli($servername, $username, $password, $dbname);
 //echo"conectado";

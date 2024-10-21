@@ -86,33 +86,7 @@ $result_accesorios_componentes = mysqli_query($conn, $query_accesorios_component
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Modificar Detalle de Reparación</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        table, th, td {
-            border: 1px solid black;
-            padding: 10px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        input[type="text"], select {
-            width: 100%;
-        }
-        button {
-            padding: 5px 10px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-        .remove-button {
-            background-color: #f44336; /* Rojo para quitar */
-        }
-    </style>
+    <link rel="stylesheet" href="./estilos/detalles.css">
 </head>
 <body>
 
@@ -171,29 +145,29 @@ $result_accesorios_componentes = mysqli_query($conn, $query_accesorios_component
     <input type="hidden" name="id_usuario" value="<?php echo $id_usuario ?>">
     
     <br>
-    <div id="detalles-accesorios">
-        <div class="detalle-accesorio">
-            <label>Accesorio:</label>
-            <select name="id_accesorios_y_componentes[]">
-                <?php
-                if (mysqli_num_rows($result_accesorios_componentes) > 0) {
-                    while ($row_accesorio = mysqli_fetch_assoc($result_accesorios_componentes)) {
-                        echo '<option value="' . $row_accesorio['id_accesorios_y_componentes'] . '">' . $row_accesorio['nombre'] . '</option>';
+        <div id="detalles-accesorios">
+            <div class="detalle-accesorio">
+                <label>Accesorio:</label>
+                <select name="id_accesorios_y_componentes[]">
+                    <?php
+                    if (mysqli_num_rows($result_accesorios_componentes) > 0) {
+                        while ($row_accesorio = mysqli_fetch_assoc($result_accesorios_componentes)) {
+                            echo '<option value="' . $row_accesorio['id_accesorios_y_componentes'] . '">' . $row_accesorio['nombre'] . '</option>';
+                        }
+                    } else {
+                        echo '<option value="">No hay accesorios disponibles</option>';
                     }
-                } else {
-                    echo '<option value="">No hay accesorios disponibles</option>';
-                }
-                ?>
-            </select>
+                    ?>
+                </select>
 
-            <label>Cantidad:</label>
-            <input type="number" name="cantidad_usada[]" min="1" required>
+                <label>Cantidad:</label>
+                <input type="number" name="cantidad_usada[]" min="1" required>
+            </div>
         </div>
-    </div>
 
-    <button type="button" id="add-accesorio">Agregar otro accesorio</button>
-    <br><br>
-    <button type="submit">Modificar Detalles y Enviar</button>
+        <button type="button" id="add-accesorio">Agregar otro accesorio</button>
+        <br><br>
+        <button type="submit">Modificar Detalles y Enviar</button>
 </form>
 
 <br>
