@@ -1,0 +1,193 @@
+/* Estilos generales */
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+h3 {
+    color: #333;
+    text-align: center;
+    padding: 10px;
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+/* Estilos para tablas */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+th {
+    background-color: #f2f2f2;
+    text-align: center;
+    font-weight: bold;
+}
+
+td {
+    text-align: center;
+}
+
+/* Estilos de formulario */
+form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Mensajes de errores o información */
+.error-message {
+    color: red;
+    font-weight: bold;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.success-message {
+    color: green;
+    font-weight: bold;
+    margin-top: 10px;
+    text-align: center;
+}
+
+/* Estilo para los resultados */
+#iva_resultados, #total_resultados {
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 4px;
+    margin-top: 10px;
+}
+
+.button:hover {
+    background-color: #1b1c1c; /* Oscurece un poco al pasar el mouse */
+}
+
+.container {
+    max-width: 1080px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+
+
+/* styles.css */
+
+
+
+h3 {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+div.factura-info, div.detalle-factura, div.servicios-factura {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+div.factura-info h3, div.detalle-factura h3, div.servicios-factura h3 {
+    font-size: 22px;
+    color: #007bff;
+}
+
+div.factura-info p, div.detalle-factura p, div.servicios-factura p {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.5;
+    margin: 8px 0;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 15px 0;
+}
+
+/* Estilos para los textos importantes */
+span.accesorio, span.servicio {
+    font-weight: bold;
+    color: #333;
+}
+
+/* Estilo de subtotales */
+h3.subtotal {
+    font-size: 20px;
+    color: #28a745;
+    margin-top: 15px;
+}
+
+/* Estilo de mensajes de error */
+p.error {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+/* Botones (opcional si tienes botones en la página) */
+button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+.servicio-remarcado {
+    font-weight: bold;
+    color: #ff5722; /* Color de texto para destacar */
+    background-color: #f0f0f0; /* Color de fondo suave */
+    padding: 2px 4px;
+    border-radius: 4px;
+}
