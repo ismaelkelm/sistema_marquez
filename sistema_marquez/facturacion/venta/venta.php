@@ -12,7 +12,7 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['role']) || !in_array($_SES
     exit;
 }
 
-// Obtener el id_usuario desde la sesión
+// Obtener el id_usuario desde la sessión
 $id_usuario = $_SESSION['user_id'];
 $id_operacion = 1;
 

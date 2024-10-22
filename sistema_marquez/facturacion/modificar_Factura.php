@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $tipo_mensaje = 'success'; // Mensaje de éxito
     } else {
         $mensaje = "Error al modificar la factura: " . $conn->error;
-        $tipo_mensaje = 'error'; // Mensaje de error
+        $tipo_mensaje = 'error'; // Mennsaje de error
     }
     echo "<script>
             setTimeout(function() {
