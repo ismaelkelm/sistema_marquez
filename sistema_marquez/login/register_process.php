@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $dni = trim($_POST["dni"]);
     $contraseña = trim($_POST["contraseña"]);
     $correo = trim($_POST["correo"]);
-    $id_roles = isset($_POST["id_roles"]) ? trim($_POST["id_roles"]) : '';
+    $id_roles = 4;
 
     // Verifica si los campos están vacíos
     if (empty($nombre) || empty($dni) || empty($contraseña) || empty($correo) || empty($id_roles)) {
@@ -46,6 +46,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     if ($stmt_insert = $conn->prepare($sql_insert)) {
                         $stmt_insert->bind_param("sssis", $nombre, $dni, $hashed_password, $id_roles, $correo);
                         if ($stmt_insert->execute()) {
+                            // Obtiene el ID del nuevo usuario
+                            $id_usuario = $stmt_insert->insert_id;
+
+                            // Verifica si el DNI ya existe en la tabla clientes
+                            $sql_cliente = "SELECT id_clientes FROM clientes WHERE dni = ?";
+                            if ($stmt_cliente = $conn->prepare($sql_cliente)) {
+                                $stmt_cliente->bind_param("s", $dni);
+                                $stmt_cliente->execute();
+                                $stmt_cliente->store_result();
+
+                                if ($stmt_cliente->num_rows > 0) {
+                                    // Si el cliente existe, obtenemos el ID
+                                    $stmt_cliente->bind_result($id_cliente);
+                                    $stmt_cliente->fetch();
+
+                                    // Inserta en la tabla cliente_con_usuario
+                                    $sql_cliente_usuario = "INSERT INTO cliente_con_usuario (id_clientes, id_usuario) VALUES (?, ?)";
+                                    if ($stmt_cliente_usuario = $conn->prepare($sql_cliente_usuario)) {
+                                        $stmt_cliente_usuario->bind_param("ii", $id_cliente, $id_usuario);
+                                        $stmt_cliente_usuario->execute();
+                                        $stmt_cliente_usuario->close();
+                                    } else {
+                                        echo "Error en la preparación de la consulta de inserción en cliente_con_usuario.";
+                                    }
+                                }
+                                $stmt_cliente->close();
+                            } else {
+                                echo "Error en la preparación de la consulta de cliente: " . $conn->error;
+                            }
+
                             // Mostrar mensaje de bienvenida y redirigir
                             echo "
                             <html lang='es'>

@@ -71,8 +71,10 @@ if ($servicios_result->num_rows > 0) {
 
 // Definición de estados
 $estados = [
-    0 => "En Reparación",
-    1 => "Reparado"
+    0 => "Pendiente",
+    1 => "Reparado",
+    2 => "En Proceso",
+    3 => "Cancelado",
 ];
 
 // Consulta para obtener accesorios y componentes

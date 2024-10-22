@@ -94,8 +94,8 @@
         <?php endif; ?>
 
         <div class="mt-3 text-center">
-            <p>¿No tienes una cuenta? <a href="register.php">Regístrate aquí</a></p>
-            <p>¿Olvidaste tu nombre de usuario o contraseña? <a href="">Recupera aquí.</a></p>
+            <p>¿No tienes una cuenta? <a href="alta_cliente.php">Regístrate aquí</a></p>
+            <!-- <p>¿Olvidaste tu nombre de usuario o contraseña? <a href="">Recupera aquí.</a></p> -->
         </div>
 
         <!-- Botón para volver al índice -->
