@@ -133,50 +133,10 @@ class PDF extends FPDF
         $this->Image('../presentacion/qr.png', 95, $this->GetY(), 13, 13, 'PNG'); // Center the QR code (X, Y, Width, Height)
     }
 
-    // function AddEmpresaSection($titulocomprobante, $ultimoId)
-    // {
-
-    //     $numeroFactura = sprintf('%04d', $ultimoId); // Formato a 4 dígitos (rellena con ceros a la izquierda si es necesario)
-    //     // Guardar la posición inicial
-    //     $xStart = 10;
-    //     $yStart = $this->GetY();
-
-    //     // Dibujar el recuadro de 190x50 para la sección de la empresa
-    //     $yStart = $this->GetY() - 5;
-    //     $this->Rect($xStart, $yStart, 190, 40);
-
-    //     // Contenido de la sección de la empresa
-    //     $this->SetFont('Arial', 'B', 12); // Establecer fuente en negrita para los títulos
-    //     $this->Ln(-2);
-
-    //     // Información de la empresa y comprobante
-    //     $this->Cell(110, 6, 'Empresa: Marquez Comunicaciones', 0, 0, 'L'); // Nombre de la empresa
-    //     $this->Cell(90, 6, $titulocomprobante['tipo_comprobante'], 0, 1, 'L'); // Tipo de comprobante
-    //     $this->Cell(110, 6, 'CUIT: 30-12345678-9', 0, 0, 'L'); // CUIT de la empresa
-    //     $this->Cell(90, 6, 'Fecha: ' . date('d/m/Y'), 0, 1, 'L'); // Fecha actual
-    //     $this->Cell(110, 6, utf8_decode('Factura N°: 0001-0000' . $numeroFactura), 0, 0, 'L'); // Número de factura
-    //     // $this->Cell(110, 6, utf8_decode('Factura N°: 0001-00001234'), 0, 0, 'L'); // Número de factura
-    //     $this->Cell(90, 6, 'Ing. Brutos: 01-23456789', 0, 1, 'L'); // Ingresos brutos
-    //     $this->Cell(110, 6, 'Punto de Venta: 0001', 0, 0, 'L'); // Punto de venta
-    //     $this->Cell(90, 6, utf8_decode('Condición IVA: Responsable Inscripto'), 0, 1, 'L'); // Condición IVA
-
-    //     // Teléfonos alineados
-    //     $this->Cell(110, 6, 'Tel: 3764-436974', 0, 0, 'L'); // Teléfono a la izquierda
-    //     $this->Cell(90, 6, 'Tel: 3764-281526', 0, 1, 'L'); // Teléfono a la derecha
-
-    //     // Dirección de la empresa
-    //     $this->Cell(110, 6, utf8_decode('Dirección: Calle Sarmiento 1994 - Posadas'), 0, 0, 'L');
-
-    //     // Fecha de inicio de actividades alineada a la derecha
-    //     $this->Cell(90, 6, 'Fecha inicio actividades: 02/02/2000', 0, 1, 'L'); // Fecha de inicio alineada a la derecha
-
-    //     // Agregar un salto de línea
-    //     $this->Ln(12);
-    // }
-
-    function AddEmpresaSection($titulocomprobante, $ultimoId) 
+    function AddEmpresaSection($titulocomprobante, $ultimoId)
     {
-        $numeroFactura = sprintf('%04d', $ultimoId); // Formato a 4 dígitos
+
+        $numeroFactura = sprintf('%04d', $ultimoId); // Formato a 4 dígitos (rellena con ceros a la izquierda si es necesario)
         // Guardar la posición inicial
         $xStart = 10;
         $yStart = $this->GetY();
@@ -186,27 +146,33 @@ class PDF extends FPDF
         $this->Rect($xStart, $yStart, 190, 40);
 
         // Contenido de la sección de la empresa
-        $this->SetFont('Arial', 'B', 12); // Establecer fuente en negrita
+        $this->SetFont('Arial', 'B', 12); // Establecer fuente en negrita para los títulos
         $this->Ln(-2);
 
         // Información de la empresa y comprobante
-        $this->Cell(110, 6, 'Empresa: Marquez Comunicaciones', 0, 0, 'L');
-        $this->Cell(90, 6, $titulocomprobante['tipo_comprobante'], 0, 1, 'L');
-        $this->Cell(110, 6, 'CUIT: 30-12345678-9', 0, 0, 'L');
-        $this->Cell(90, 6, 'Fecha: ' . date('d/m/Y'), 0, 1, 'L');
-        $this->Cell(110, 6, utf8_decode('Factura N°: 0001-0000' . $numeroFactura), 0, 0, 'L');
-        $this->Cell(90, 6, 'Ing. Brutos: 01-23456789', 0, 1, 'L');
-        $this->Cell(110, 6, 'Punto de Venta: 0001', 0, 0, 'L');
-        $this->Cell(90, 6, utf8_decode('Condición IVA: Responsable Inscripto'), 0, 1, 'L');
-        $this->Cell(110, 6, 'Tel: 3764-436974', 0, 0, 'L');
-        $this->Cell(90, 6, 'Tel: 3764-281526', 0, 1, 'L');
+        $this->Cell(110, 6, 'Empresa: Marquez Comunicaciones', 0, 0, 'L'); // Nombre de la empresa
+        $this->Cell(90, 6, $titulocomprobante['tipo_comprobante'], 0, 1, 'L'); // Tipo de comprobante
+        $this->Cell(110, 6, 'CUIT: 30-12345678-9', 0, 0, 'L'); // CUIT de la empresa
+        $this->Cell(90, 6, 'Fecha: ' . date('d/m/Y'), 0, 1, 'L'); // Fecha actual
+        $this->Cell(110, 6, utf8_decode('Factura N°: 0001-0000' . $numeroFactura), 0, 0, 'L'); // Número de factura
+        // $this->Cell(110, 6, utf8_decode('Factura N°: 0001-00001234'), 0, 0, 'L'); // Número de factura
+        $this->Cell(90, 6, 'Ing. Brutos: 01-23456789', 0, 1, 'L'); // Ingresos brutos
+        $this->Cell(110, 6, 'Punto de Venta: 0001', 0, 0, 'L'); // Punto de venta
+        $this->Cell(90, 6, utf8_decode('Condición IVA: Responsable Inscripto'), 0, 1, 'L'); // Condición IVA
+
+        // Teléfonos alineados
+        $this->Cell(110, 6, 'Tel: 3764-436974', 0, 0, 'L'); // Teléfono a la izquierda
+        $this->Cell(90, 6, 'Tel: 3764-281526', 0, 1, 'L'); // Teléfono a la derecha
+
+        // Dirección de la empresa
         $this->Cell(110, 6, utf8_decode('Dirección: Calle Sarmiento 1994 - Posadas'), 0, 0, 'L');
-        $this->Cell(90, 6, 'Fecha inicio actividades: 02/02/2000', 0, 1, 'L');
+
+        // Fecha de inicio de actividades alineada a la derecha
+        $this->Cell(90, 6, 'Fecha inicio actividades: 02/02/2000', 0, 1, 'L'); // Fecha de inicio alineada a la derecha
 
         // Agregar un salto de línea
         $this->Ln(12);
     }
-
 
 
     function AddTotalsSection($subTotal, $totalIVA, $totalFactura)
@@ -230,6 +196,7 @@ class PDF extends FPDF
         
 
     }
+
 
 
     function DrawCheckboxes()
@@ -287,7 +254,8 @@ class PDF extends FPDF
             $this->Rect($currentX, $currentY, $checkboxSize, $checkboxSize); // Crear el cuadro
             $this->SetXY($currentX + 5, $currentY); // Ajustar la posición del texto a la derecha del cuadro
             $this->Cell(30, 5, $checkboxTexts[$i], 0, 0, 'L'); // Escribir el texto específico al lado del cuadro
-            $this->Ln(3);
+            $this->Ln(-100);
+
 
         }
     }
@@ -388,7 +356,7 @@ class PDF extends FPDF
         $currentY = $this->GetY();
 
         // Establecer la distancia adicional antes de imprimir la sección de la factura
-        $this->SetY($currentY + 42); // Ajusta 70 a la distancia deseada después de la última sección
+        $this->SetY($currentY + 41.9); // Ajusta 70 a la distancia deseada después de la última sección
 
         // Encabezado común para servicios, accesorios y dispositivos
         $this->SetFont('Arial', '', 10);
@@ -474,8 +442,8 @@ class PDF extends FPDF
     {
 
         foreach ($servicios as $servicio) {
-            // $this->Cell(80, 10, $servicio['descripcion'], 1);
-            // $this->Cell(30, 10, '$' . number_format($servicio['precio'], 2, '.', ','), 1);
+            $this->Cell(80, 10, $servicio['descripcion'], 1);
+            $this->Cell(30, 10, '$' . number_format($servicio['precio'], 2, '.', ','), 1);
         }
 
     }
@@ -484,15 +452,15 @@ class PDF extends FPDF
     {
 
         foreach ($accesorios as $accesorio) {
-            // $this->Cell(80, 10, $accesorio['nombre'], 1);
-            // $this->Cell(30, 10, '$' . number_format($accesorio['precio'], 2, '.', ','), 1);
+            $this->Cell(80, 10, $accesorio['nombre'], 1);
+            $this->Cell(30, 10, '$' . number_format($accesorio['precio'], 2, '.', ','), 1);
         }
     }
 
     function AddDevices($dispositivos)
     {
         foreach ($dispositivos as $dispositivo) {
-            // $this->Cell(80, 10, utf8_decode($dispositivo['marca'] . ' ' . $dispositivo['modelo']), 1);
+            $this->Cell(80, 10, utf8_decode($dispositivo['marca'] . ' ' . $dispositivo['modelo']), 1);
         }
     }
 
@@ -534,39 +502,8 @@ class PDF extends FPDF
         $this->Ln(2);
     }
 
-    
-
 }
 
-$query_tipo_comprobante = "SELECT id_tipo_comprobante, tipo_comprobante FROM tipo_comprobante";
-$result_tipo_comprobante = mysqli_query($conn, $query_tipo_comprobante);
-
-if ($result_tipo_comprobante && mysqli_num_rows($result_tipo_comprobante) > 1) {
-    // Obtener el primer cliente como ejemplo
-    $titulocomprobante = mysqli_fetch_assoc($result_tipo_comprobante);
-} else {
-    // echo "No se encontraron clientes.";
-    exit;
-}
-
-// Consulta para obtener el último ID de cabecera de factura
-$query = "SELECT id_cabecera_factura FROM cabecera_factura ORDER BY id_cabecera_factura DESC LIMIT 1";
-$result = mysqli_query($conn, $query);
-
-// Manejo de resultados
-if ($result) {
-    if (mysqli_num_rows($result) > 0) {
-        $row = mysqli_fetch_assoc($result);
-        $ultimoId = $row['id_cabecera_factura'];
-        // echo "Último ID de cabecera de factura: " . $ultimoId . "<br>"; // Muestra el último ID
-    } else {
-        // echo "No se encontró ningún registro de cabecera de factura.";
-        exit;
-    }
-} else {
-    // echo "Error en la consulta: " . mysqli_error($conn);
-    exit;
-}
 
 // Consultas a la base de datos
 $querys = [
@@ -584,7 +521,7 @@ $querys = [
 foreach ($querys as $key => $query) {
     $$key = mysqli_query($conn, $query);
     if (!$$key) {
-        // echo "Error en la consulta de $key: " . mysqli_error($conn);
+        echo "Error en la consulta de $key: " . mysqli_error($conn);
         exit;
     }
 }
@@ -593,28 +530,23 @@ foreach ($querys as $key => $query) {
 if ($tipo_comprobante && mysqli_num_rows($tipo_comprobante) > 0) {
     $titulocomprobante = mysqli_fetch_assoc($tipo_comprobante);
 } else {
-    // echo "No se encontraron tipos de comprobante.";
+    echo "No se encontraron tipos de comprobante.";
     exit;
 }
 
-// Consulta para obtener el último ID de detalle de reparaciones
-$query_detalle = "SELECT id_detalle_reparaciones FROM detalle_reparaciones ORDER BY id_detalle_reparaciones DESC LIMIT 1";
-$result_detalle = mysqli_query($conn, $query_detalle);
+// Consulta para obtener el último ID de pedido
+$query_pedido = "SELECT id_pedidos_de_reparacion FROM pedidos_de_reparacion ORDER BY id_pedidos_de_reparacion DESC LIMIT 1";
+$result_pedido = mysqli_query($conn, $query_pedido);
 
-
-if ($result_detalle && mysqli_num_rows($result_detalle) > 0) {
-    $row_detalle = mysqli_fetch_assoc($result_detalle);
-    $ultimoIdDetalle = $row_detalle['id_detalle_reparaciones'];
-    // echo "El último ID de detalle de reparación es: " . $ultimoIdDetalle . "<br>";
+if ($result_pedido && mysqli_num_rows($result_pedido) > 0) {
+    $row = mysqli_fetch_assoc($result_pedido);
+    $ultimoIdPedido = $row['id_pedidos_de_reparacion'];
 } else {
-    // echo "No se encontró ningún registro de detalles de reparación.";
+    echo "No se encontró ningún registro de pedidos de reparación.";
     exit;
 }
 
-
-
-
-// Consulta para obtener los detalles del último detalle de reparación
+// Consulta para obtener los detalles del último pedido
 $query = "
 SELECT
     pr.numero_orden,
@@ -631,11 +563,11 @@ SELECT
     ac.precio AS precio_accesorio,
     dr.cantidad_usada
 FROM
-    detalle_reparaciones dr
-JOIN
-    pedidos_de_reparacion pr ON dr.id_pedidos_de_reparacion = pr.id_pedidos_de_reparacion
+    pedidos_de_reparacion pr
 JOIN
     clientes c ON pr.id_clientes = c.id_clientes
+JOIN
+    detalle_reparaciones dr ON pr.id_pedidos_de_reparacion = dr.id_pedidos_de_reparacion
 JOIN
     servicios s ON dr.id_servicios = s.id_servicios
 JOIN
@@ -643,7 +575,7 @@ JOIN
 LEFT JOIN
     accesorios_y_componentes ac ON dr.id_accesorio = ac.id_accesorios_y_componentes
 WHERE
-    dr.id_detalle_reparaciones = $ultimoIdDetalle";
+    pr.id_pedidos_de_reparacion = $ultimoIdPedido";
 
 $result = mysqli_query($conn, $query);
 
@@ -697,77 +629,22 @@ if (mysqli_num_rows($result) > 0) {
         }
     }
 
-    ob_start(); // Iniciar el buffer de salida
-
     // Generar el PDF
     $pdf = new PDF('Original');
     $pdf->AddPage();
+    $pdf->AddEmpresaSection($titulocomprobante, $ultimoIdPedido);
 
-    // Agregar secciones al PDF
-    if (isset($titulocomprobante) && isset($ultimoId)) {
-        $pdf->AddEmpresaSection($titulocomprobante, $ultimoId); // Asegúrate de acceder correctamente al tipo de comprobante
-    } else {
-        echo "Error: No se pudo obtener el título del comprobante o el último ID.";
-        exit;
-    }
+    $pdf->AddInvoiceSection($servicios, $accesorios, [$dispositivo]); // Asegúrate de que dispositivos sea un array
+    $pdf->AddClienteSection($cliente);
+    $pdf->AddDevices([$dispositivo]); // Pasa como array
+    $pdf->AddServices($servicios);
+    $pdf->AddAccessories($accesorios);
+    $pdf->Footer(); // Pie de página
+    $pdf->Output(); // Genera el PDF
 
-    if (!empty($servicios) || !empty($accesorios) || !empty($dispositivo)) {
-        $pdf->AddInvoiceSection($servicios, $accesorios, [$dispositivo]);
-        $pdf->AddClienteSection($cliente);
-        $pdf->AddDevices([$dispositivo]);
-        $pdf->AddAccessories($accesorios);
-    }
-
-    // Ruta para guardar los archivos PDF
-    $directorio_guardado = '../pdf/facturapedido'; // Carpeta donde se guardarán las facturas
-    if (!file_exists($directorio_guardado)) {
-        mkdir($directorio_guardado, 0777, true); // Crea el directorio si no existe
-    }
-
-    // Formato de la fecha
-    $fechaActual = date('Y-m-d'); // Fecha actual en formato YYYY-MM-DD
-    $nombreCliente = strtolower($cliente['nombre']); // Convertir a minúsculas
-    $apellidoCliente = strtolower($cliente['apellido']); // Convertir a minúsculas
-
-    // Guardar el PDF como original
-    $archivoOriginal = $directorio_guardado . '/' . $nombreCliente . '_' . $apellidoCliente . '_factura_original_' . $fechaActual . '.pdf'; // Nombre del archivo
-    $pdf->Output('F', $archivoOriginal); // Guarda como original
-
-    // Mostrar el PDF "Original" en el navegador
-    $pdf->Output('I', 'factura_original.pdf'); // 'I' muestra el PDF en el navegador
-
-    // Generar el PDF duplicado
-    $pdfDuplicado = new PDF('Duplicado');
-    $pdfDuplicado->AliasNbPages();
-    $pdfDuplicado->AddPage();
-
-    // Agregar secciones al PDF duplicado
-    if (isset($titulocomprobante) && isset($ultimoId)) {
-        $pdfDuplicado->AddEmpresaSection($titulocomprobante, $ultimoId); // Asegúrate de acceder correctamente al tipo de comprobante
-    } else {
-        echo "Error: No se pudo obtener el título del comprobante o el último ID.";
-        exit;
-    }
-
-    if (!empty($servicios) || !empty($accesorios) || !empty($dispositivo)) {
-        $pdfDuplicado->AddInvoiceSection($servicios, $accesorios, [$dispositivo]);
-        $pdfDuplicado->AddClienteSection($cliente);
-        $pdfDuplicado->AddDevices([$dispositivo]);
-        $pdfDuplicado->AddAccessories($accesorios);
-    }
-
-    // Guardar el PDF como duplicado
-    $archivoDuplicado = $directorio_guardado . '/' . $nombreCliente . '_' . $apellidoCliente . '_factura_duplicado_' . $fechaActual . '.pdf'; // Nombre del archivo
-    $pdfDuplicado->Output('F', $archivoDuplicado); // Guarda como duplicado
-
-    ob_end_flush(); // Enviar el contenido del buffer y limpiar
 } else {
-    echo "No se encontraron resultados para el último detalle de reparación.";
+    echo "No se encontraron datos para el pedido.";
 }
 
-// Cerrar la conexión a la base de datos
 mysqli_close($conn);
 ?>
-
-
-

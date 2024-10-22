@@ -413,6 +413,19 @@ $result_accesorios_componentes = mysqli_query($conn, $query_accesorios_component
 $query_clientes = "SELECT id_clientes, nombre, apellido, dni, cuit, direccion FROM clientes";
 $result_clientes = mysqli_query($conn, $query_clientes);
 
+$query_pedidos_de_reparacion = "SELECT id_pedidos_de_reparacion,numero_orden,id_clientes FROM pedidos_de_reparacion";
+$result_pedidos_de_reparacion = mysqli_query($conn, $query_pedidos_de_reparacion);
+
+$query_detalle_reparaciones = "SELECT id_pedidos_de_reparacion, id_servicios,id_dipositivos,descripcion FROM pedidos_de_reparacion";
+$result_detalle_reparaciones = mysqli_query($conn, $query_pedidos_de_reparacion);
+
+$query_servicios = "SELECT id_servicios,descripcion,precio_servicio FROM pedidos_de_reparacion";
+$result_servicios = mysqli_query($conn, $query_servicios);
+
+$query_dispositivos = "SELECT id_dispositivos,marca,modelo FROM pedidos_de_reparacion";
+$result_dispositivos = mysqli_query($conn, $query_dispositivos);
+
+
 
 if ($result_tipo_comprobante && mysqli_num_rows($result_tipo_comprobante) > 1) {
     // Obtener el primer cliente como ejemplo

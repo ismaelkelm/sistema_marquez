@@ -6,7 +6,7 @@ $(document).ready(function () {
       var id_tipo_comprobante = $('#id_tipo_comprobante').val();
 
       if (total && id_tipo_comprobante) {
-          // Enviar los datos al servidor usando AJAX
+          // Enviar los datos al servidorr usando AJAX
           $.ajax({
               url: '../calcular_iva.php',
               type: 'POST',
@@ -239,6 +239,6 @@ $(document).ready(function () {
               alert('Hubo un error al registrar la factura.');
           }
       });
-  });
-  
+  });
+  
 });

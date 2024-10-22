@@ -44,7 +44,7 @@ function procesar_factura($conn, $id_clientes, $fecha_factura, $subtotal_factura
             mysqli_stmt_execute($stmt_stock);
         }
 
-        // Commit si todo fue bien
+        // Commiit si todo fue bien
         mysqli_commit($conn);
         header("Location: ../../pdf/facturaB.php");
         // Redireccionar o mostrar mensaje de éxito
