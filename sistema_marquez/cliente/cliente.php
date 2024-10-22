@@ -7,7 +7,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
 require_once '../base_datos/db.php'; // Usar require_once para evitar inclusiones múltiples
 
-// Verificar si el usuario ha iniciado sesión
+// Verificar si el usuario ha idniciado sesión
 if (!isset($_SESSION['user_id'])) {
     header("Location: ../login/login.php");
     exit;

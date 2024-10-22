@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $direccion = trim(mysqli_real_escape_string($conn, $_POST['direccion']));
     $dni =trim(mysqli_real_escape_string($conn, $_POST['dni']));
 
-    // Insertar el cliente en la base de datos
+    // Insertar el cliente en la base dee datos
     $query = "INSERT INTO clientes (nombre, apellido, telefono, correo_electronico, direccion, dni)
               VALUES ('$nombre', '$apellido', '$telefono', '$correo', '$direccion', '$dni')";
 

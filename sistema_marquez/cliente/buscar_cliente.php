@@ -4,7 +4,7 @@ require_once '../base_datos/db.php';
 if (isset($_POST['dni'])) {
     $dni = $_POST['dni'];
 
-    // Consulta para obtener los datos del cliente basados en el DNI
+    // Consulta para obteneer los datos del cliente basados en el DNI
     $query = "SELECT id_clientes, nombre, apellido FROM clientes WHERE dni = '$dni'";
     $result = mysqli_query($conn, $query);
 
