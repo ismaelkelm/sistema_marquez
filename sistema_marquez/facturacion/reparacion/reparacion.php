@@ -44,16 +44,17 @@ $result_tipo_comprobante = mysqli_query($conn, $query_tipo_comprobante);
     <title>FACTURAR REPARACION</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Asegúrate de tener jQuery cargado -->
     <script src="reparacion.js"></script> <!-- Aquí va el archivo JS donde harás el cálculo del IVA -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="reparacion.css">
 </head>
 <body>
 <?php
     if ($rol_usuario == 1) {
         // Para usuarios con rol 2 (administrativo)
-        echo '<button onclick="location.href=\'../../administrador/administrador.php\'" class="button button-back">Volver</button>';
+        echo '<button onclick="location.href=\'../../administrador/administrador.php\'" class="mt-3 button button-back">Volver</button>';
     } elseif ($rol_usuario == 2) {
         // Para usuarios con rol 3 (técnico)
-        echo '<button onclick="location.href=\'../../administrativo/administrativo.php\'" class="button button-back">Volver</button>';
+        echo '<button onclick="location.href=\'../../administrativo/administrativo.php\'" class="mt-3 button button-back">Volver</button>';
     }
     ?>
 <form method="POST" action="">

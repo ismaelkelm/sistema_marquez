@@ -1,6 +1,9 @@
 <?php
 include_once '../base_datos/db.php'; // Incluir la conexión a la base de datos
-
+        // Iniciar la sesión si no ha sido iniciada
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 // Obtener los datos del formulario con seguridad
 $order_number = isset($_POST['order_number']) ? htmlspecialchars(trim($_POST['order_number'])) : '';
 $dni = isset($_POST['dni']) ? htmlspecialchars(trim($_POST['dni'])) : '';
@@ -163,11 +166,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </script>
 
         <?php
-        // Iniciar la sesión si no ha sido iniciada
-        if (session_status() == PHP_SESSION_NONE) {
-            session_start();
-        }
-
         // Verificar si el usuario ha iniciado sesión
         if (isset($_SESSION['user_id'])) {
             // Si el usuario ha iniciado sesión, muestra el botón que redirige a "cliente.php"
