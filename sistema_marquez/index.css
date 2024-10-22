@@ -1,20 +1,19 @@
 /* Estilo para el body */
 body {
-    background-color: #d8e9ff; /* Fondo del body */
+    background-color: #d8e9ff; /* Fondo suave azul claro */
+    color: #333; /* Color de texto estándar */
 }
-
 /* Estilo para el banner superior */
 .top-banner {
-    background-color: rgb(0, 132, 255);
-    color: rgb(0, 0, 0);
+    background-color: #007bff; /* Azul brillante */
+    color: #fff; /* Texto blanco */
     text-align: center;
     padding: 10px 0;
 }
-
 /* Estilo del header con el logo y el buscador */
 .header {
-    background-color: #1719ac;
-    padding: 10px 0;
+    background-color: #003772; /* Azul oscuro para el header */
+    padding: 10px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -22,42 +21,73 @@ body {
 
 .header .logo {
     margin-left: 20px;
+    color: #fff;
 }
 
 .header .search-bar {
     flex-grow: 1;
-    margin: 0 20px;
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
 }
-
+#search-input {
+    width: 60%;
+    max-width: 400px;
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
 .header .icons {
     margin-right: 20px;
 }
+.boton_estado {
+    margin-left: 40rem;
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 16px;
+}
+.boton:hover {
+    background-color: #0056b3;
+}
 
-.header .icons a {
-    color: rgb(255, 255, 255);
-    margin-left: 15px;
+.icons {
+    display: flex;
+    gap: 15px;
+}
+
+.icon-link {
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 16px;
+}
+
+.icon-link i {
+    margin-left: 5px;
+    font-size: 18px;
 }
 
 /* Estilo del menú */
 .menu {
-    background-color: #132067;
+    background-color: #132067; /* Azul intermedio */
     padding: 10px 0;
 }
 
 .menu a {
-    color: rgb(234, 235, 241);
+    color: #e0e8f7; /* Azul claro para los enlaces */
     margin: 0 15px;
 }
 
 .menu a:hover {
     text-decoration: underline;
+    color: #fff;
 }
 
 /* Estilo del navbar */
 .navbar {
-    background-color: #1719ac; /* Fondo del segundo nav */
-    font-weight: bold; /* Negrita */
+    background-color: #003772; /* Azul fuerte */
+    font-weight: bold;
 }
+
 
 /* Estilo de los enlaces del navbar */
 .navbar-nav .nav-link {
@@ -68,14 +98,14 @@ body {
 }
 
 .navbar-nav .nav-link:hover {
-    color: rgb(255, 94, 0); /* Color del texto al pasar el mouse */
-    text-decoration: underline; /* Subrayado al pasar el mouse */
+    color: #ff5e00; /* Naranja brillante al pasar el mouse */
 }
 
 .navbar-nav .nav-link.active {
-    color: rgb(255, 94, 0); /* Color activo */
-    border-bottom: 2px solid rgb(255, 94, 0); /* Línea debajo del enlace activo */
+    color: #ff5e00;
+    border-bottom: 2px solid #ff5e00;
 }
+
 
 /* Estilo del carrusel */
 .carousel-item img {
@@ -113,13 +143,6 @@ body {
 
 .whatsapp-bubble:hover {
     background-color: #128C7E;
-}
-
-/* Footer */
-.footer {
-    background-color: #f2f5f8;
-    padding: 20px;
-    text-align: center;
 }
 
 /* Estilo para los códigos QR */
@@ -174,4 +197,142 @@ body {
 
 .boton:hover {
     background-color: #0056b3;
+}
+/* Estilo para las secciones */
+section {
+    margin: 40px 0; /* Espaciado superior e inferior de las secciones */
+}
+
+/* Estilo para los encabezados de las secciones */
+h2 {
+    font-size: 2.5rem; /* Tamaño del texto del encabezado */
+    margin-bottom: 20px; /* Espaciado inferior */
+    font-weight: bold; /* Negrita para los encabezados */
+    color: #003772; /* Color del encabezado */
+}
+
+/* Estilo para los párrafos */
+p {
+    font-size: 1.1rem; /* Tamaño del texto de los párrafos */
+    line-height: 1.5; /* Altura de línea para mejor legibilidad */
+    color: #555; /* Color del texto */
+    font-weight: 500; /* Peso del texto ligeramente más fuerte */
+}
+
+/* Estilo para la imagen contenedora */
+.image-container {
+    border: 3px solid #003772; /* Borde que resalta alrededor de las imágenes */
+    border-radius: 10px; /* Bordes redondeados */
+    overflow: hidden; /* Oculta cualquier parte que sobresalga */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para un efecto elevado */
+    transition: transform 0.3s, box-shadow 0.3s; /* Transición suave para el efecto hover */
+    margin-bottom: 20px; /* Espaciado inferior entre las imágenes y el texto */
+}
+
+/* Efecto hover en la imagen contenedora */
+.image-container:hover {
+    transform: scale(1.05); /* Aumenta ligeramente el tamaño de la imagen al pasar el ratón */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Aumenta la sombra al hacer hover */
+}
+
+/* Ajuste de espaciado */
+.mt-2 {
+    margin-top: 10px; /* Espaciado superior para los párrafos */
+}
+
+.mt-3 {
+    margin-top: 20px; /* Espaciado superior para los párrafos */
+}
+
+/* Estilos para el texto de "¿Por qué elegirnos?" */
+#why-choose-us p {
+    font-weight: 600; /* Texto un poco más remarcado */
+    font-size: 1.2rem; /* Tamaño del texto */
+    color: #003772; /* Color del texto */
+}
+.payment-options {
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+.section-title {
+    font-size: 2rem;
+    color: #003772;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Estilo general para todas las imágenes */
+.qr-code {
+    margin-top: 15px;
+    width: 70%; /* Tamaño ajustado para las imágenes */
+    max-width: 120px; /* Ancho máximo */
+    border: 4px double #007bff; /* Borde azul doble */
+    box-shadow: 0 6px 12px rgba(0, 123, 255, 0.4); /* Sombra azul suave */
+    border-radius: 8px; /* Bordes redondeados */
+    transition: transform 0.3s;
+}
+
+/* Efecto hover común para todas las imágenes */
+.qr-code:hover {
+    transform: scale(1.1); /* Las imágenes aumentan ligeramente al hacer hover */
+}
+
+.payment-options p {
+    font-size: 1.2rem;
+    color: #333;
+    margin-top: 10px;
+}
+
+/* Estilo del footer */
+.footer {
+    background-color: #132067; /* Azul más oscuro */
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    font-size: 0.9rem;
+}
+.footer p {
+    margin-bottom: 10px;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center; /* Centrar los enlaces */
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px; /* Espacio entre los enlaces */
+}
+
+.footer-links a {
+    color: #f8f9fa; /* Color de enlace */
+    text-decoration: none;
+    padding: 0 10px;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: #007bff; /* Color al hacer hover */
+}
+
+.footer-separator {
+    color: #f8f9fa;
+    padding: 0 5px;
+}
+
+.location-link {
+    color: #28a745; /* Color para el enlace de ubicación */
+}
+
+.location-link:hover {
+    color: #218838;
+}
+
+/* Responsivo: Alinear verticalmente en pantallas pequeñas */
+@media (max-width: 768px) {
+    .footer-links {
+        flex-direction: column; /* Colocar enlaces en columna en pantallas pequeñas */
+        gap: 10px;
+    }
 }

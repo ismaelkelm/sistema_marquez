@@ -10,7 +10,7 @@
 </head>
 <body>
 
-    <div class="top-banner">
+    <div id="inicio" class="top-banner">
         Enterate todas las novedades, seguinos en Instagram 
         <a href="https://www.instagram.com/tu_cuenta_de_instagram" target="_blank" style="color: white; text-decoration: underline;">Marquez Comunicaciones</a>
     </div>
@@ -21,16 +21,14 @@
         </div>
         <div class="search-bar d-flex align-items-center">
             <input type="text" id="search-input" class="form-control" placeholder="Buscar Productos, Dispositivos, Accesorios..." aria-label="Buscar">
-            <a href="../../cliente/estado.php" class="boton">Ir a otra página</a>
-            <button id="reload-button" class="btn" aria-label="Recargar página" onclick="location.reload();">
-                <i class="fas fa-sync-alt"></i>
-            </button>
+            <a href="../../cliente/estado.php" class="boton_estado">Consultar Estado de reparacion</a>
         </div>
         <div class="icons">
             <a href="login/login.php" class="icon-link" aria-label="Iniciar Sesión">Iniciar Sesión <i class="fas fa-sign-in-alt"></i></a>
-            <a href="vista_carrito/cart.php" class="icon-link" aria-label="Ver Carrito"><i class="fas fa-shopping-cart"></i></a>
+            <a href="vista_carrito/carrito.html" class="icon-link" aria-label="Ver Carrito"><i class="fas fa-shopping-cart"></i></a>
         </div>
     </header>
+    
     
     <div class="container loading-container">
         <div id="loading-spinner" style="display: none;">Cargando...</div>
@@ -231,83 +229,82 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav mx-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Inicio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Servicios</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Productos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contacto</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link location-link" href="https://www.google.com/maps/place/Marquez+Comunicaciones/@-27.365022,-55.895284,17z/data=!4m6!3m5!1s0x9457be339466a153:0x385d43353fa4e3ec!8m2!3d-27.3650219!4d-55.8952843!16s%2Fg%2F11c1tlf7hl?hl=es-419&entry=ttu&g_ep=EgoyMDI0MTAwOS4wIKXMDSoASAFQAw%3D%3D" target="_blank">Ubicación</a>
-                    </li>
-                </ul>
+               
             </div>
         </div>
     </nav>
 
-    <section class="container my-5">
+    <section id="Acercad de" class="container my-5">
         <h2 class="text-center">Acerca de nosotros</h2>
-        <div class="row">
-            <div class="col-md-4 text-center">
+        <div class="row text-center">
+            <div class="col-md-4">
                 <div class="image-container">
                     <img src="vista_nav_imagenes/accesorios.png" class="img-fluid" alt="Producto 1">
                 </div>
-                <p>Contamos con venta de Accesorios y dispositivos con garantia</p>
+                <p class="mt-2">Contamos con venta de Accesorios y dispositivos con garantía</p>
             </div>
-            <div class="col-md-4 text-center">
+            <div class="col-md-4">
                 <div class="image-container">
                     <img src="vista_nav_imagenes/celu.png" class="img-fluid" alt="Producto 2">
                 </div>
-                <p>Realizamos reparaciones de distintos Electrodimesticos y Dispositivos</p>
+                <p class="mt-2">Realizamos reparaciones de distintos electrodomésticos y dispositivos</p>
             </div>
-            <div class="col-md-4 text-center">
+            <div class="col-md-4">
                 <div class="image-container">
-                    <img src="vista_nav_imagenes/pc2.png" class="img-fluid" alt="Producto 3">
+                    <img src="vista_nav_imagenes/redes.jpeg" class="img-fluid" alt="Producto 3">
                 </div>
-                <p>Estamos en las redes sociales, atendemos por consultas de todo tipo</p>
+                <p class="mt-2">Estamos en las redes sociales, atendemos por consultas de todo tipo</p>
             </div>
         </div>
     </section>
     
-
     <section class="container my-5" id="why-choose-us">
         <h2 class="text-center">¿Por qué elegirnos?</h2>
-        <p class="text-center">Contamos con técnicos profesionales, un excelente servicio de atención al cliente, y resolvemos cualquier problema o falla que tengas.</p>
+        <div class="row text-center mt-4"> <!-- Agregado para la fila de imágenes -->
+            <div class="col-md-4">
+                <div class="image-container mb-3"> <!-- Clase para bordes y sombra -->
+                    <img src="vista_nav_imagenes/tecnicos.jpg" class="img-fluid" alt="Técnicos Profesionales">
+                </div>
+                <p class="mt-2">Contamos con técnicos profesionales listos para ayudarte.</p>
+            </div>
+            <div class="col-md-4">
+                <div class="image-container mb-3"> <!-- Clase para bordes y sombra -->
+                    <img src="vista_nav_imagenes/atencion_cliente.jpeg" class="img-fluid" alt="Atención al Cliente">
+                </div>
+                <p class="mt-2">Ofrecemos un excelente servicio de atención al cliente.</p>
+            </div>
+            <div class="col-md-4">
+                <div class="image-container mb-3"> <!-- Clase para bordes y sombra -->
+                    <img src="vista_nav_imagenes/problemas.jpg" class="img-fluid" alt="Resolución de Problemas">
+                </div>
+                <p class="mt-2">Estamos aquí para resolver cualquier problema o falla que tengas.</p>
+            </div>
+        </div>
     </section>
 
     <section class="payment-options my-5">
         <div class="container">
+            <div class="text-center mb-4">
+                <strong class="section-title">Trabajamos con</strong>
+            </div>
             <div class="row">
-                <div class="col-md-3 text-center">
-                    <strong>Pagá en cuotas</strong>
-                    <div><a href="#">Ver promociones bancarias</a></div>
+                <div class="col-md-4 text-center">
+                    <p>Cuotas sin interes</p>
                     <img src="presentacion/banco.png" alt="Cupon 1" class="qr-code">
                 </div>
-                <div class="col-md-3 text-center">
-                    <strong>¿Necesitás financiación?</strong>
-                    <div><a href="#">Conocé nuestras opciones</a></div>
-                    <img src="presentacion/bank.avif" alt="Cupon 2" class="qr-code">
+                <div class="col-md-4 text-center">
+                    <p>Tarjetas de credito</p>
+                    <img src="vista_nav_imagenes/bancaria.png" alt="Cupon 2" class="qr-code">
                 </div>
-                <div class="col-md-3 text-center">
-                    <strong>Trabajamos con</strong>
-                    <div><a href="#">Ver bancos</a></div>
-                    <img src="vista_nav_imagenes/bancaria.png" alt="Cupon 3" class="qr-code">
-                </div>
-                <div class="col-md-3 text-center">
-                    <strong>Trabajamos con</strong>
-                    <div><a href="#">Ver Billetera</a></div>
-                    <img src="vista_nav_imagenes/pago.png" alt="Cupon 4" class="qr-code">
+                <div class="col-md-4 text-center">
+                    <p>Billeteras Virtuales</p>
+                    <img src="vista_nav_imagenes/pago.png" alt="Cupon 3" class="qr-code">
                 </div>
             </div>
         </div>
     </section>
+    
+    
     
 
     <div class="whatsapp-bubble">
@@ -316,14 +313,22 @@
         </a>
     </div>
 
-    <footer class="footer">
-        <p>&copy; 2024 Marquez Comunicaciones. Todos los derechos reservados.</p>
-        <div>
-            <a href="#">Política de privacidad</a> | 
-            <a href="#">Términos y condiciones</a>
+    <footer class="footer py-4">
+        <div class="container text-center">
+            <p>&copy; 2024 Marquez Comunicaciones. Todos los derechos reservados.</p>
+            <div class="footer-links">
+                <a href="mailto:contacto@marquezcomunicaciones.com">@marquezcomunicaciones.com</a>
+                <span class="footer-separator">|</span>
+                <a href="#inicio">Inicio</a>
+                <span class="footer-separator">|</span>
+                <a href="#Acercad de">Acerca de</a>
+                <span class="footer-separator">|</span>
+                <a class="location-link" href="https://www.google.com/maps/place/Marquez+Comunicaciones/@-27.365022,-55.895284,17z/data=!4m6!3m5!1s0x9457be339466a153:0x385d43353fa4e3ec!8m2!3d-27.3650219!4d-55.8952843!16s%2Fg%2F11c1tlf7hl?hl=es-419&entry=ttu&g_ep=EgoyMDI0MTAwOS4wIKXMDSoASAFQAw%3D%3D" target="_blank">Ubicación</a>
+            </div>
         </div>
     </footer>
-
+    
+    
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

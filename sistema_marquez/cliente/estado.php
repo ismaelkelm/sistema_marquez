@@ -100,6 +100,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <title>Consulta de Estado - Mi Empresa</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
         <style>
+                    /* Estilo para el body */
+        body {
+            background-color: #d8e9ff; /* Fondo suave azul claro */
+            color: #333; /* Color de texto estándar */
+        }
             /* Estilos personalizados */
             .alert-info { padding: 1px 15px; margin-bottom: 10px; border-radius: 8px; }
             .alert-info p { font-size: 0.9rem; margin: 1px 0; }
@@ -109,7 +114,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             form { margin-top: 20px; }
             .btn-secondary { background-color: #6c757d; padding: 10px 20px; display: block; margin: 20px auto 0; border-radius: 8px; }
             .btn-secondary:hover { background-color: #5a6268; }
-            .semaforo { display: flex; justify-content: center; align-items: center; margin: 20px auto; padding: 10px; border-radius: 10px; background-color: #f8f9fa; }
+            .semaforo { display: flex; justify-content: center; align-items: center; margin: 20px auto; padding: 10px; border-radius: 10px; background-color: #d8e9ff; }
             .indicator-red, .indicator-yellow, .indicator-green, .indicator-blue { border-radius: 50%; transition: transform 0.2s; }
             .indicator-red { background-color: red; }
             .indicator-yellow { background-color: yellow; }
@@ -124,6 +129,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 50% { transform: scale(1.1); }
                 100% { transform: scale(1); }
             }
+
     </style>
 
 </head>
@@ -156,9 +162,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     </script>
 
-    <div class="mt-4">
-        <a href="../index.html" class="btn btn-secondary">Volver</a>
-    </div>
+        <?php
+        // Iniciar la sesión si no ha sido iniciada
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        // Verificar si el usuario ha iniciado sesión
+        if (isset($_SESSION['user_id'])) {
+            // Si el usuario ha iniciado sesión, muestra el botón que redirige a "cliente.php"
+            echo '
+            <div class="mt-4">
+                <a href="cliente.php" class="btn btn-secondary">Volver</a>
+            </div>';
+        } else {
+            // Si el usuario no ha iniciado sesión, muestra el botón que redirige a "index.html"
+            echo '
+            <div class="mt-4">
+                <a href="../index.html" class="btn btn-secondary">Volver</a>
+            </div>';
+        }
+        ?>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
