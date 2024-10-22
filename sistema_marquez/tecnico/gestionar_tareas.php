@@ -36,7 +36,7 @@ $sql = "
     FROM detalle_reparaciones dr
     JOIN pedidos_de_reparacion pr ON dr.id_pedidos_de_reparacion = pr.id_pedidos_de_reparacion
     JOIN dispositivos di ON dr.id_dispositivos = di.id_dispositivos
-    WHERE dr.estado_dispositivo = 0
+    WHERE dr.estado_dispositivo NOT IN (1, 3)
     AND dr.fecha_seguimiento = (
         SELECT MAX(dr2.fecha_seguimiento)
         FROM detalle_reparaciones dr2
@@ -104,7 +104,22 @@ if ($result->num_rows > 0) {
     // Recorrer los resultados y mostrarlos en la tabla
     while ($row = $result->fetch_assoc()) {
         // Cambiar el estado del dispositivo a "Pendiente de revisión" si es 0
-        $estadoDispositivo = ($row['estado_dispositivo'] == 0) ? "Pendiente de revisión" : $row['estado_dispositivo'];
+        switch ($row['estado_dispositivo']) {
+            case 0:
+                $estadoDispositivo = "Pendiente de revisión";
+                break;
+            case 1:
+                $estadoDispositivo = "Reparado"; // Asegúrate de tener este estado definido
+                break;
+            case 2:
+                $estadoDispositivo = "En Proceso";
+                break;
+            case 3:
+                $estadoDispositivo = "Cancelado";
+                break;
+            default:
+                $estadoDispositivo = "Estado Desconocido"; // En caso de que no coincida con ninguno
+        }
         $tecnicoAsignado = ($row['id_tecnico'] == 0) ? "Sin Asignar" : $row['id_tecnico'];
 
         echo "<tr>";

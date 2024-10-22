@@ -6,179 +6,7 @@
     <title>Marquez Comunicaciones</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
-    <style>
-        /* Estilo para el body */
-        body {
-            background-color: #d8d6d6; /* Fondo del body */
-        }
-    
-        /* Estilo para el banner superior */
-        .top-banner {
-            background-color: rgb(255, 94, 0);
-            color: rgb(245, 243, 243);
-            text-align: center;
-            padding: 10px 0;
-        }
-    
-        /* Estilo del header con el logo y el buscador */
-        .header {
-            background-color: #458a8b;
-            padding: 10px 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-    
-        .header .logo {
-            margin-left: 20px;
-        }
-    
-        .header .search-bar {
-            flex-grow: 1;
-            margin: 0 20px;
-        }
-    
-        .header .icons {
-            margin-right: 20px;
-        }
-    
-        .header .icons a {
-            color: white;
-            margin-left: 15px;
-        }
-    
-        /* Estilo del menú */
-        .menu {
-            background-color: #458a8b;
-            padding: 10px 0;
-        }
-    
-        .menu a {
-            color: rgb(235, 241, 234);
-            margin: 0 15px;
-        }
-    
-        .menu a:hover {
-            text-decoration: underline;
-        }
-    
-        /* Estilo del segundo nav */
-        .navbar {
-            margin-top: 20px;
-            background-color: #458a8b;  /* Fondo del segundo nav */
-            font-weight: bold; /* Negrita */
-        }
-    
-        .navbar-nav .nav-item {
-            position: relative; /* Necesario para el efecto hover */
-        }
-    
-        .navbar-nav .nav-link {
-            padding: 15px 20px; /* Espaciado alrededor de los enlaces */
-            color: #458a8b; /* Color del texto */
-            font-weight: bold; /* Negrita */
-            transition: color 0.3s ease; /* Transición suave */
-        }
-    
-        .navbar-nav .nav-link:hover {
-            color: rgb(255, 94, 0); /* Color del texto al pasar el mouse */
-            text-decoration: underline; /* Subrayado al pasar el mouse */
-        }
-    
-        .navbar-nav .nav-link.active {
-            color: rgb(255, 94, 0); /* Color activo */
-            border-bottom: 2px solid rgb(255, 94, 0); /* Línea debajo del enlace activo */
-        }
-    
-        /* Estilo del carrusel */
-        .carousel-item img {
-            width: 100%;
-            height: 500px;
-            object-fit: cover;
-        }
-    
-        .carousel-caption h5 {
-            font-size: 2rem;
-            font-weight: bold;
-        }
-    
-        .carousel-caption p {
-            font-size: 1.2rem;
-        }
-    
-        /* Estilo del botón flotante de WhatsApp */
-        .whatsapp-bubble {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1000;
-            background-color: #25D366;
-            border-radius: 50%;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
-            width: 60px;
-            height: 60px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-    
-        .whatsapp-bubble img {
-            width: 40px;
-            height: 40px;
-        }
-    
-        .whatsapp-bubble:hover {
-            background-color: #128C7E;
-        }
-    
-        /* Footer */
-        .footer {
-            background-color: #f2f5f8;
-            padding: 20px;
-            text-align: center;
-        }
-    
-        /* Estilo para los códigos QR */
-        .qr-code {
-            width: 100px; /* Tamaño del código QR */
-            margin-top: 10px;
-        }
-
-
-        .image-container {
-            width: 100%; /* O cualquier tamaño fijo que desees, por ejemplo: 300px */
-            height: 200px; /* Establece la altura deseada */
-            overflow: hidden; /* Oculta cualquier parte de la imagen que sobrepase el contenedor */
-            display: flex; /* Usamos flexbox para centrar la imagen */
-            justify-content: center; /* Centra horizontalmente */
-            align-items: center; /* Centra verticalmente */
-        }
-
-        .image-container img {
-            width: 100%; /* Asegura que la imagen ocupe todo el ancho del contenedor */
-            height: auto; /* Mantiene la proporción de la imagen */
-            object-fit: cover; /* Cubre todo el contenedor sin distorsionar la imagen */
-        }
-
-        /* Estilos para los resultados de búsqueda */
-        #search-results {
-            background-color: #f9f9f9;
-            border: 1px solid #ddd;
-            padding: 10px;
-            margin-bottom: 15px;
-        }
-
-        .search-result-item {
-            padding: 10px;
-            border-bottom: 1px solid #eee;
-        }
-
-        .search-result-item:last-child {
-            border-bottom: none;
-        }
-    </style>
-    
+    <link rel="stylesheet" href="index.css"> <!-- Vinculando el archivo CSS externo -->
 </head>
 <body>
 
@@ -188,24 +16,16 @@
     </div>
 
     <header class="header">
-
         <div class="logo">
             <img src="../../presentacion/ios.png" alt="Logo de Marquez Comunicaciones" width="120">
         </div>
         <div class="search-bar d-flex align-items-center">
-            <input type="text" id="search-input" class="form-control" placeholder="Buscar Productos,Dispositivos,Accesorios..." aria-label="Buscar">
-            
-            <!-- Botones para buscar diferentes tipos -->
-            <button id="search-button-productos" class="btn" aria-label="Buscar productos" onclick="searchItems('productos');">Buscar Productos</button>
-            <button id="search-button-dispositivos" class="btn" aria-label="Buscar Dispositivos" onclick="searchItems('dispositivos');">Buscar Dispositivos</button>
-            <button id="search-button-accesorios" class="btn" aria-label="Buscar Accesorios" onclick="searchItems('accesorios');">Buscar Accesorios</button>
-            
-            <!-- Botón para recargar la página -->
+            <input type="text" id="search-input" class="form-control" placeholder="Buscar Productos, Dispositivos, Accesorios..." aria-label="Buscar">
+            <a href="../../cliente/estado.php" class="boton">Ir a otra página</a>
             <button id="reload-button" class="btn" aria-label="Recargar página" onclick="location.reload();">
                 <i class="fas fa-sync-alt"></i>
             </button>
         </div>
-        
         <div class="icons">
             <a href="login/login.php" class="icon-link" aria-label="Iniciar Sesión">Iniciar Sesión <i class="fas fa-sign-in-alt"></i></a>
             <a href="vista_carrito/cart.php" class="icon-link" aria-label="Ver Carrito"><i class="fas fa-shopping-cart"></i></a>
@@ -216,6 +36,7 @@
         <div id="loading-spinner" style="display: none;">Cargando...</div>
         <div id="result" aria-live="polite"></div> 
     </div>
+
     
     <script defer>
         function searchItems(type) {
@@ -404,7 +225,7 @@
         </a>
     </div>
     
-    <nav class="navbar navbar-expand-lg navbar-light mt-3">
+    <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -430,31 +251,36 @@
             </div>
         </div>
     </nav>
-    
 
     <section class="container my-5">
+        <h2 class="text-center">Acerca de nosotros</h2>
         <div class="row">
             <div class="col-md-4 text-center">
                 <div class="image-container">
                     <img src="vista_nav_imagenes/accesorios.png" class="img-fluid" alt="Producto 1">
                 </div>
-                <p>Accesorios</p>
+                <p>Contamos con venta de Accesorios y dispositivos con garantia</p>
             </div>
             <div class="col-md-4 text-center">
                 <div class="image-container">
                     <img src="vista_nav_imagenes/celu.png" class="img-fluid" alt="Producto 2">
                 </div>
-                <p>Celulares</p>
+                <p>Realizamos reparaciones de distintos Electrodimesticos y Dispositivos</p>
             </div>
             <div class="col-md-4 text-center">
                 <div class="image-container">
                     <img src="vista_nav_imagenes/pc2.png" class="img-fluid" alt="Producto 3">
                 </div>
-                <p>Computadoras</p>
+                <p>Estamos en las redes sociales, atendemos por consultas de todo tipo</p>
             </div>
         </div>
     </section>
     
+
+    <section class="container my-5" id="why-choose-us">
+        <h2 class="text-center">¿Por qué elegirnos?</h2>
+        <p class="text-center">Contamos con técnicos profesionales, un excelente servicio de atención al cliente, y resolvemos cualquier problema o falla que tengas.</p>
+    </section>
 
     <section class="payment-options my-5">
         <div class="container">

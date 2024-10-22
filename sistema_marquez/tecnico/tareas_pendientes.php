@@ -34,7 +34,7 @@ WHERE
         FROM detalle_reparaciones dr2
         WHERE dr2.id_dispositivos = dr.id_dispositivos
     )
-    AND dr.estado_dispositivo = 0  -- Solo mostrar si el estado del último seguimiento es 0 (pendiente)
+    AND dr.estado_dispositivo != 1  -- Solo mostrar si el estado del último seguimiento es distinto de 1 
 GROUP BY 
     d.id_dispositivos
 ORDER BY 
@@ -52,8 +52,10 @@ $result = $stmt->get_result();
 
 // Definición de estados
 $estados = [
-    0 => "En Reparación",
-    1 => "Reparado"
+    0 => "Pendiente",
+    1 => "Reparado",
+    2 => "En Proceso",
+    3 => "Cancelado",
 ];
 ?>
 <!DOCTYPE html>
