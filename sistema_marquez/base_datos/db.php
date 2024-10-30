@@ -5,12 +5,16 @@ $username = "marquez";        // Nombre de usuario para acceder a la base de dat
 $password = "marquez2024";      // Contraseña del usuario para acceder a la base de datos.
 $dbname = "pruebas_marquez2"; // Nombre de la base   http://arielon23.duckdns.org:10000/
 
+// $servername = "arielon23.duckdns.org:3306"; // Nombre del servidor donde se aloja la base de datos.
+// $username = "c211c211";        // Nombre de usuario para acceder a la base de datos.
+// $password = "c211211_kelm";      // Contraseña del usuario para acceder a la base de datos.
+// $dbname = "fuSUse31ma"; // Nombre de la base   http://arielon23.duckdns.org:10000/
 
-// // Configuración de la base de datos: se establecen los parámetros para la conexión a la base de datos MySQL.
-// $servername = "localhost:3308"; // Nombre del servidor donde se aloja la base de datos.
+// Configuración de la base de datos: se establecen los parámetros para la conexión a la base de datos MySQL.
+// $servername = "localhost"; // Nombre del servidor donde se aloja la base de datos.
 // $username = "root";        // Nombre de usuario para acceder a la base de datos.
-// $password = "";      // Contraseña del usuario para acceder a la base de datos.
-// $dbname = "pruebas_marquez2"; // Nombre de la base   http://arielon23.duckdns.org:10000/
+// $password = "543210";      // Contraseña del usuario para acceder a la base de datos.
+// $dbname = "pruebas_marquez3"; // Nombre de la base   http://arielon23.duckdns.org:10000/
 
 // Crear conexión: se crea un nuevo objeto mysqli para conectarse a la base de datos utilizando los parámetros definidos.
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -26,3 +30,7 @@ if ($conn->connect_error) { // Si hay un error en la conexión...
 date_default_timezone_set('America/Argentina/Buenos_Aires'); // Cambia a tu zona horaria
 $fecha_hora_actual = date('Y-m-d H:i:s'); // Obtener fecha y hora actual
 ?>      
+
+
+
+

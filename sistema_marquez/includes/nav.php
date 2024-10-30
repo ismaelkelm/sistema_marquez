@@ -67,7 +67,7 @@ switch ($usuario_rol) {
                         <a class="dropdown-item" href="../pdf/facturaA.php">Factura A</a>
                         <a class="dropdown-item" href="../pdf/facturaB.php">Factura B</a>
                         <a class="dropdown-item" href="../pdf/facturaC.php">Factura c</a>
-                        <a class="dropdown-item" href="../facturacion/pdf2/venta.php">Factura XXX</a>
+                        <a class="dropdown-item" href="../facturacion/compra/compra.html">compra</a>
                         <a class="dropdown-item" href="../facturacion/generarfactura.html">Factura generity</a>
 
 
