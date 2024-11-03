@@ -6,10 +6,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $descripcion = $_POST['descripcion'];
     $precio = $_POST['precio'];
     $stock = $_POST['stock'];
-
-    $query = "INSERT INTO accesorios_y_componentes (nombre, descripcion, precio, stock) VALUES (?, ?, ?, ?)";
+    $tipo = $_POST['tipo'];
+    $stockmin = $_POST['stockmin'];
+    $stockmax = $_POST['stockmax'];
+    // Preparar la consulta de inserción con todos los campos
+    $query = "INSERT INTO accesorios_y_componentes (nombre, descripcion, precio, stock, tipo, stockmin, stockmaximo
+) VALUES (?, ?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($query);
-    $stmt->bind_param("ssdi", $nombre, $descripcion, $precio, $stock);
+    $stmt->bind_param("ssdiiii", $nombre, $descripcion, $precio, $stock, $tipo, $stockmin, $stockmax);
 
     if ($stmt->execute()) {
         header('Location: index.php');
@@ -42,6 +46,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <div class="mb-3">
             <label for="stock" class="form-label">Stock</label>
             <input type="number" class="form-control" id="stock" name="stock" required>
+        </div>
+        <div class="mb-3">
+            <label for="tipo" class="form-label">Tipo</label>
+            <input type="text" class="form-control" id="tipo" name="tipo" required>
+        </div>
+        <div class="mb-3">
+            <label for="stockmin" class="form-label">Stock Mínimo</label>
+            <input type="number" class="form-control" id="stockmin" name="stockmin" required>
+        </div>
+        <div class="mb-3">
+            <label for="stockmax" class="form-label">Stock Maximo</label>
+            <input type="number" class="form-control" id="stockmax" name="stockmax" required>
         </div>
         <button type="submit" class="btn btn-primary">Agregar</button>
     </form>

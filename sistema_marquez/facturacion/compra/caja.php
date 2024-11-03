@@ -1,82 +1,76 @@
-
 <?php
-include '../../base_datos/db.php'; // Conexión a la base de datos
+include '../../base_datos/db.php';
 
-// Variables para filtros
-$filtro_producto = $_POST['producto'] ?? '';
-$filtro_precio_min = $_POST['precio_min'] ?? '';
-$filtro_precio_max = $_POST['precio_max'] ?? '';
-$filtro_fecha_inicio = $_POST['fecha_inicio'] ?? '';
-$filtro_fecha_fin = $_POST['fecha_fin'] ?? '';
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $fecha_desde = $_POST['fecha_desde'];
+    $fecha_hasta = $_POST['fecha_hasta'];
 
-// Construcción de la consulta SQL según los filtros aplicados
-$sql = "SELECT id_accesorios_y_componentes, nombre, descripcion, stock, precio, tipo, stockmin, stockmaximo 
-        FROM accesorios_y_componentes WHERE 1=1";
+    // Consulta para obtener el total de dinero en compras de accesorios (DEBE)
+    $query_accesorios = "
+        SELECT SUM(total_pagado) AS total_accesorios
+        FROM comprobante_proveedores
+        WHERE fecha_de_compra BETWEEN ? AND ?
+    ";
+    $stmt_accesorios = $conn->prepare($query_accesorios);
+    $stmt_accesorios->bind_param("ss", $fecha_desde, $fecha_hasta);
+    $stmt_accesorios->execute();
+    $result_accesorios = $stmt_accesorios->get_result();
+    $total_accesorios = $result_accesorios->fetch_assoc()['total_accesorios'];
 
-if ($filtro_producto) {
-    $sql .= " AND nombre LIKE '%$filtro_producto%'";
+    // Consulta para obtener el total de dinero en facturas (HABER)
+    $query_facturas = "
+        SELECT SUM(total_factura) AS total_facturas
+        FROM cabecera_factura
+        WHERE fecha_factura BETWEEN ? AND ?
+    ";
+    $stmt_facturas = $conn->prepare($query_facturas);
+    $stmt_facturas->bind_param("ss", $fecha_desde, $fecha_hasta);
+    $stmt_facturas->execute();
+    $result_facturas = $stmt_facturas->get_result();
+    $total_facturas = $result_facturas->fetch_assoc()['total_facturas'];
+
+    // Calcular la diferencia entre HABER y DEBE
+    $diferencia = $total_facturas - $total_accesorios;
 }
-if ($filtro_precio_min && $filtro_precio_max) {
-    $sql .= " AND precio BETWEEN $filtro_precio_min AND $filtro_precio_max";
-}
-if ($filtro_fecha_inicio && $filtro_fecha_fin) {
-    $sql .= " AND fecha BETWEEN '$filtro_fecha_inicio' AND '$filtro_fecha_fin'";
-}
-
-$result = $conn->query($sql);
-
 ?>
 
-<!-- Formulario para aplicar filtros -->
-<form method="post" action="">
-    <label>Producto:</label>
-    <input type="text" name="producto" placeholder="Nombre del producto">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte de Movimiento de Caja</title>
+    <link rel="stylesheet" href="caja.css">
+</head>
+<body>
+    <h2>Movimiento de caja en el periodo</h2>
     
-    <label>Precio Mínimo:</label>
-    <input type="number" name="precio_min" step="0.01" placeholder="0.00">
-    
-    <label>Precio Máximo:</label>
-    <input type="number" name="precio_max" step="0.01" placeholder="0.00">
-    
-    <label>Fecha Inicio:</label>
-    <input type="date" name="fecha_inicio">
-    
-    <label>Fecha Fin:</label>
-    <input type="date" name="fecha_fin">
-    
-    <button type="submit">Filtrar</button>
-</form>
+    <form action="reporte_dinero.php" method="post">
+        <label for="fecha_desde">Desde:</label>
+        <input type="date" id="fecha_desde" name="fecha_desde" required>
+        
+        <label for="fecha_hasta">Hasta:</label>
+        <input type="date" id="fecha_hasta" name="fecha_hasta" required>
+        
+        <button type="submit">Consultar</button>
+    </form>
 
-<!-- Tabla de resultados -->
-<?php
-if ($result && $result->num_rows > 0) {
-    echo "<table border='1'>
-            <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Descripción</th>
-                <th>Stock</th>
-                <th>Precio</th>
-                <th>Tipo</th>
-                <th>Stock Min</th>
-                <th>Stock Máximo</th>
-            </tr>";
-    while ($row = $result->fetch_assoc()) {
-        echo "<tr>
-                <td>" . $row["id_accesorios_y_componentes"] . "</td>
-                <td>" . $row["nombre"] . "</td>
-                <td>" . $row["descripcion"] . "</td>
-                <td>" . $row["stock"] . "</td>
-                <td>" . $row["precio"] . "</td>
-                <td>" . $row["tipo"] . "</td>
-                <td>" . $row["stockmin"] . "</td>
-                <td>" . $row["stockmaximo"] . "</td>
-              </tr>";
-    }
-    echo "</table>";
-} else {
-    echo "No se encontraron resultados";
-}
-
-$conn->close();
-?>
+    <?php if (isset($total_accesorios) && isset($total_facturas)): ?>
+        <div class="reporte">
+            <table>
+                <tr>
+                    <th>DEBE</th>
+                    <th>HABER</th>
+                </tr>
+                <tr>
+                    <td>$<?= number_format($total_accesorios, 2) ?></td>
+                    <td>$<?= number_format($total_facturas, 2) ?></td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="diferencia">Diferencia: $<?= number_format($diferencia, 2) ?></td>
+                </tr>
+            </table>
+        </div>
+    <?php endif; ?>
+</body>
+</html>

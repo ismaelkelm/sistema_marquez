@@ -1,8 +1,14 @@
 <?php
+// // Configuración de la base de datos: se establecen los parámetros para la conexión a la base de datos MySQL.
+// $servername = "arielon23.duckdns.org:3306"; // Nombre del servidor donde se aloja la base de datos.
+// $username = "marquez";        // Nombre de usuario para acceder a la base de datos.
+// $password = "marquez2024";      // Contraseña del usuario para acceder a la base de datos.
+// $dbname = "pruebas_marquez2"; // Nombre de la base   http://arielon23.duckdns.org:10000/
+
 // Configuración de la base de datos: se establecen los parámetros para la conexión a la base de datos MySQL.
-$servername = "arielon23.duckdns.org:3306"; // Nombre del servidor donde se aloja la base de datos.
-$username = "marquez";        // Nombre de usuario para acceder a la base de datos.
-$password = "marquez2024";      // Contraseña del usuario para acceder a la base de datos.
+$servername = "localhost:3308"; // Nombre del servidor donde se aloja la base de datos.
+$username = "root";        // Nombre de usuario para acceder a la base de datos.
+$password = "";      // Contraseña del usuario para acceder a la base de datos.
 $dbname = "pruebas_marquez2"; // Nombre de la base   http://arielon23.duckdns.org:10000/
 
 // $servername = "arielon23.duckdns.org:3306"; // Nombre del servidor donde se aloja la base de datos.
