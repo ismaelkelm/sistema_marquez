@@ -43,9 +43,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link rel="stylesheet" href="caja.css">
 </head>
 <body>
+<?php echo '<button onclick="location.href=\'compra.html\'" class="mt-3 button button-back">Volver</button>';?>
     <h2>Movimiento de caja en el periodo</h2>
     
-    <form action="reporte_dinero.php" method="post">
+    <form action="" method="post">
         <label for="fecha_desde">Desde:</label>
         <input type="date" id="fecha_desde" name="fecha_desde" required>
         

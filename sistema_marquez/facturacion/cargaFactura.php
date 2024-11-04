@@ -29,12 +29,10 @@ function procesar_factura($conn, $id_clientes, $fecha_factura, $subtotal_factura
         foreach ($id_accesorios_y_componentes as $key => $id_accesorio) {
             $cantidad = $cantidad_venta[$key];
             $precio_unitario = $precio_unitario_V[$key];
-            $servicio = $id_servicio[$key]; // Recibe el id_servicio correspondiente
-
             $query_detalle = "INSERT INTO detalle_factura (cantidad_venta, precio_unitario_V, id_accesorios_y_componentes, id_cabecera_factura, id_servicio)
                               VALUES (?, ?, ?, ?, ?)";
             $stmt_detalle = mysqli_prepare($conn, $query_detalle);
-            mysqli_stmt_bind_param($stmt_detalle, 'idiii', $cantidad, $precio_unitario, $id_accesorio, $id_cabecera_factura, $servicio);
+            mysqli_stmt_bind_param($stmt_detalle, 'idiii', $cantidad, $precio_unitario, $id_accesorio, $id_cabecera_factura, $id_servicio);
             mysqli_stmt_execute($stmt_detalle);
 
             // Actualizar el stock de los accesorios
@@ -70,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $cantidad_venta = $_POST['cantidad_venta'];
     $precio_unitario_V = $_POST['precio_unitario_V'];
     $id_accesorios_y_componentes = $_POST['id_accesorios_y_componentes'];
-    $id_servicio = $_POST['id_servicio']; // Asegurarse de recibir el id_servicio
+    $id_servicio = 0; // Asegurarse de recibir el id_servicio
     $id_operacion = $_POST['id_operacion'];
 
     // Llamar a la función

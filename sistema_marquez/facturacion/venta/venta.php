@@ -178,9 +178,6 @@ $result_accesorios_componentes = mysqli_query($conn, $query_accesorios_component
                     </select>
                 </div>
 
-                <input type="hidden" id="id_usuario" name="id_usuario" value="<?php echo $id_usuario; ?>">
-                <input type="hidden" id="id_operacion" name="id_operacion" value="<?php echo $id_operacion; ?>">
-                <input type="hidden" id="id_servicio" name="id_servicio" value="0">
             </div>
 
             <div class="form-section">
@@ -213,7 +210,9 @@ $result_accesorios_componentes = mysqli_query($conn, $query_accesorios_component
                 </div>
                 <button type="button" class="btn btn-custom" id="add-accesorio">Agregar otro accesorio</button>
             </div>
-
+            
+            <input type="hidden" id="id_usuario" name="id_usuario" value="<?php echo $id_usuario; ?>">
+                <input type="hidden" id="id_operacion" name="id_operacion" value="<?php echo $id_operacion; ?>">
             <div class="form-section">
                 <h3>Resumen de Factura</h3>
                 <div class="form-group">
