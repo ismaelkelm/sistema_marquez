@@ -125,10 +125,10 @@ $accesorios = $conn->query("SELECT id_accesorios_y_componentes, nombre, stock FR
         } ?>
     </select>
 
-    <label for="tipo_pago">Tipo de Pago:</label>
+    <label for="tipo_pago">Tipo de Pago.:</label>
     <select name="id_tipo_pago" required>
         <?php while ($row = $tipos_pago->fetch_assoc()) {
-            echo "<option value='{$row['id_tipo_pago']}'>{$row['descripcion_de_pago']}</option>";
+            echo "<option value='{$row['id_tipo_de_pago']}'>{$row['descripcion_de_pago']}</option>";
         } ?>
     </select>
 

@@ -3,9 +3,22 @@ include '../../base_datos/db.php'; // Conexión a la base de datos
 
 // Validación de que los datos requeridos estén presentes
 if (
+    
     isset($_POST['id_proveedores'], $_POST['id_tipo_pago'], $_POST['tipo_comprobante'], $_POST['id_accesorios_y_componentes'], 
     $_POST['fecha_de_compra'], $_POST['cantidad_comprada'], $_POST['num_de_comprobante'], $_POST['precio_por_unidad'], $_POST['total_pagado'])
 ) {
+      // Imprimir todos los valores para verificar que están llegando correctamente
+      echo "id_proveedores: " . $_POST['id_proveedores'] . "<br>";
+      echo "id_tipo_pago: " . $_POST['id_tipo_pago'] . "<br>";
+      echo "tipo_comprobante: " . $_POST['tipo_comprobante'] . "<br>";
+      echo "id_accesorios_y_componentes: " . $_POST['id_accesorios_y_componentes'] . "<br>";
+      echo "fecha_de_compra: " . $_POST['fecha_de_compra'] . "<br>";
+      echo "cantidad_comprada: " . $_POST['cantidad_comprada'] . "<br>";
+      echo "num_de_comprobante: " . $_POST['num_de_comprobante'] . "<br>";
+      echo "precio_por_unidad: " . $_POST['precio_por_unidad'] . "<br>";
+      echo "total_pagado: " . $_POST['total_pagado'] . "<br>";
+  
+    
     // Escapar los datos para evitar inyección SQL
     $id_proveedores = $conn->real_escape_string($_POST['id_proveedores']);
     $id_tipo_pago = $conn->real_escape_string($_POST['id_tipo_pago']);
